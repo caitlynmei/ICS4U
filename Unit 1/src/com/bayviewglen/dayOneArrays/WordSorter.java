@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class DayOneWordSorter {
+public class WordSorter {
 	
 	public static void main(String[] args) throws FileNotFoundException {
 		
@@ -37,6 +37,17 @@ public class DayOneWordSorter {
 		
 	}
 	
+	private static String[] truncateArray(String[] allWords, int wordCount) {
+		
+		String[] temp = new String[wordCount];
+		
+		for (int i=0; i<wordCount; i++) {
+			temp[i] = allWords[i];
+		}
+		
+		return temp;
+	}
+
 	private static String[] removeMiddleWord(String[] allWords) {
 		
 		String[] temp = new String[allWords.length-1];
@@ -52,17 +63,5 @@ public class DayOneWordSorter {
 		
 		return temp;
 	}
-
-	private static String[] truncateArray(String[] allWords, int wordCount) {
-		
-		String[] temp = new String[wordCount];
-		
-		for (int i=0; i<wordCount; i++) {
-			temp[i] = allWords[i];
-		}
-		
-		return temp;
-	}
-
 	
 }
