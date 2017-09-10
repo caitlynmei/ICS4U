@@ -52,31 +52,28 @@ public class AddressBook {
 	}
 
 	// method checks if the user entered a contact name using valid characters
-	public boolean contactNameCheck(Scanner keyboard) {
-		String contactName = "";
+	public boolean contactNameCheck(Scanner keyboard, String contactName) {
+		String tempContactName = contactName;
 		boolean validName = false; // to check if the user entered a valid contact name
 		while (!validName) {
-			contactName = keyboard.nextLine().toUpperCase();
 			validName = true;
-			for (int i = 0; i < contactName.length() && validName; i++) {
-				if (VALID_CONTACT_NAME_CHARACTERS.indexOf(contactName.charAt(i)) == -1) {
+			for (int i = 0; i < tempContactName.length() && validName; i++) {
+				if (VALID_CONTACT_NAME_CHARACTERS.indexOf(tempContactName.charAt(i)) == -1) {
 					validName = false;
-					System.out.println(
-							"Please enter a name containing \'only\' characters from the English alphabet. No numbers");
+					System.out.println("Please enter a name containing \'only\' characters from the English alphabet. No numbers");
 					System.out.println("(*Hint: A B C D E F G H I J K L M N O P Q R S T U V W X Y Z)");
 					System.out.print("Please enter here: ");
-				}
+				} 
 			}
 		}
 		return validName;
 	}
 
 	// method checks if the user entered a phone number using valid numbers
-	public boolean contactNumCheck(Scanner keyboard) {
-		String contactNum = "";
+	public boolean contactNumCheck(Scanner keyboard, String phoneNum) {
+		String contactNum = phoneNum;
 		boolean validNum = false; // to check if the user entered a valid contact phone number
 		while (!validNum) {
-			contactNum = keyboard.nextLine().toUpperCase();
 			validNum = true;
 			for (int i = 0; i < contactNum.length() && validNum; i++) {
 				if (VALID_CONTACT_PHONE_NUMBER.indexOf(contactNum.charAt(i)) == -1) {
@@ -103,47 +100,41 @@ public class AddressBook {
 		// *** NEED TO SAVE THE INFO
 
 		System.out.print("Please enter the new contact's LAST NAME: ");
-		// to check if user entered valid characters for the contact's last name (no
-		// numbers)
+		// to check if user entered valid characters for the contact's last name (no numbers)
 		boolean invalidInput = true;
 		while (invalidInput) {
-			if (contactNameCheck(keyboard)) {
-				// tempContact.setLname(lastName);
+			lastName = keyboard.nextLine().toUpperCase(); // assigning last name to contact
+			if (contactNameCheck(keyboard, lastName)) {
+				//lastName.setlname(lastName);
 				invalidInput = false;
 			} else {
 				System.out.println("Please enter a last name containing only characters from the English alphabet.");
 			}
-			// lastName = keyboard.nextLine().toUpperCase(); // assigning last name to
-			// contact
 		}
 
 		System.out.print("Please enter the new contact's FIRST NAME: ");
-		// to check if user entered valid characters for the contact's first name (no
-		// numbers)
+		// to check if user entered valid characters for the contact's first name (no numbers)
 		invalidInput = true;
 		while (invalidInput) {
-			if (contactNameCheck(keyboard)) {
+			firstName = keyboard.nextLine().toUpperCase(); // assigning first name to contact
+			if (contactNameCheck(keyboard, firstName)) {
 				invalidInput = false;
 			} else {
 				System.out.println("Please enter a first name containing only characters from the English alphabet.");
 			}
-			// firstName = keyboard.nextLine().toUpperCase(); // assigning first name to
-			// contact
 		}
 
-		System.out.print("Please enter the new contact's PHONE NUMBER (numbers only): "); // make an int array for
-																							// checking
-		// if time, check for only 10 digits
-		// to check if user entered valid numbers for the contact's phone number (no
-		// characters)
+		System.out.print("Please enter the new contact's PHONE NUMBER (numbers only): ");
+		// **if time, check for only 10 digits
+		// to check if user entered valid numbers for the contact's phone number (no characters)
 		invalidInput = true;
 		while (invalidInput) {
-			if (contactNumCheck(keyboard)) {
+			phoneNum = keyboard.nextLine(); // assigning phone number to contact
+			if (contactNumCheck(keyboard, phoneNum)) {
 				invalidInput = false;
 			} else {
 				System.out.println("Please enter a phone number containg only numbers.");
-			}
-			// phoneNum = keyboard.nextLine(); // assigning phone number to contact
+			}			
 		}
 
 		System.out.println("f: " + firstName + ", l: " + lastName + ", num: " + phoneNum); // checking variables
