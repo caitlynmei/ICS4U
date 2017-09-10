@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class AddressBook {
 	final String VALID_CONTACT_NAME_CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	final String VALID_CONTACT_PHONE_NUMBER = "0123456789";
 	private Contact[] contacts;
 	private int numContacts;
 
@@ -50,47 +51,92 @@ public class AddressBook {
 	}
 
 	// method checks if the user entered a contact name using valid characters 
-	public boolean contactNameCheck(String contactName) {
+	public boolean contactNameCheck(Scanner keyboard) {
+		String contactName = "";
 		boolean validName = false; // to check if the user entered a valid number for menu options
 		while (!validName) {
+			contactName = keyboard.nextLine().toUpperCase();
 			validName = true;
 			for (int i = 0; i < contactName.length() && validName; i++) {
 				if (VALID_CONTACT_NAME_CHARACTERS.indexOf(contactName.charAt(i)) == -1) {
 					validName = false;
-					System.out.println("Please enter a name containing \'only\' characters from the English alphabet:");
+					System.out.println("Please enter a name containing \'only\' characters from the English alphabet. No numbers");
 					System.out.println("(*Hint: A B C D E F G H I J K L M N O P Q R S T U V W X Y Z)");
+					System.out.print("Please enter here: ");
 				}
 			}
 		}
 		return validName;
 	}
-
+	
+	// method checks if the user entered a phone number using valid numbers
+	public boolean contactNumCheck(Scanner keyboard) {
+		String contactNum = "";
+		boolean validNum = false; // to check if the user entered a valid number for menu options
+		while (!validNum) {
+			contactNum = keyboard.nextLine().toUpperCase();
+			validNum = true;
+			for (int i = 0; i < contactNum.length() && validNum; i++) {
+				if (VALID_CONTACT_NAME_CHARACTERS.indexOf(contactNum.charAt(i)) == -1) {
+					validNum = false;
+					System.out.println("Please enter a phone number containing \'only\' numbers. No characters.");
+					System.out.println("(*Hint: 0 1 2 3 4 5 6 7 8 9)");
+					System.out.print("Please enter here: ");
+				}
+			}
+		}
+		return validNum;
+	}
+	
 	// (1) Add a Contact
 	public void addContact(Scanner keyboard) {
 		String lastName = "";
 
 		System.out.println("\n--- ADD A NEW CONTACT ---");
 		System.out.println("Yay! A new friend :) ");
-		System.out.print("Please enter the new contact's \'last name\': ");
-
-		// to check if user entered valid characters for the contact's last name
+		
+		// *** NEED TO SAVE THE INFO
+		
+		System.out.print("Please enter the new contact's LAST NAME: ");
+		// to check if user entered valid characters for the contact's last name (no numbers)
 		boolean invalidInput = true;
 		while (invalidInput) {
-			lastName = keyboard.nextLine().toUpperCase();
-			if (contactNameCheck(lastName)) {
+			if (contactNameCheck(keyboard)) {
 				invalidInput = false;
 			} else {
-				System.out.println("Please enter ... testing");
+				System.out.println("Please enter a last name containing only characters from the English alphabet.");
 			}
 		}
 		
-		System.out.print("Please enter the new contact's \'first name\': ");
+		System.out.print("Please enter the new contact's FIRST NAME: ");
+		// to check if user entered valid characters for the contact's first name (no numbers)
+		invalidInput = true;
+		while (invalidInput) {
+			if (contactNameCheck(keyboard)) {
+				invalidInput = false;
+			} else {
+				System.out.println("Please enter a first name containing only characters from the English alphabet.");
+			}
+		}
+				
+		System.out.print("Please enter the new contact's PHONE NUMBER (numbers only): "); // make an int array for checking
+		// if time, check for only 10 digits
+		// to check if user entered valid numbers for the contact's phone number (no characters)
+		invalidInput = true;
+		while (invalidInput) {
+			if (contactNumCheck(keyboard)) {
+				invalidInput = false;
+			} else {
+				System.out.println("Please enter a phone number containg only numbers.");
+			}
+		}
 		
-		System.out.print("Please enter the new contact's phone number (only numbers please): ");
-		
+		System.out.println("Great!! Your friend " + contact.fName() + " " + contact.lName() + " (" + contact.phone + ") has been added to your address book.");
 		//contacts[numContacts] = " ";
 		numContacts++;
 	}
+
+
 
 	// (2) Display All Contacts 
 	public void displayAll() {

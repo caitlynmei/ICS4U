@@ -5,18 +5,18 @@ import java.util.Scanner;
 public class AddressDriver {
 
 	public static void main(String[] args) {
-	
-		AddressBook contact = new AddressBook();
-		
+			
 		Scanner keyboard = new Scanner(System.in);
+		
+		AddressBook contact = new AddressBook();
 		
 		contact.welcomeMenu(keyboard);
 		
-		contact.addContact(keyboard);
+		//contact.addContact(keyboard);
 		
-		contact.displayAll();
+		//contact.displayAll();
 		
-		contact.search();
+		//contact.search();
 		
 	}
 
