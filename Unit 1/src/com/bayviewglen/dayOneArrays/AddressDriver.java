@@ -16,7 +16,7 @@ public class AddressDriver {
 		
 		contact.displayAll();
 		
-		//contact.search();
+		contact.search(keyboard, contact);
 		
 	}
 
