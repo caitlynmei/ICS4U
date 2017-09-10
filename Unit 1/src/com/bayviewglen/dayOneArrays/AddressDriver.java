@@ -12,7 +12,7 @@ public class AddressDriver {
 		
 		contact.welcomeMenu(keyboard);
 		
-		//contact.addContact(keyboard);
+		contact.addContact(keyboard);
 		
 		//contact.displayAll();
 		
