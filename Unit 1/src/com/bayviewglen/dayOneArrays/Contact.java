@@ -18,21 +18,29 @@ public class Contact {
 		this.fname = fname;
 		this.phone = phone;
 	}
+	
 	public String getPhone() {
 		return phone;
 	}
+	
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+	
+	
 	public String getLname() {
 		return lname;
 	}
+	
 	public void setLname(String lname) {
 		this.lname = lname;
 	}
+	
+	
 	public String getFname() {
 		return fname;
 	}
+	
 	public void setFname(String fname) {
 		this.fname = fname;
 	}
