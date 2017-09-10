@@ -177,44 +177,62 @@ public class AddressBook {
 		}
 	}
 	
-	// method checks if the user entered a contact name using valid characters
+	// --- checks if the user entered a LAST NAME TO SEARCH using valid characters ---
 	public boolean searchLnameCheck(Scanner keyboard, String contactName) {
 		String tempContactName = contactName;
-		boolean validName = false; // to check if the user entered a valid contact name
+		boolean validName = false; // to check if the user entered a valid contact last name
 		while (!validName) {
 			tempContactName = keyboard.nextLine().toUpperCase(); // assigning last name to contact
 			validName = true;
 			for (int i = 0; i < tempContactName.length() && validName; i++) {
 				if (VALID_CONTACT_NAME_CHARACTERS.indexOf(tempContactName.charAt(i)) == -1) {
 					validName = false;
-					System.out.println(
-							"\nPlease enter a name containing \'only\' characters from the English alphabet. No numbers.");
+					System.out.println("\nPlease enter a name containing \'only\' characters from the English alphabet. No numbers.");
 					System.out.println("(*Hint: A B C D E F G H I J K L M N O P Q R S T U V W X Y Z)");
 					System.out.print("\nEnter here: ");
 				}
 			}
 		}
-		System.out.println("contactName: " + contactName); // checking
+		contactName = tempContactName;
+		//System.out.println("contactName: " + contactName); // checking
 		return validName;
 
 	}
-
+	
+	private boolean checkContact(Scanner keyboard, int[] tempLnameContacts, int numLnameContacts) {
+		String tempLname = "";
+		// int j = 0; // for incrementing index of tempLnameContacts
+		int tempNumLnameContacts = numLnameContacts;
+		boolean invalidName = true; // to check if the user entered a valid contact last name
+		while (invalidName) {
+			tempLname = keyboard.nextLine();
+			for (int i = 0; i < numContacts && invalidName; i++) {
+				if (contacts[i].getLname().equals(tempLname)) {
+					tempLnameContacts[++tempNumLnameContacts] = i;
+					invalidName = false;
+				} else {
+					System.out.println("\nYou do not have a contact with that last name.");
+					System.out.print("Please try again: ");
+				}
+			}
+		}
+		System.out.println("tempNumLnameContacts: " + tempNumLnameContacts);
+		return invalidName;
+	}
+	
 	// (3) Search for a Specific Contact
 	public void search(Scanner keyboard, AddressBook contact) {
 		String tempLname = "";
 		int tempNumLnameContacts = 0; // number of contacts with the last name user is searching for
-		int[] tempLnameContacts = new int[tempNumLnameContacts]; // holds indices for contacts with the last name user
-																	// is searching for
+		int[] tempLnameContacts = new int[tempNumLnameContacts]; // holds indices for contacts with the last name user is searching for
 
 		System.out.println("\n--- SEARCH FOR A SPECIFIC CONTACT ---");
 		System.out.println("Who would you like to search for?");
 		System.out.print("Please enter the contact's LAST NAME: ");
 
-		// to check if user entered valid characters for the contact's last name (no
-		// numbers)
+		// to check if user entered valid characters for the contact's last name (no numbers)
 		boolean invalidInput = true;
 		while (invalidInput) {
-			tempLname = keyboard.nextLine().toUpperCase(); // assigning last name to contact
 			if (searchLnameCheck(keyboard, tempLname)) {
 				invalidInput = false;
 			} else {
@@ -222,14 +240,14 @@ public class AddressBook {
 			}
 		}
 
-		System.out.println("You are looking for a contact with the last name " + tempLname
-				+ ". Please give your addressbook a second...");
+		System.out.println("\nPlease give your addressbook a second...");
 
-		// to check is user has a contact with the entered last name
+		// to check if user has a contact with the entered last name
 		boolean invalidContact = true;
 		while (invalidContact) {
-			if (!checkContact(keyboard, tempLname, tempLnameContacts, tempNumLnameContacts)) {
-				System.out.println("\nYay! Your friends with the last name " + tempLname + " were found: ");
+			invalidContact = false;
+			if (!checkContact(keyboard, tempLnameContacts, tempNumLnameContacts)) {
+				System.out.println("\nYay! Your friend(s) with this last name was(were) found: ");
 				for (int i = 0; i < tempNumLnameContacts; i++) {
 					System.out.println("( " + i + ") " + contacts[tempLnameContacts[i]].getLname() + ", "
 							+ contacts[tempLnameContacts[i]].getFname() + " ("
@@ -284,25 +302,6 @@ public class AddressBook {
 
 	}
 
-	private boolean checkContact(Scanner keyboard, String Lname, int[] tempLnameContacts, int numLnameContacts) {
-		String tempLname = Lname;
-		// int j = 0; // for incrementing index of tempLnameContacts
-		int tempNumLnameContacts = numLnameContacts;
-		boolean invalidName = true; // to check if the user entered a valid contact last name
-		while (invalidName) {
-			for (int i = 0; i < numContacts && invalidName; i++) {
-				if (contacts[i].getLname().equals(tempLname)) {
-					// tempNumContact = i;
-					tempLnameContacts[++tempNumLnameContacts] = i;
-					invalidName = false;
-				} else {
-					System.out.println("You do not have a contact with that last name.");
-					System.out.print("Please try again: ");
-				}
-			}
-		}
-		System.out.println("tempNumLnameContacts: " + tempNumLnameContacts);
-		return invalidName;
-	}
+	
 
 }
