@@ -10,11 +10,11 @@ public class AddressDriver {
 		
 		AddressBook contact = new AddressBook();
 		
-		contact.welcomeMenu(keyboard);
+		contact.welcomeMenu(keyboard, contact);
 		
-		contact.addContact(keyboard);
+		contact.addContact(keyboard, contact);
 		
-		//contact.displayAll();
+		contact.displayAll();
 		
 		//contact.search();
 		

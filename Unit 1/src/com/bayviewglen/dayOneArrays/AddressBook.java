@@ -14,7 +14,7 @@ public class AddressBook {
 	}
 
 	// welcome message that offers menu options
-	public void welcomeMenu(Scanner keyboard) {
+	public void welcomeMenu(Scanner keyboard, AddressBook contact) {
 		String optionNum = "";
 		
 		System.out.println("Welcome to your faithful addressbook!");
@@ -37,7 +37,7 @@ public class AddressBook {
 		
 		// determining which option the user entered 
 		if (optionNum == "1") {
-			addContact(keyboard);	
+			addContact(keyboard, contact);	// ***** FOR SOME REASON IT JUST ENDS HERE...
 		} else if (optionNum == "2") {
 			displayAll();
 		} /*else if (optionNum == "3") {
@@ -88,16 +88,13 @@ public class AddressBook {
 	}
 
 	// (1) Add a Contact
-	public void addContact(Scanner keyboard) {
-		// AddressBook tempContact = new AddressBook();
+	public void addContact(Scanner keyboard, AddressBook contact) {
 		String lastName = "";
 		String firstName = "";
 		String phoneNum = "";
-
+		
 		System.out.println("\n--- ADD A NEW CONTACT ---");
 		System.out.println("Yay! A new friend :) ");
-
-		// *** NEED TO SAVE THE INFO
 
 		System.out.print("Please enter the new contact's LAST NAME: ");
 		// to check if user entered valid characters for the contact's last name (no numbers)
@@ -126,6 +123,7 @@ public class AddressBook {
 
 		System.out.print("Please enter the new contact's PHONE NUMBER (numbers only): ");
 		// **if time, check for only 10 digits
+		
 		// to check if user entered valid numbers for the contact's phone number (no characters)
 		invalidInput = true;
 		while (invalidInput) {
@@ -137,20 +135,31 @@ public class AddressBook {
 			}			
 		}
 
-		System.out.println("f: " + firstName + ", l: " + lastName + ", num: " + phoneNum); // checking variables
-
-		// contacts[numContacts] = Contact(lastName, firstName, phoneNum);
-		//System.out.println("Great!! Your friend " + tempContact.lName(lastName) + ", " + tempContact.fName(firstName) + " (" + contact.phone(phoneNum) + ") has been added to your address book.");
-		// contacts[numContacts] = " ";
+		//System.out.println("f: " + firstName + ", l: " + lastName + ", num: " + phoneNum); // checking variables
+		
+		// saving contact information
+		Contact tempContact = new Contact(lastName, firstName, phoneNum);
+		tempContact.setLname(lastName);
+		tempContact.setFname(firstName);
+		tempContact.setPhone(phoneNum);
+		
+		System.out.println("Great!! Your friend " + tempContact.getLname() + ", " + tempContact.getFname() + " (" + tempContact.getPhone() + ") has been added to your address book!");
+		
+		contacts[numContacts] = tempContact;		
 		numContacts++;
+		
+		//System.out.println("contact: " + contacts[numContacts-1].toString() + ", numContactsFirst: " + (numContacts-1) + ", numContactsNext: " + numContacts); // checking variables
+		// ***SIDE NOTE: what is the method to show arrays?
 	}
 
 	// (2) Display All Contacts
 	public void displayAll() {
-		// TODO Auto-generated method stub
-
-		// array that contains
-
+		System.out.println("\n--- DISPLAY ALL CONTACTS ---");
+		System.out.println("Hi there! You have the following friends in your addressbook: ");
+		
+		for (int i=0; i<numContacts; i++) {
+			System.out.println("- " + contacts[i].getLname() + ", " + contacts[i].getFname() + " (" + contacts[i].getPhone() + ")");
+		}
 	}
 
 	// (3) Search for a Specific Contact
