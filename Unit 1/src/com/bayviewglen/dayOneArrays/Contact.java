@@ -1,6 +1,8 @@
 package com.bayviewglen.dayOneArrays;
 
-public class Contact {
+import java.util.Comparator;
+
+public class Contact implements Comparator <Contact> {
 	
 	// complete the class by adding appropriate constructors, get, set methods, etc.
 	
@@ -43,6 +45,20 @@ public class Contact {
 	
 	public void setFname(String fname) {
 		this.fname = fname;
+	}
+	
+	public int compareTo(Object o) {
+		Contact c = (Contact) o; 
+		String a = this.lname + this.fname;
+		String b = c.lname + c.fname; 
+		
+		return a.compareTo(b);
+	}
+	
+	public int compare(Contact a, Contact b) {
+		String c = a.lname + a.fname;
+		String d = b.lname + b.fname;
+		return c.compareTo(d); 
 	}
 	
 }

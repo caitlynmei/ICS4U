@@ -22,7 +22,6 @@ public class TryCatchAndDucking {
 		}
 		
 	}
-
 	
 	// (1)
 	private static void tryCatchMethod() {
