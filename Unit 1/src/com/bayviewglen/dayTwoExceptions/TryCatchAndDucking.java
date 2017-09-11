@@ -28,10 +28,16 @@ public class TryCatchAndDucking {
 	private static void tryCatchMethod() {
 		try {
 			Scanner scanner = new Scanner(new File("data/words.dat"));
+			throwingAnExceptionWithPerfectMechanics();
+
+		// ***for catches, use most specific first
 			
 		} catch(FileNotFoundException ex) {
 			/* the catch keeps it from crashing */
 			System.out.println(ex.getMessage());
+			
+		} catch (BestExceptionEver e) { // like else if ()
+			e.printStackTrace();
 			
 		} finally {
 			// happens always: e.g. clean or reset stuff up 
