@@ -36,6 +36,8 @@ public class FileReaderWriterExample {
 			System.out.println(line2);
 		}*/
 		
+		// compareable interface		
+		
 	}
 
 }

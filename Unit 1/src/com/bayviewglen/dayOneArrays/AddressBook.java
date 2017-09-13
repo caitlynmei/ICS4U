@@ -47,7 +47,7 @@ public class AddressBook {
 		}
 
 	}
-
+	
 	// (1) Add a Contact
 	public void addContact(Scanner keyboard, AddressBook contact) {
 		String lastName = "";
