@@ -18,49 +18,30 @@ public class homeworkOne {
 
 		readingQuestions(questions);
 		
+		/* testing questions array 
 		for (String[] arr : questions) {
 			for (String i : arr) {
 				System.out.print(i);
 			}
 			System.out.println();
+		}*/
+		
+		int[] marks = new int[8];
+		
+		checkingAnswers(questions, answers, marks);
+		
+		for (int i=0; i<questions.length; i++) {
+			System.out.println("Student " + i + "\'s correct count is " + marks[i] + ".");
 		}
 		
-		
-		
+		/* testing marks array
+		for (int i : marks) {
+			System.out.println(i);
+		}
+		*/
 		
 		//System.out.println("here: " + questions[3][5]); testing 
 		
-		/*
-		 * 
-		 * 
-		 * 	String[] horses = null;
-		try {
-			Scanner scannerFile = new Scanner(new File("Input/horses.dat"));
-			int numHorses = Integer.parseInt(scannerFile.nextLine()); // take a string and turn it into an int
-			horses = new String[numHorses];
-
-			for (int i = 0; i < numHorses; i++) {
-				horses[i] = scannerFile.nextLine();
-			}
-		} catch (FileNotFoundException e) { // in case file isn't there
-			e.printStackTrace();
-		}
-
-		return horses;
-	}
-		FileWriter fw = new FileWriter(new File("data/homeworkOne.dat"));
-		fw.write("\n");
-		fw.write("This is another test...\n");
-		fw.close();
-		
-		for (String[] arr : questions) {
-			for (String i : arr) {
-				System.out.print(i);
-			}
-			System.out.println();
-		}
-		*/
-
 	}
 
 	public static void readingQuestions(String[][] questions) {
@@ -69,15 +50,24 @@ public class homeworkOne {
 			input = new Scanner(new File("data/homeworkOne.dat"));
 			
 			for (int row = 0; row < questions.length; row++) {
-				for (int column = 0; column < questions[0].length; column++) {
+				for (int column = 0; column < questions[row].length; column++) {
 					questions[row][column] = input.next();
 				}
 			}		
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private static void checkingAnswers(String[][] questions, String[] answers, int[] marks) {
 		
-			
+		for (int r = 0; r<questions.length; r++) {
+			for (int c=0; c<questions[r].length; c++) {
+				if (questions[r][c].compareTo(answers[c]) == 0) {
+					marks[r]++;
+				}
+			}
+		}		
 	}
 
 }
