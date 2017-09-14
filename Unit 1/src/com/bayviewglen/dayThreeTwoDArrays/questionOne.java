@@ -8,7 +8,8 @@ public class questionOne {
 
 	public static void main(String[] args) {
 
-		int[][] sudoku = new int[9][9];
+		int[][] sudoku = new int[9][9]; // full 
+		int[][] miniSudoku = new int[9][9]; // 3 by 3
 
 		readingSudoku(sudoku);
 
@@ -20,12 +21,26 @@ public class questionOne {
 			System.out.println();
 		}
 
+		assigningMiniSukudo(sudoku, miniSudoku);
+		
 		if (checkingRow(sudoku) && checkingColumn(sudoku)) {
 			System.out.println("This is a valid solution.");
 		}
 
 	}
 
+	private static void assigningMiniSukudo(int[][] sudoku, int[][] miniSudoku) {
+		// fix this part 
+		for (int r = 0; r < miniSudoku.length; r++) {
+			for (int c = 0; c < miniSudoku[r].length; c++) {
+				miniSudoku[r][c] = sudoku[r][c];
+			}
+		}
+		
+		
+	}
+
+	// full sudoku
 	private static boolean checkingColumn(int[][] sudoku) {
 		System.out.println("Columns");
 		
@@ -80,23 +95,20 @@ public class questionOne {
 					}
 				}
 				System.out.println();
-				
-				//System.out.println(sudoku[tempR][tempC] + " : " + sudoku[r][c+1]);
-				/*if (sudoku[r][tempC] == sudoku[r][c+1]) {
-					count[r]++;
-				}*/
 			}
 			System.out.println();
 			if (count[r] != 0) {
 				System.out.println("This is not a valid solution.");
 				return false;
 			} 			
-			//tempC++;
 		}
 		return true;
 
 	}
 
+	// mini sudoku
+	
+	
 	private static void readingSudoku(int[][] sudoku) {
 		try {
 			Scanner input = new Scanner(new File("data/questionOne.dat"));
