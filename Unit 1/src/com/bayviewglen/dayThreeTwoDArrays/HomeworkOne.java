@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 import com.bayviewglen.dayTwoExceptions.BestExceptionEver;
 
-public class homeworkOne {
+public class HomeworkOne {
 
 	public static void main(String[] args) throws IOException {
 

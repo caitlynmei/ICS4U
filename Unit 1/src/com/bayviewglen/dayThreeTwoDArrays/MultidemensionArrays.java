@@ -1,6 +1,6 @@
 package com.bayviewglen.dayThreeTwoDArrays;
 
-public class multidemensionArrays {
+public class MultidemensionArrays {
 
 	public static void main(String[] args) {
 		char[][] words = new char[3][];
