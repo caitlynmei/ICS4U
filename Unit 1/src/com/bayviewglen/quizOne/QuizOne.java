@@ -157,9 +157,7 @@ public class QuizOne {
 
 	private static void readingGame(String[][] game) {
 		String temp = "";
-		String strs[] = new String[3];
-		
-		
+			
 		try {
 			Scanner input = new Scanner(new File("data/quizOne.dat"));
 			for (int r=0; r<game.length; r++) {
