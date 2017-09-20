@@ -9,61 +9,128 @@ public class PostFix {
 
 	public static void main(String[] args) {
 		
-		testPostFix("data/postfix.dat");
 		testInFix("data/infix.dat");
-		
-		
+		testPostFix("data/postfix.dat");
+
 	}
 
 	private static void testInFix(String fileName) {
 		File f = new File(fileName);
 		Scanner input;
-		
+
 		try {
 			input = new Scanner(f);
 			while (input.hasNext()) {
 				String expression = input.nextLine();
 				evaluateInFix(expression.split(" "));
 			}
-			
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
 		}
 	}
-	
+
 	private static void evaluateInFix(String[] stream) {
 		Stack<String> operators = new Stack<String>();
 		Stack<Double> operands = new Stack<Double>();
 		
 		String numbers = "0123456789";
-		String operators1 = "*/+-";
 		
+		System.out.print("\nInfix Expression: ");
 		for (String s : stream) {
 			System.out.print(s);
 		}
 		
 		for (int i=0; i<stream.length; i++) {
-			if (operators.indexOf(stream[i]) != -1){
-				operands.push(Double.parseDouble(stream[i]));
-				System.out.println(operands);
+			if (numbers.indexOf(stream[i]) == -1) {
+				if (stream[i].equals("(")) {
+					operators.push(stream[i]);
+					//System.out.println("operators " + operators +"\n");
+				} else if (stream[i].equals(")") && operators.peek().equals("(")) {
+					operators.pop();
+					//System.out.println("operators close " + operators+ "\n");
+				} else if (operators.peek().equals("(")) {
+					operators.push(stream[i]);
+					//System.out.println("operators " + operators +"\n");
+				} 
+			
 			} else {
-				if (stream[i].equals("*")) {
-					operands.push(operands.pop() * operands.pop());
-				} else if (stream[i].equals("/")) {
-					operands.push(operands.pop() / operands.pop());
-				} else if (stream[i].equals("+")) {
-					operands.push(operands.pop() + operands.pop());
-				} else if (stream[i].equals("-")) {
-					operands.push(operands.pop() - operands.pop());
+				double temp = Double.parseDouble(stream[i]);
+				if (operators.peek().equals("(")) {
+					operands.push(temp);
+
+					//System.out.println("operands " + operands);
+					//System.out.println("operators " + operators +"\n");
+					
+				} else {
+					if (operators.peek().equals("*")) {
+						operands.push(temp * operands.pop());
+						operators.pop();
+						
+						//System.out.println("operands " + operands);
+						//System.out.println("operators " + operators +"\n");
+						
+					} else if (operators.peek().equals("/")) {
+						operands.push(temp / operands.pop());
+						operators.pop();
+						
+						//System.out.println("operands " + operands);
+						//System.out.println("operators " + operators +"\n");
+						
+					} else if (operators.peek().equals("+")) {
+						operands.push(temp + operands.pop());
+						operators.pop();
+
+						//System.out.println("operands " + operands);
+						//System.out.println("operators " + operators +"\n");
+						
+					} else if (operators.peek().equals("-")) {
+						operands.push(temp - operands.pop());
+						operators.pop();
+
+						//System.out.println("operands " + operands);
+						//System.out.println("operators " + operators +"\n");
+						
+					}
 				}
 			}
-						
-			//System.out.print(s);
 		}
 		
+		if (!operators.isEmpty()) {
+			if (operators.peek().equals("*")) {
+				operands.push(operands.pop() * operands.pop());
+				operators.pop();
+				
+				//System.out.println("operands " + operands);
+				//System.out.println("operators " + operators +"\n");
+				
+			} else if (operators.peek().equals("/")) {
+				operands.push(operands.pop() / operands.pop());
+				operators.pop();
+				
+				//System.out.println("operands " + operands);
+				//System.out.println("operators " + operators +"\n");
+				
+			} else if (operators.peek().equals("+")) {
+				operands.push(operands.pop() + operands.pop());
+				operators.pop();
+
+				//System.out.println("operands " + operands);
+				//System.out.println("operators " + operators +"\n");
+				
+			} else if (operators.peek().equals("-")) {
+				operands.push(operands.pop() - operands.pop());
+				operators.pop();
+
+				//System.out.println("operands " + operands);
+				//System.out.println("operators " + operators +"\n");
+				
+			}
+		}
 		
+		System.out.println("\nInfix Expression Result: " + operands.peek());		
 	}
-	
+
 	private static void testPostFix(String fileName) {
 		File f = new File(fileName);
 		Scanner input;
@@ -73,21 +140,20 @@ public class PostFix {
 				String expression = input.nextLine();
 				evaluatePostFix(expression.split(" "));
 			}
-			
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-		}		
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private static void evaluatePostFix(String[] stream) {
 		Stack<Double> operands = new Stack<Double>();
-		//String numbers = "0123456789";
-		//String operators = "*/+-";
-		
+
+		System.out.print("\nPostfix Expression: ");
 		for (String s : stream) {
 			System.out.print(s);
 		}
-	
+
 		for (String s : stream) {
 			if (s.equals("*")) {
 				operands.push(operands.pop() * operands.pop());
@@ -101,7 +167,6 @@ public class PostFix {
 				operands.push(Double.parseDouble(s));
 			}
 		}
-		operands.peek();
-		//System.out.println(operands);
+		System.out.println("\nPostfix Expression Result: " + operands.peek());
 	}
 }

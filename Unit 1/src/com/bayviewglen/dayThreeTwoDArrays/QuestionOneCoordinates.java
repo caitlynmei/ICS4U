@@ -13,6 +13,8 @@ public class QuestionOneCoordinates {
 		
 		readCoordinates(reading, coordinates);
 		
+		points(coordinates);
+		
 		// checking 
 		/* 
 		for (String[] arr : reading) {
@@ -22,13 +24,21 @@ public class QuestionOneCoordinates {
 			System.out.println();
 		}*/
 		
+		// printing out coordinates
 		for (double[] arr : coordinates) {
 			for (double i : arr) {
-				System.out.print(i);
+				System.out.print(i + " ");
 			}
 			System.out.println();
 		}
+	}
 
+	private static void points(double[][] coordinates) {
+		double pointX = 0;
+		double pointY = 0;
+	
+		
+		
 	}
 
 	private static void readCoordinates(String[][] reading, double[][] coordinates) {
@@ -50,10 +60,6 @@ public class QuestionOneCoordinates {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		
-		
 	}
 
-	
-	
 }
