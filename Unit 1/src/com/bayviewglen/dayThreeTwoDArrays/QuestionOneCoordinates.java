@@ -1,5 +1,6 @@
 package com.bayviewglen.dayThreeTwoDArrays;
 
+import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -7,59 +8,35 @@ import java.util.Scanner;
 public class QuestionOneCoordinates {
 
 	public static void main(String[] args) {
-		
-		double[][] coordinates = new double[8][2];
-		String[][] reading = new String[8][2];
-		
-		readCoordinates(reading, coordinates);
-		
-		points(coordinates);
-		
-		// checking 
-		/* 
-		for (String[] arr : reading) {
-			for (String str : arr) {
-				System.out.print(str + " ");
-			}
-			System.out.println();
-		}*/
-		
-		// printing out coordinates
-		for (double[] arr : coordinates) {
-			for (double i : arr) {
-				System.out.print(i + " ");
-			}
-			System.out.println();
-		}
-	}
-
-	private static void points(double[][] coordinates) {
-		double pointX = 0;
-		double pointY = 0;
 	
+		Point2D[] points = readCoordinates();	
 		
+		//double points[1]
 		
+
+		// checking 
+		for (int i=0; i< points.length; i++) {
+			System.out.print(points[i].getX() + ", " + points[i].getY() + "\n");
+		} 
+	
 	}
 
-	private static void readCoordinates(String[][] reading, double[][] coordinates) {
-		String temp = "";
-
+	private static Point2D[] readCoordinates() {
+		Point2D[] points = null;
 		try {
-			Scanner input = new Scanner(new File("data/questionOneCoordinates.dat"));
-			for (int r=0; r<reading.length; r++) {
-				temp = input.nextLine();
-				reading[r] = temp.split(" ");
-			}
-		
-			for (int r = 0; r < coordinates.length; r++) {
-				for (int c = 0; c < coordinates[r].length; c++) {
-					coordinates[r][c] = Double.parseDouble(reading[r][c]);
-				}
+			Scanner scanner = new Scanner(new File("data/questionOneCoordinates.dat"));
+			points = new Point2D[Integer.parseInt(scanner.nextLine())];
+			
+			for(int i = 0; i < points.length; i++) {
+				points[i] = new Point2D.Double(Double.parseDouble(scanner.next()), Double.parseDouble(scanner.next()));
 			}
 			
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
+		} catch(Exception e) {
+			System.out.println(e.getLocalizedMessage());
 		}
+		return points;
 	}
 
 }
