@@ -16,8 +16,6 @@ public class LinkedList {
 
 	// Adds the specified element to the end of this list 
 	public boolean add(int x) { // add onto tail
-		IntNode temp; // to hold tail?
-		
 		if (numNodes == 0) {
 			addFirst(x); // The linked list is empty. I need to make sure head and tail both points to it. 
 		} else if (numNodes >= 1){
@@ -29,32 +27,28 @@ public class LinkedList {
 	}
 	
 	// Inserts the specified element at the specified position in this list 
-	// ****HOW DO I ACCESS NODES THAT AREN'T HEAD/TAIL?
-	private void add(int index, int value) {
+	public void add(int index, int value) {
 		if (numNodes == 0) {
 			addFirst(value);
 			// check for empty link -- if they give you one that's out of bounds, throw an exception 
-		}
-		
-		IntNode previous = head;
-
-		for (int i=0; i<numNodes; i++) {
-			if (i == index-1) {
+		} else {		
+			if (index < numNodes){
+				IntNode previous = head;
 				
+				for (int i=0; i<index; i++) {
+					previous = previous.getLink();
+				}
+					
+				// create new node and insert it as you are at the correct spot now
+				// Notes: .getLink() points to the next link
+				// 		  .setLink() sets the new reference link 
+				
+				previous.setLink(new IntNode(value, previous.getLink()));
+				numNodes += 1;
+			} else {
+				throw new IndexOutOfBoundsException();
 			}
-			previous = previous.getLink();
 		}
-		
-		// use a for loop to iterate 
-		
-		if (previous.equals(value)) {
-			for (int i=0; i<numNodes; i++) {
-				previous = new IntNode(value, previous.getLink());
-			}
-		}
-		
-		//previousIndex = previousIndex.getLink();
-		//previousIndex.getLink() = new IntNode(value, previousIndex.getLink());
 	}
 	
 	// Inserts specified element at the beginning of this list 
@@ -74,17 +68,16 @@ public class LinkedList {
 		tail = null;
 	}
 	
-	// Returns true if this list contains the specified element 
-	// **** SEARCHING FOR NODE OR INT? 
-	public boolean contains (int x) {
-		IntNode temp = head;
+	// Returns true if this list contains the specified element  
+	public boolean contains (int value) {
+		IntNode previous = head;
 		
 		if (numNodes > 0) {
 			for (int i=0; i<numNodes; i++) {
-				if (x == temp.getData()) {
-					// *** but how do I iterate through the list? 
+				if (value == previous.getData()) {
 					return true;
 				}
+				previous = previous.getLink();
 			}
 		}
 		
@@ -92,57 +85,63 @@ public class LinkedList {
 	}
 	
 	// returns the element at the specified position in this list
-	public IntNode get(int index) {
-		IntNode temp = null;
+	public int get(int index) {
+		IntNode previous = head;
 		
-		if (numNodes >= index) { 
-			for (int i=0; i<numNodes; i++) {
-				if (i == index) {
-					// iterate through nodes... 
-					return temp;
-				}
+		if (index < 0 || index >= size()) {
+				throw new IndexOutOfBoundsException();
+		} else { // (numNodes > index) 
+			for (int i=0; i<index; i++) {
+				previous = previous.getLink();
 			}
-		} else { // or (index < 0 || index >= size())
-			throw new IndexOutOfBoundsException();
-		}
-		
-		return temp; // discard 
-		
+			return previous.getData();
+		}		
 	}
 	
 	// returns the first element in this list
-	public IntNode getFirst() {
+	public int getFirst() {
 		if (numNodes == 0) {
 			throw new NoSuchElementException();
 		} else {
-			return head.getLink(); // **** do I return the link?	
+			return head.getData(); 	
 		}
 	}
 	
 	// returns the last element in this list
-	public IntNode getLast() {
+	public int getLast() {
 		if (numNodes == 0) {
 			throw new NoSuchElementException();
 		} else {
-			return tail.getLink(); // **** do I return the link?	
+			return tail.getData();	
 		}
 	}
 	
 	// retrieves and removes the head of this list
 	public int remove() {
 		IntNode temp = head;
+		IntNode secondLink = head.getLink(); // 2nd link in list
+		head = secondLink;
 		
-		// reassign head to 2nd link
-		// head = 2nd link;
-		 
+		numNodes -= 1;
 		return temp.getData();
 	}
 	
 	// removes the element at the specified position in this list
-	public IntNode remove(int index) {
-		//IntNode temp = new IntNode(get(index));
+	public int remove(int index) {
+		IntNode previous = head;
+		int temp = 0;
 		
-		return head; // temp
+		if (index < 0 || index >= size()) {
+			throw new IndexOutOfBoundsException();
+		} else { // (numNodes >= index) 
+			for (int i=0; i<index; i++) {
+				temp = previous.getData();
+				previous = previous.getLink();
+			}
+			previous.setLink(new IntNode(previous.getData(), previous.getLink()));
+		}
+		
+		return temp; 
 	}
 	
 	// removes the 1st occurrence of the specified element in the list 
@@ -191,15 +190,26 @@ public class LinkedList {
 		return false;
 	}
 	
-	// ------ didn't really look at the ones below: ---------
-	
 	// replaces the element at the specified position in this list with the specified element
 	// return element previously stored in the position 
-	public IntNode set(int index, int value) {
+	public int set(int index, int value) {
+		IntNode previous = head;
+		int temp = 0;
 		
+		for (int i=0; i<index; i++) {
+			if (i<index-1) {
+				temp = previous.getData();
+			}
+			previous = previous.getLink();
+		}
 		
-		return head;
+		previous.setData(value);
+		
+		return temp;
 	}
+	
+	// ------ didn't really look at the ones below: ---------
+	
 	
 	// returns number of elements in this list 
 	public int size() {
