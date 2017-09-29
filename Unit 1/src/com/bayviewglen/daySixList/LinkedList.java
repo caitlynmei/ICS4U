@@ -345,19 +345,16 @@ public class LinkedList {
 	public int size() {
 		return numNodes;
 	}
-	
-	// ------ didn't really look at the ones below: ---------
-	
-	
-	
-	
+		
 	// returns an array containing all of the elements in this list 
 	// in proper sequence (from first to last element)
 	public int[] toArray() {
 		int[] arr = null;
 		
-		return arr;
+		for (int i=0; i<numNodes; i++) {
+			arr[i] = get(i);
+		}
 		
+		return arr;
 	}
-	
 }
