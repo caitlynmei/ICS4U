@@ -88,7 +88,7 @@ public class LinkedList {
 	public int get(int index) {
 		IntNode previous = head;
 		
-		if (index < 0 || index >= size()) {
+		if (index < 0 || index >= numNodes) {
 				throw new IndexOutOfBoundsException();
 		} else { // (numNodes > index) 
 			for (int i=0; i<index; i++) {
@@ -118,76 +118,207 @@ public class LinkedList {
 	
 	// retrieves and removes the head of this list
 	public int remove() {
-		IntNode temp = head;
-		IntNode secondLink = head.getLink(); // 2nd link in list
-		head = secondLink;
 		
-		numNodes -= 1;
-		return temp.getData();
+		if (numNodes == 0) {
+			throw new NoSuchElementException();
+		} else {			
+			IntNode temp = head;
+			
+			if (numNodes == 1) {
+				clear();
+			} else {
+				IntNode secondLink = head.getLink(); // 2nd link in list
+				head = secondLink;
+			}
+			
+			numNodes--;
+			return temp.getData();
+		}
 	}
 	
-	// removes the element at the specified position in this list
+	// **** being stupid about the returns 
+	// Removes the element at the specified position in this list
+	// Returns the element that was removed from the list.
 	public int remove(int index) {
-		IntNode previous = head;
-		int temp = 0;
 		
-		if (index < 0 || index >= size()) {
+		int temp = get(index);
+		
+		if (index < 0 || index >= numNodes) {
 			throw new IndexOutOfBoundsException();
-		} else { // (numNodes >= index) 
-			for (int i=0; i<index; i++) {
-				temp = previous.getData();
-				previous = previous.getLink();
+		} else {  // (numNodes > index) 
+			if (index == 0){ // if index is head 
+				if (numNodes == 1) {
+					clear();
+				} else {
+					IntNode secondLink = head.getLink(); // 2nd link in list
+					head = secondLink;
+				}
+			} else if (index == numNodes-1) { // if index is tail
+				if (numNodes == 1) {
+					clear();
+				} else {
+					IntNode previous = head;
+					IntNode secondLast = head;
+					
+					for (int i=0; i<numNodes; i++) {
+						if (i == numNodes-2) {
+							secondLast = previous;
+							break;
+						}
+						previous = previous.getLink();
+					}
+					tail = secondLast;
+				}
+			} else {
+				IntNode previous = head;
+				IntNode next = previous;
+				for (int i=0; i<index; i++) {
+					previous = previous.getLink();
+				}
+				next = previous.getLink();
+				previous.setLink(next.getLink());
+
 			}
-			previous.setLink(new IntNode(previous.getData(), previous.getLink()));
+			numNodes--;
+			return temp; 
 		}
-		
-		return temp; 
 	}
 	
 	// removes the 1st occurrence of the specified element in the list 
 	// traverse list head to tail 
-	public boolean removeFirstOccurrence(IntNode n) {
-		IntNode temp = head;
+	public boolean removeFirstOccurrence(int value) {
+		int removeIndex = 0; // index for element that will be removed 
+		boolean valid = false;
 		
-		if (numNodes > 0) {
+		if (numNodes > 0 && contains(value)) {			
+			IntNode previous = head;
 			for (int i=0; i<numNodes; i++) {
-				if (n.equals(temp)) { // have to iterate through nodes 
-					return true;
+				if (value == previous.getData()) {
+					removeIndex = i;
+					valid = true;
+					break;
 				}
+				previous = previous.getLink();
 			}
 		}
 		
-		return false;
+		if (valid) {
+			if (removeIndex == 0) { // if 1st occurrence is the head
+				if (numNodes == 1) {
+					clear();
+				} else {
+					IntNode secondLink = head.getLink(); // 2nd link in list
+					head = secondLink;
+				}
+			} else if(removeIndex == numNodes-1){ // if 1st occurrence is the tail 
+				if (numNodes == 1) {
+					clear();
+				} else {
+					IntNode previous = head;
+					IntNode secondLast = head;
+					
+					for (int i=0; i<numNodes; i++) {
+						if (i == numNodes-2) {
+							secondLast = previous;
+							break;
+						}
+						previous = previous.getLink();
+					}
+					tail = secondLast;
+				}
+			} else {
+				IntNode previous = head;
+				for (int i=0; i<removeIndex-1; i++) {
+					previous = previous.getLink();
+				}
+				previous.setLink(null);	
+			}
+			numNodes--;
+		}
+		
+		return valid;
 	}
 	
 	// removes and returns the last element from this list
-	public IntNode removeLast(int x) {
-		IntNode temp = tail;
+	public int removeLast() {
+		int temp = tail.getData();
 		
 		if (numNodes > 0) {
-			//tail = previous.getLink();
+			if (numNodes == 1) {
+				clear();
+			} else {
+				IntNode previous = head;
+				IntNode secondLast = head;
+				
+				for (int i=0; i<numNodes; i++) {
+					if (i == numNodes-2) {
+						secondLast = previous;
+						break;
+					}
+					previous = previous.getLink();
+				}
+				tail = secondLast;
+			}
+			numNodes--;
 			return temp; 
+			
 		} else {
 			throw new NoSuchElementException();
 		}
-		
-		// x.previouslink.link.link 
 	}
 	
 	// removes the last occurrence of the specified element in the list 
 	// traverse list head to tail 
-	public boolean removeLastOccurrence(IntNode n) {
-		IntNode temp = tail;
+	// if the list does not contain the element, it is unchanged.
+	public boolean removeLastOccurrence(int value) {
+		int removeIndex = 0;
+		boolean valid = false;
 		
-		if (numNodes > 0) {
-			for (int i = numNodes - 1; i >= 0; i--) { // **** do Linked List start at index 0 or 1?
-				if (n.equals(temp)) { // have to iterate through nodes 
-					return true;
+		if (numNodes > 0 && contains(value)) {
+			for (int i = numNodes - 1; i >= 0; i--) {
+				if (value == get(i)) { 
+					removeIndex = i;
+					valid = true;
+					break;
 				}
 			}
 		}
-			
-		return false;
+		
+		if (valid) {
+			if (removeIndex == 0) { // if last occurrence is the head
+				if (numNodes == 1) {
+					clear();
+				} else {
+					IntNode secondLink = head.getLink(); // 2nd link in list
+					head = secondLink;
+				}
+			} else if(removeIndex == numNodes-1){ // if last occurrence is the tail 
+				if (numNodes == 1) {
+					clear();
+				} else {
+					IntNode previous = head;
+					IntNode secondLast = head;
+					
+					for (int i=0; i<numNodes; i++) {
+						if (i == numNodes-2) {
+							secondLast = previous;
+							break;
+						}
+						previous = previous.getLink();
+					}
+					tail = secondLast;
+				}
+			} else {
+				IntNode previous = head;
+				for (int i=0; i<removeIndex-1; i++) {
+					previous = previous.getLink();
+				}
+				previous.setLink(null);	
+			}
+			numNodes--;
+		}
+		
+		return valid;
 	}
 	
 	// replaces the element at the specified position in this list with the specified element
@@ -196,25 +327,29 @@ public class LinkedList {
 		IntNode previous = head;
 		int temp = 0;
 		
-		for (int i=0; i<index; i++) {
-			if (i<index-1) {
-				temp = previous.getData();
+		if (index < 0 || index >= numNodes) {
+			throw new IndexOutOfBoundsException();
+		} else {
+			for (int i=0; i<index; i++) {
+				if (i<index-1) {
+					temp = previous.getData();
+				}
+				previous = previous.getLink();
 			}
-			previous = previous.getLink();
+			previous.setData(value);
+			return temp;
 		}
-		
-		previous.setData(value);
-		
-		return temp;
 	}
-	
-	// ------ didn't really look at the ones below: ---------
-	
 	
 	// returns number of elements in this list 
 	public int size() {
 		return numNodes;
 	}
+	
+	// ------ didn't really look at the ones below: ---------
+	
+	
+	
 	
 	// returns an array containing all of the elements in this list 
 	// in proper sequence (from first to last element)
