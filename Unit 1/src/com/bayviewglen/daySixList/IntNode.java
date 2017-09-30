@@ -5,7 +5,7 @@ public class IntNode {
 	private int data;
 	private IntNode link; 
 	
-	public IntNode () { // always create your own default constructor 
+	public IntNode() { // always create your own default constructor 
 		super();
 		data = 0;
 		link = null;
@@ -32,6 +32,6 @@ public class IntNode {
 	public void setLink(IntNode link) {
 		this.link = link;
 	}
-	
+
 	
 }

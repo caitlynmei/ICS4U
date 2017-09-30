@@ -20,7 +20,7 @@ public class LinkedList {
 			addFirst(x); // The linked list is empty. I need to make sure head and tail both points to it. 
 		} else if (numNodes >= 1){
 			tail = new IntNode(x, tail);
-			numNodes += 1;
+			numNodes++;
 		} 
 		
 		return true;
@@ -28,23 +28,22 @@ public class LinkedList {
 	
 	// Inserts the specified element at the specified position in this list 
 	public void add(int index, int value) {
-		if (numNodes == 0) {
+		if (numNodes == 0 || index == 0) {
 			addFirst(value);
 			// check for empty link -- if they give you one that's out of bounds, throw an exception 
 		} else {		
 			if (index < numNodes){
 				IntNode previous = head;
 				
-				for (int i=0; i<index; i++) {
+				for (int i=0; i<index-1; i++) {
 					previous = previous.getLink();
 				}
 					
 				// create new node and insert it as you are at the correct spot now
 				// Notes: .getLink() points to the next link
 				// 		  .setLink() sets the new reference link 
-				
-				previous.setLink(new IntNode(value, previous.getLink()));
-				numNodes += 1;
+				previous.setLink(new IntNode(value, previous.getLink())); 
+				numNodes++;
 			} else {
 				throw new IndexOutOfBoundsException();
 			}
@@ -52,20 +51,22 @@ public class LinkedList {
 	}
 	
 	// Inserts specified element at the beginning of this list 
-	public void addFirst(int x) {
-		head = new IntNode(x, head);
+	public void addFirst(int value) {
+		head = new IntNode(value, head); 
+		//numNodes =+ 1;
 		
-		if (numNodes == 0) {
+		if (numNodes == 0) { // was == 0
 			tail = head;
 		}
-		
-		numNodes =+ 1;
+		numNodes++;
+	
 	}
 	
 	// Removes all the elements from this list 
 	public void clear() {
 		head = null;
 		tail = null;
+		numNodes = 0;
 	}
 	
 	// Returns true if this list contains the specified element  
@@ -136,7 +137,6 @@ public class LinkedList {
 		}
 	}
 	
-	// **** being stupid about the returns 
 	// Removes the element at the specified position in this list
 	// Returns the element that was removed from the list.
 	public int remove(int index) {
@@ -171,8 +171,8 @@ public class LinkedList {
 				}
 			} else {
 				IntNode previous = head;
-				IntNode next = previous;
-				for (int i=0; i<index; i++) {
+				IntNode next = head;
+				for (int i=0; i<index-1; i++) {
 					previous = previous.getLink();
 				}
 				next = previous.getLink();
@@ -180,7 +180,7 @@ public class LinkedList {
 
 			}
 			numNodes--;
-			return temp; 
+ 			return temp; 
 		}
 	}
 	
@@ -228,10 +228,12 @@ public class LinkedList {
 				}
 			} else {
 				IntNode previous = head;
+				IntNode next = head;
 				for (int i=0; i<removeIndex-1; i++) {
 					previous = previous.getLink();
 				}
-				previous.setLink(null);	
+				next = previous.getLink();
+				previous.setLink(next.getLink());
 			}
 			numNodes--;
 		}
@@ -241,9 +243,10 @@ public class LinkedList {
 	
 	// removes and returns the last element from this list
 	public int removeLast() {
-		int temp = tail.getData();
-		
-		if (numNodes > 0) {
+		if (numNodes == 0) {
+			throw new NoSuchElementException();
+		} else { // (numNodes > 0) 
+			int temp = tail.getData();
 			if (numNodes == 1) {
 				clear();
 			} else {
@@ -260,11 +263,8 @@ public class LinkedList {
 				tail = secondLast;
 			}
 			numNodes--;
-			return temp; 
-			
-		} else {
-			throw new NoSuchElementException();
-		}
+			return temp;
+		}	
 	}
 	
 	// removes the last occurrence of the specified element in the list 
@@ -310,10 +310,12 @@ public class LinkedList {
 				}
 			} else {
 				IntNode previous = head;
+				IntNode next = head;
 				for (int i=0; i<removeIndex-1; i++) {
 					previous = previous.getLink();
 				}
-				previous.setLink(null);	
+				next = previous.getLink();
+				previous.setLink(next.getLink());
 			}
 			numNodes--;
 		}
