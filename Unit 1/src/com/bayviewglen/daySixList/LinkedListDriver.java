@@ -21,14 +21,14 @@ public class LinkedListDriver {
 		driver.addFirst(3);
 		print(driver);
 		
-		// add(int value) ****
-		//driver.add(10); // returns true
-		//print(driver);
+		// add(int value) OK
+		driver.add(4); // returns true
+		print(driver);
 		
 		// add(int index, int value) OK
-		driver.add(1, 3);
-		System.out.print("add at index: ");
-		print(driver);
+		//driver.add(1, 3);
+		//System.out.print("add at index: ");
+		//print(driver);
 		
 		// ---- extra methods ----
 		

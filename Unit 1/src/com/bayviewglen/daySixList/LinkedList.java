@@ -15,11 +15,18 @@ public class LinkedList {
 	}
 
 	// Adds the specified element to the end of this list 
-	public boolean add(int x) { // add onto tail
+	public boolean add(int value) { // add onto tail
 		if (numNodes == 0) {
-			addFirst(x); // The linked list is empty. I need to make sure head and tail both points to it. 
-		} else if (numNodes >= 1){
-			tail = new IntNode(x, tail);
+			addFirst(value); // The linked list is empty. I need to make sure head and tail both points to it. 
+		} else if (numNodes > 0){
+			IntNode previous = head;
+			
+			for (int i=0; i<numNodes-1; i++) {
+				previous = previous.getLink();
+			}
+			tail = new IntNode(value, tail);
+			previous.setLink(new IntNode(value, tail)); 
+						
 			numNodes++;
 		} 
 		
