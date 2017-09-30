@@ -17,7 +17,7 @@ public class LinkedList {
 	// Adds the specified element to the end of this list 
 	public boolean add(int value) { // add onto tail
 		if (numNodes == 0) {
-			addFirst(value); // The linked list is empty. I need to make sure head and tail both points to it. 
+			addFirst(value); // The linked list is empty. I need to make sure head and tail both points to it
 		} else if (numNodes > 0){
 			IntNode previous = head;
 			

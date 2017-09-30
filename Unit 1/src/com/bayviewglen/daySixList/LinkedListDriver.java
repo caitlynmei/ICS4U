@@ -22,8 +22,8 @@ public class LinkedListDriver {
 		print(driver);
 		
 		// add(int value) OK
-		driver.add(4); // returns true
-		print(driver);
+		//driver.add(4); // returns true
+		//print(driver);
 		
 		// add(int index, int value) OK
 		//driver.add(1, 3);
@@ -93,7 +93,6 @@ public class LinkedListDriver {
 		}
 		
 		for (int i=0; i<driver.size(); i++) {
-			//System.out.println(driver.getData());
 			System.out.print(driver.get(i));
 		}
 		System.out.println();
