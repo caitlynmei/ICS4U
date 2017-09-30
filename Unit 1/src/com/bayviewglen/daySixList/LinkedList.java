@@ -351,8 +351,8 @@ public class LinkedList {
 	// returns an array containing all of the elements in this list 
 	// in proper sequence (from first to last element)
 	public int[] toArray() {
-		int[] arr = null;
-		
+		int[] arr = new int[numNodes];
+	
 		for (int i=0; i<numNodes; i++) {
 			arr[i] = get(i);
 		}

@@ -1,5 +1,7 @@
 package com.bayviewglen.daySixList;
 
+import java.util.Arrays;
+
 public class LinkedListDriver {
 
 	public static void main(String[] args) {
@@ -24,9 +26,11 @@ public class LinkedListDriver {
 		//print(driver);
 		
 		// add(int index, int value) OK
-		driver.add(1, 4);
+		driver.add(1, 3);
 		System.out.print("add at index: ");
 		print(driver);
+		
+		// ---- extra methods ----
 		
 		// clear() OK
 		//driver.clear();
@@ -34,6 +38,8 @@ public class LinkedListDriver {
 		
 		// contains(int value) OK
 		//System.out.println("contains: " + driver.contains(6));
+		
+		// ---- get methods ----
 		
 		// get(int index) OK
 		//System.out.println("get: " + driver.get(2));
@@ -44,6 +50,8 @@ public class LinkedListDriver {
 		// getLast() OK
 		//System.out.println("getLast : " + driver.getLast());
 
+		// ---- remove methods ----
+		
 		// remove() OK
 		//System.out.println(driver.remove());
 		
@@ -52,14 +60,28 @@ public class LinkedListDriver {
 		//print(driver);
 		
 		// removeFirstOccurrence(int value) OK
-		//driver.removeFirstOccurrence(2); // boolean works
+		//driver.removeFirstOccurrence(3); // boolean works
 		//print(driver);
 		
 		// removeLast(); OK
 		//driver.removeLast();
 		//print(driver);
 		
+		// removeLastOccurrence(int value) OK
+		//System.out.println(driver.removeLastOccurrence(3)); // boolean works
+		//print(driver);
 		
+		// ---- extra methods ----
+		
+		// set(int index, int value) OK
+		//driver.set(3, 5);
+		//print(driver);
+		
+		// size() OK
+		// System.out.println("Size: " + driver.size());
+		
+		// toArray() OK
+		//System.out.println(Arrays.toString(driver.toArray()));
 		
 	}
 
