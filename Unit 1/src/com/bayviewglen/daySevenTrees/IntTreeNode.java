@@ -15,7 +15,7 @@ public class IntTreeNode {
 	
 	public IntTreeNode(int data) {
 		super();
-		data  = 0;
+		this.data = data;
 		left = null;
 		right = null;
 	}
@@ -50,10 +50,5 @@ public class IntTreeNode {
 	public void setRight(IntTreeNode right) {
 		this.right = right;
 	}
-	
-	
-	
-	
-	
 
 }
