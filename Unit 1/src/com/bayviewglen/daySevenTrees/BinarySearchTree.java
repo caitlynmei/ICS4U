@@ -27,8 +27,10 @@ public class BinarySearchTree {
 	
 	// private add method (also takes in node)
 	private void add(IntTreeNode current, int value) {
+		IntTreeNode temp = new IntTreeNode(value);
+		
 		if (current == null) {
-			root = new IntTreeNode(value);
+			current = temp;
 		} else if (current.getData() > value) { // left side
 			add(current.getLeft(), value);
 		} else if (current.getData() <= value) { // right side

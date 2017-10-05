@@ -2,7 +2,7 @@ package com.bayviewglen.daySevenTrees;
 
 public class IntTreeNode {
 
-	private int data;
+	private int data; // data to contact for phone number 
 	private IntTreeNode left;
 	private IntTreeNode right;
 	

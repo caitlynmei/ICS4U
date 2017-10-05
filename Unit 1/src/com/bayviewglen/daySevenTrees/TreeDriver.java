@@ -13,9 +13,9 @@ public class TreeDriver {
 		driver.add(18);
 		driver.add(8);
 		
-		driver.inorderTraversal(driver.getRoot());
+		//driver.inorderTraversal(driver.getRoot());
 		
-		driver.delete(driver.getRoot(), 7);
+		//driver.delete(driver.getRoot(), 7);
 			
 	}
 
