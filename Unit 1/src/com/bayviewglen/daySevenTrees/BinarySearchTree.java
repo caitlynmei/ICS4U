@@ -16,7 +16,17 @@ public class BinarySearchTree {
 	
 	// insertions
 	
-	public void add(IntTreeNode current, int value) {
+	// public add method from driver 
+	public void add(int value) {
+		if (root == null) {
+			root = new IntTreeNode(value);
+		} else {
+			add(root, value);
+		}
+	}
+	
+	// private add method (also takes in node)
+	private void add(IntTreeNode current, int value) {
 		if (current == null) {
 			root = new IntTreeNode(value);
 		} else if (current.getData() > value) { // left side
@@ -25,8 +35,6 @@ public class BinarySearchTree {
 			add(current.getRight(), value);
 		}
 	}
-	
-	
 	
 	/*
 	public void add(IntTreeNode current, int x) {
@@ -39,21 +47,11 @@ public class BinarySearchTree {
 		} else if (current.getData() <= x) {
 			add(current.getRight(), x);
 		}
-	}
-	
-	public void add(int x) {
-		if (root == null) {
-			IntTreeNode temp = new IntTreeNode(x);
-			root = temp;
-		} else {
-			add(root, x);
-		}
-	}
-	
+	}	
 	*/
 	
 	// deleting
-	public boolean delete(IntTreeNode root, int dltKey) {
+	public boolean delete(IntTreeNode root, int dltKey) { // change root to parent 
 		if (root == null) {
 			return false;
 		} else if (dltKey < root.getData()) {
@@ -64,10 +62,27 @@ public class BinarySearchTree {
 			if (root.getLeft() == null) {
 				root = root.getRight();
 				return true;
+			} else if (root.getRight() == null) {
+				root = root.getLeft();
+				return true;
+			} else { // find largest node on the left side 
+				root = root.getLeft();
+				IntTreeNode largestLeft = findLargestRemove(root);
+				int temp = largestLeft.getData(); // find largest node from the parent.getLeft() side and replaces the parent with the greatest left node 
+				root.setData(temp);
+				largestLeft = null;
+				return true;
 			}
 		}
-		
-		return false;
+	}
+	
+	// find largest from left node (remove)
+	public IntTreeNode findLargestRemove(IntTreeNode parent) {
+		if (parent.getRight() == null) {
+			return parent;
+		} else {
+			return findLargestRemove(parent);
+		}		
 	}
 	
 	
