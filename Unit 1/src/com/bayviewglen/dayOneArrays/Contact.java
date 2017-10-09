@@ -11,7 +11,9 @@ public class Contact implements Comparator <Contact> {
 	private String phone;
 	
 	public Contact() {
-		
+		lname = null;
+		fname = null;
+		phone = null;
 	}
 	
 	public Contact(String lname, String fname, String phone) {
@@ -21,6 +23,8 @@ public class Contact implements Comparator <Contact> {
 		this.phone = phone;
 	}
 	
+	// phone
+	
 	public String getPhone() {
 		return phone;
 	}
@@ -29,6 +33,7 @@ public class Contact implements Comparator <Contact> {
 		this.phone = phone;
 	}
 	
+	// Lname
 	
 	public String getLname() {
 		return lname;
@@ -38,6 +43,7 @@ public class Contact implements Comparator <Contact> {
 		this.lname = lname;
 	}
 	
+	// Fname
 	
 	public String getFname() {
 		return fname;
@@ -46,6 +52,8 @@ public class Contact implements Comparator <Contact> {
 	public void setFname(String fname) {
 		this.fname = fname;
 	}
+	
+	// compares
 	
 	public int compareTo(Object o) {
 		Contact c = (Contact) o; 
@@ -60,5 +68,20 @@ public class Contact implements Comparator <Contact> {
 		String d = b.lname + b.fname;
 		return c.compareTo(d); 
 	}
+	
+	/*
+	public int compare(String o1, String o2) {
+        if (o1 == null && o2 == null) {
+             return 0;
+         }
+         if (o1 == null) {
+             return 1;
+         }
+         if (o2 == null) {
+             return -1;
+         }
+         return o1.compareTo(o2);
+     }
+     */
 	
 }

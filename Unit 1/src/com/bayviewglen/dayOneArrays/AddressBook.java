@@ -38,14 +38,13 @@ public class AddressBook {
 		}
 
 		// determining which option the user entered
-		if (optionNum == "1") {
+		if (optionNum.equals("1")) {
 			addContact(keyboard, contact); // ***** FOR SOME REASON IT JUST ENDS HERE...
-		} else if (optionNum == "2") {
+		} else if (optionNum.equals("2")) {
 			displayAll();
-		} else if (optionNum == "3") {
+		} else if (optionNum.equals("3")) {
 			search(keyboard, contact);
 		}
-
 	}
 	
 	// (1) Add a Contact
@@ -94,11 +93,11 @@ public class AddressBook {
 		System.out.println("Great!! Your friend " + tempContact.getLname() + ", " + tempContact.getFname() + " (" + tempContact.getPhone() + ") has been added to your address book!");
 
 		contacts[numContacts] = tempContact;
-		// Arrays.sort(contacts);
 		numContacts++;
-
-		System.out.println("contact: " + contacts[numContacts - 1].toString() + ", numContactsFirst: " + (numContacts - 1) + ", numContactsNext: " + numContacts); // checking variables
-		// ***SIDE NOTE: what is the method to show arrays?
+		//Arrays.sort(contacts, Ordering.natural().nullsLast());
+		
+		sort(); // sorting 
+		print(); // checking 		
 	}
 // --- checks if the user entered a LAST NAME using valid characters ---
 	public boolean contactLnameCheck(Scanner keyboard, String lastName, Contact newContact) {
@@ -339,6 +338,26 @@ public class AddressBook {
 		}		
 	}
 
+	// checking method 
+	public void print() {
+		for (int i=0; i<numContacts; i++) {
+			System.out.println("Last: " + contacts[i].getLname() + ", First: " + contacts[i].getFname() + ", Phone: " + contacts[i].getPhone());
+		}
+	}
 	
-
+	// sorting contacts in order: from smallest to greatest regarding ASCII 
+	public void sort() {
+		for (int i=0; i<contacts.length-1; i++) {
+			if (contacts[i] == null || contacts[i+1] == null) {
+				i++;
+			} else if ((contacts[i].compare(contacts[i], contacts[i+1])) == -1) {
+				Contact smaller = contacts[i];
+				Contact bigger = contacts[i+1];
+				contacts[i] = smaller;
+				contacts[i+1] = bigger; 
+			}
+		}
+	}
+	
+	
 }
