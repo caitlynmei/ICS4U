@@ -53,6 +53,12 @@ public class Contact implements Comparator <Contact> {
 		this.fname = fname;
 	}
 	
+	// full name
+	
+	public String getFullName() {
+		return lname + fname;
+	}
+	
 	// compares
 	
 	public int compareTo(Object o) {

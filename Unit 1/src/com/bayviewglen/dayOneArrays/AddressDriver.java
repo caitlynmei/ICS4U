@@ -6,22 +6,20 @@ import java.util.Scanner;
 public class AddressDriver {
 
 	public static void main(String[] args) {
-		//String optionNum = "";
-		
-		
+		AddressBook contact = new AddressBook();
 		Scanner keyboard = new Scanner(System.in);
 		
-		AddressBook contact = new AddressBook();
+		boolean closeBook = false;
 		
-		contact.welcomeMenu(keyboard, contact);
+		System.out.println("Welcome to your faithful addressbook!");
 		
-		/*
-		contact.addContact(keyboard, contact);
+		while (!closeBook) {
+			contact.welcomeMenu(keyboard, contact);	
+			
+			closeBook = contact.finished(keyboard, contact);
+		}
 		
-		contact.displayAll();
-		
-		contact.search(keyboard, contact);
-		*/
+		contact.closingMessage();
 		
 	}
 
