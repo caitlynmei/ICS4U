@@ -29,24 +29,29 @@ public class BinarySearchTree {
 	
 	// public add method from driver 
 	public void add(int value) {
+		root = add(root, value);
+		
+		/*
 		if (root == null) {
 			root = new IntTreeNode(value);
 		} else {
 			add(root, value);
 		}
+		*/
 	}
 	
 	// private add method (takes in node)
-	private void add(IntTreeNode current, int value) {
-		IntTreeNode temp = new IntTreeNode(value);
-		
-		if (current == null) {
-			current = temp;
-		} else if (value < current.getData()) { // left side
-			add(current.getLeft(), value);
-		} else if (value >= current.getData()) { // right side
-			add(current.getRight(), value);
+	private IntTreeNode add(IntTreeNode root, int value) {
+		if (root == null) {
+			root = new IntTreeNode(value);
+			return root;
+		} else if (value < root.getData()) { // left side
+			root.setLeft(add(root.getLeft(), value));
+		} else if (value >= root.getData()) { // right side
+			root.setRight(add(root.getRight(), value));
 		}
+		
+		return root;
 	}
 	
 	/* 
