@@ -269,22 +269,20 @@ public class AddressBook {
 		
 		for (int i=0; i<numContacts; i++) {
 			if (contacts[i].getFullName().equals(tempFullName)) {
-				while (i<numContacts-1) {
-					Contact temp = contacts[i+1];
-					contacts[i] = temp;
-					i++;
+				if (i == lastContactIndex) {
+					contacts[i] = null;
+				} else {
+					while (i<numContacts-1) {
+						Contact temp = contacts[i+1];
+						contacts[i] = temp;
+						i++;
+					}
+					contacts[i+1] = null;
 				}
-				contacts[i+1] = null;
+				
 			}
 		}
-		
-		print();
-		System.out.println();
-		
-		//contacts[lastContactIndex] = null; 
 		numContacts--;
-		
-		print();
 	}
 
 	// checking method 
