@@ -6,11 +6,13 @@ public class IntTreeNode {
 	private IntTreeNode left;
 	private IntTreeNode right;
 	
+	// constructors
+	
 	public IntTreeNode() {
 		super();
-		data  = 0;
-		left = null;
-		right = null;
+		this.data  = 0;
+		this.left = null;
+		this.right = null;
 	}
 	
 	public IntTreeNode(int data) {
@@ -27,6 +29,8 @@ public class IntTreeNode {
 		this.right = right;
 	}
 
+	// data
+	
 	public int getData() {
 		return data;
 	}
@@ -35,6 +39,8 @@ public class IntTreeNode {
 		this.data = data;
 	}
 	
+	// left
+	
 	public IntTreeNode getLeft() {
 		return left;
 	}
@@ -42,6 +48,8 @@ public class IntTreeNode {
 	public void setLeft(IntTreeNode left) {
 		this.left = left;
 	}
+	
+	// right
 	
 	public IntTreeNode getRight() {
 		return right;

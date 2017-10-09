@@ -14,7 +14,18 @@ public class BinarySearchTree {
 		this.root = root;
 	}
 	
-	// insertions
+	// --- Getters and Setters ---
+	
+
+	public IntTreeNode getRoot() {
+		return root;
+	}
+
+	public void setRoot(IntTreeNode root) {
+		this.root = root;
+	}
+
+	// --- insertions ---
 	
 	// public add method from driver 
 	public void add(int value) {
@@ -25,20 +36,21 @@ public class BinarySearchTree {
 		}
 	}
 	
-	// private add method (also takes in node)
+	// private add method (takes in node)
 	private void add(IntTreeNode current, int value) {
 		IntTreeNode temp = new IntTreeNode(value);
 		
 		if (current == null) {
 			current = temp;
-		} else if (current.getData() > value) { // left side
+		} else if (value < current.getData()) { // left side
 			add(current.getLeft(), value);
-		} else if (current.getData() <= value) { // right side
+		} else if (value >= current.getData()) { // right side
 			add(current.getRight(), value);
 		}
 	}
 	
-	/*
+	/* 
+	 * we wrote this one in class  
 	public void add(IntTreeNode current, int x) {
 		IntTreeNode temp = new IntTreeNode(x);
 		
@@ -52,43 +64,61 @@ public class BinarySearchTree {
 	}	
 	*/
 	
-	// deleting
-	public boolean delete(IntTreeNode root, int dltKey) { // change root to parent 
+	// --- delete --- 
+	
+	// public delete method from driver
+	public boolean delete(int dltKey) {
 		if (root == null) {
 			return false;
+		} else {
+			return delete(root, dltKey);
+		}
+		
+	}
+	
+	// private delete method (takes in node)
+	private boolean delete(IntTreeNode root, int dltKey) { // change root to parent 
+		if (root == null) {
+			return false;
+			
 		} else if (dltKey < root.getData()) {
 			return delete(root.getLeft(), dltKey);
-		} else if (dltKey >= root.getData()) { // in ppt it only has >
+		} else if (dltKey > root.getData()) {
 			return delete(root.getRight(), dltKey);
+			
 		} else { // dltKey found
-			if (root.getLeft() == null) {
+			if (root.getLeft() == null) { 
 				root = root.getRight();
 				return true;
 			} else if (root.getRight() == null) {
 				root = root.getLeft();
 				return true;
-			} else { // find largest node on the left side 
-				root = root.getLeft();
-				IntTreeNode largestLeft = findLargestRemove(root);
-				int temp = largestLeft.getData(); // find largest node from the parent.getLeft() side and replaces the parent with the greatest left node 
-				root.setData(temp);
-				largestLeft = null;
+			} else { // have L and R children --> find largest node on the left side 
+				//root = root.getLeft();
+				IntTreeNode tempLeft = root.getLeft();
+				IntTreeNode largestLeft = findLargestRemove(tempLeft);
+				
+				// find largest node from the parent.getLeft() side and replaces the parent with the greatest left node 
+				int tempData = largestLeft.getData(); 
+				
+				root.setData(tempData); // replace root with data from largest node on left 
+				largestLeft = null; // null the largest node on left of root
 				return true;
 			}
 		}
 	}
 	
-	// find largest from left node (remove)
+	// deleting: find largest from left node (remove)
 	public IntTreeNode findLargestRemove(IntTreeNode parent) {
 		if (parent.getRight() == null) {
 			return parent;
 		} else {
-			return findLargestRemove(parent);
+			return findLargestRemove(parent.getRight());
 		}		
 	}
 	
 	
-	// traversals
+	// --- traversals --- 
 	
 	public void inorderTraversal(IntTreeNode current) {
 		if (current.getLeft() != null){ // left subtree
@@ -115,6 +145,7 @@ public class BinarySearchTree {
 		evaluate(current); // process root
 	}
 	
+	// finish this one... 
 	public void postorderTraversal(IntTreeNode current) {
 		if (current.getLeft() != null) {
 			// .... 
@@ -122,28 +153,27 @@ public class BinarySearchTree {
 		
 	}
 	
-	
 	private void evaluate(IntTreeNode current) {
 		System.out.println(current.getData());
 	}
 	
-	// searches
+	// --- searches ---
 	
-	// find smallest node 
+	// find smallest  
 	public int findSmallest(IntTreeNode root) {
 		if (root.getLeft() == null) {
-			return root.getData();// ****or address??
+			return root.getData();
 		} else {
-			return findSmallest(root);
+			return findSmallest(root.getLeft());
 		}
 	}
 	
-	// find largest node
+	// find largest 
 	public int findLargest(IntTreeNode root) {
 		if (root.getRight() == null) {
 			return root.getData();
 		} else {
-			return findLargest(root);
+			return findLargest(root.getRight());
 		}		
 	}
 	
@@ -152,29 +182,16 @@ public class BinarySearchTree {
 		if (root == null) { // empty
 			return -1;
 		} 
-		
-		int rootData = root.getData();
-		
-		if (targetKey < rootData) {
+			
+		if (targetKey < root.getData()) {
 			return searchBST(root.getLeft(), targetKey);
-		} else if (targetKey > rootData) {
+		} else if (targetKey > root.getData()) {
 			return searchBST(root.getRight(), targetKey);
-		} else { // found target key
+		} else { // found target key (root.getData() == targetKey)
 			return root.getData();
 		}
 	}
 	
-	// Getters and Setters
-	
-
-	public IntTreeNode getRoot() {
-		return root;
-	}
-
-	public void setRoot(IntTreeNode root) {
-		this.root = root;
-	}
-
 	
 	
 
