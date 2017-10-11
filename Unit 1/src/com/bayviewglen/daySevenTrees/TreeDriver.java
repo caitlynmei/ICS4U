@@ -18,17 +18,27 @@ public class TreeDriver {
 		System.out.println("---Adding---");
 		printTree(driver);
 		
+		// find smallest 
+		System.out.println("\nSmallest: " + driver.findSmallest(driver.getRoot()));
+		
+		// find largest
+		System.out.println("\nLargest: " + driver.findLargest(driver.getRoot()));
+		
+		// search
+		System.out.println("\nSearching for 8: " + driver.searchBST(driver.getRoot(), 8));
+		
 		// deleting 
 		
 		//System.out.println(driver.delete(1)); // boolean works
-		//driver.delete(7);
+		//driver.delete(10);
+		
+		driver.delete(10);
+		printTree(driver);
 		
 		//System.out.println("\nDeleting");
 		//printRight(driver);
 		
 		//driver.inorderTraversal(driver.getRoot());
-		
-		//driver.delete(driver.getRoot(), 7);
 			
 	}
 
@@ -43,6 +53,7 @@ public class TreeDriver {
 		System.out.println("2nd Right: " + driver.getRoot().getLeft().getRight().getData());
 
 		System.out.println("\nRight\n2nd Left: " + driver.getRoot().getRight().getLeft().getData());
+		//System.out.println("2nd Right: " + driver.getRoot().getRight().getRight().getData());
 
 	}
 	

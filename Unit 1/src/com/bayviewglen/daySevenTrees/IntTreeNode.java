@@ -39,6 +39,12 @@ public class IntTreeNode {
 		this.data = data;
 	}
 	
+	/*
+	public void setData(Object data) {
+		this.data = (Integer) null;
+	}
+	*/
+	
 	// left
 	
 	public IntTreeNode getLeft() {
@@ -58,5 +64,7 @@ public class IntTreeNode {
 	public void setRight(IntTreeNode right) {
 		this.right = right;
 	}
+
+	
 
 }
