@@ -4,16 +4,16 @@ public class IntTreeDriver {
 
 	public static void main(String[] args) {
 		
-		BinarySearchTree driver = new BinarySearchTree(); 
+		BinarySearchTreeTesting driver = new BinarySearchTreeTesting(); 
 		
 		// adding
 		
-		//driver.add(10);
-		//driver.add(7);
-		//driver.add(20);
-		//driver.add(2);
-		//driver.add(18);
-		//driver.add(8);
+		driver.add(10);
+		driver.add(7);
+		driver.add(20);
+		driver.add(2);
+		driver.add(18);
+		driver.add(8);
 		
 		System.out.println("---Adding---");
 		printTree(driver);
@@ -29,12 +29,13 @@ public class IntTreeDriver {
 		
 		// deleting 
 		
-		//System.out.println(driver.delete(1)); // boolean works
+		System.out.println(driver.delete(7)); // boolean works
+		printTree(driver);
 		//driver.delete(10);
 		
-		System.out.println("Delete: 7");
+		//System.out.println("Delete: 7");
 		//driver.delete(7);
-		printTree(driver);
+		//printTree(driver);
 		
 		//System.out.println("\nDeleting");
 		//printRight(driver);
@@ -45,7 +46,7 @@ public class IntTreeDriver {
 
 	// --- printing --- 
 	
-	public static void printTree(BinarySearchTree driver) {
+	public static void printTree(BinarySearchTreeTesting driver) {
 		print(driver);
 		printLeft(driver);
 		printRight(driver);
@@ -58,20 +59,31 @@ public class IntTreeDriver {
 
 	}
 	
-	public static void printLeft(BinarySearchTree driver) {
-		System.out.println("Root Left: " + driver.getRoot().getLeft().getData());
+	public static void printLeft(BinarySearchTreeTesting driver) {
+		if (driver.getRoot() == null) {
+			System.out.println("Root is null");
+		} else {
+			System.out.println("Root Left: " + driver.getRoot().getLeft().getData());
+		}
 		
 	}
 	
-	public static void printRight(BinarySearchTree driver) {
-		System.out.println("Root Right: " + driver.getRoot().getRight().getData());
+	public static void printRight(BinarySearchTreeTesting driver) {
+		if (driver.getRoot() == null) {
+			System.out.println("Root is null");
+		} else {
+			System.out.println("Root Right: " + driver.getRoot().getRight().getData());
+		}
 		
 	}
 
-	public static void print(BinarySearchTree driver) {
+	public static void print(BinarySearchTreeTesting driver) {
 		
-		System.out.println("Root: " + driver.getRoot().getData());
-		
+		if (driver.getRoot() == null) {
+			System.out.println("Root is null");
+		} else {
+			System.out.println("Root: " + driver.getRoot().getData());
+		}
 	}
 	
 }
