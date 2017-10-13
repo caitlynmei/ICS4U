@@ -232,6 +232,7 @@ public class BinarySearchTreeTesting {
 	
 	// --- traversals --- 
 	
+	// inOrder traversal 
 	public void inorderTraversal(IntTreeNode current) {
 		if (current.getLeft() != null){ // left subtree
 			inorderTraversal (current.getLeft());
@@ -245,24 +246,30 @@ public class BinarySearchTreeTesting {
 		
 	}
 	
+	// preOrder traversal
 	public void preorderTraversal(IntTreeNode current) {
+		evaluate(current); // process root
+		
 		if (current.getLeft() != null){ // left subtree
-			inorderTraversal (current.getLeft());
+			preorderTraversal (current.getLeft());
 		} 
 		// no else if, or you won't get to the right child 
 		if (current.getRight() != null) {
-			inorderTraversal(current.getRight());
+			preorderTraversal(current.getRight());
 		}
-			
-		evaluate(current); // process root
 	}
 	
-	// finish this one... 
+	// postOrder traversal 
 	public void postorderTraversal(IntTreeNode current) {
 		if (current.getLeft() != null) {
-			// .... 
+			postorderTraversal(current.getLeft());
 		}
 		
+		if (current.getRight() != null) {
+			postorderTraversal(current.getRight());
+		}
+		
+		evaluate(current); // process root
 	}
 	
 	private void evaluate(IntTreeNode current) {

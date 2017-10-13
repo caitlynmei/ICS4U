@@ -7,14 +7,13 @@ public class IntTreeDriver {
 		BinarySearchTreeTesting driver = new BinarySearchTreeTesting(); 
 		
 		// adding
-		
 		driver.add(10);
 		driver.add(7);
 		driver.add(20);
-		//driver.add(2);
-		//driver.add(18);
-		//driver.add(8);
-		//driver.add(22);
+		driver.add(2);
+		driver.add(18);
+		driver.add(8);
+		driver.add(22);
 		
 		System.out.println("---Adding---");
 		printTree(driver);
@@ -26,22 +25,17 @@ public class IntTreeDriver {
 		System.out.println("\nLargest: " + driver.findLargest(driver.getRoot()));
 		
 		// search
-		//System.out.println("\nSearching for 8: " + driver.searchBST(driver.getRoot(), 8));
+		System.out.println("\nSearching for 8: " + driver.searchBST(driver.getRoot(), 9));
 		
 		// deleting 
-		
-		System.out.println(driver.delete(10)); // boolean works
+		//System.out.println(driver.delete(10)); // boolean works
 		printTree(driver);
 		//driver.delete(10);
 		
-		//System.out.println("Delete: 7");
-		//driver.delete(7);
-		//printTree(driver);
-		
-		//System.out.println("\nDeleting");
-		//printRight(driver);
-		
+		// traversal 
 		//driver.inorderTraversal(driver.getRoot());
+		//driver.preorderTraversal(driver.getRoot());
+		//driver.postorderTraversal(driver.getRoot());
 			
 	}
 
