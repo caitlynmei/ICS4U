@@ -14,6 +14,7 @@ public class IntTreeDriver {
 		driver.add(2);
 		driver.add(18);
 		driver.add(8);
+		driver.add(22);
 		
 		System.out.println("---Adding---");
 		printTree(driver);
@@ -55,12 +56,12 @@ public class IntTreeDriver {
 		System.out.println("2nd Right: " + driver.getRoot().getLeft().getRight().getData());
 
 		System.out.println("\nRight\n2nd Left: " + driver.getRoot().getRight().getLeft().getData());
-		//System.out.println("2nd Right: " + driver.getRoot().getRight().getRight().getData());
+		System.out.println("2nd Right: " + driver.getRoot().getRight().getRight().getData());
 
 	}
 	
 	public static void printLeft(BinarySearchTreeTesting driver) {
-		if (driver.getRoot() == null) {
+		if (driver.getRoot().getLeft() == null) {
 			System.out.println("Root is null");
 		} else {
 			System.out.println("Root Left: " + driver.getRoot().getLeft().getData());
@@ -69,7 +70,7 @@ public class IntTreeDriver {
 	}
 	
 	public static void printRight(BinarySearchTreeTesting driver) {
-		if (driver.getRoot() == null) {
+		if (driver.getRoot().getRight() == null) {
 			System.out.println("Root is null");
 		} else {
 			System.out.println("Root Right: " + driver.getRoot().getRight().getData());
