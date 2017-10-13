@@ -11,10 +11,10 @@ public class IntTreeDriver {
 		driver.add(10);
 		driver.add(7);
 		driver.add(20);
-		driver.add(2);
-		driver.add(18);
-		driver.add(8);
-		driver.add(22);
+		//driver.add(2);
+		//driver.add(18);
+		//driver.add(8);
+		//driver.add(22);
 		
 		System.out.println("---Adding---");
 		printTree(driver);
@@ -30,7 +30,7 @@ public class IntTreeDriver {
 		
 		// deleting 
 		
-		System.out.println(driver.delete(7)); // boolean works
+		System.out.println(driver.delete(10)); // boolean works
 		printTree(driver);
 		//driver.delete(10);
 		
@@ -52,11 +52,11 @@ public class IntTreeDriver {
 		printLeft(driver);
 		printRight(driver);
 		
-		System.out.println("\nLeft\n2nd Left: " + driver.getRoot().getLeft().getLeft().getData());
-		System.out.println("2nd Right: " + driver.getRoot().getLeft().getRight().getData());
+		//System.out.println("\nLeft\n2nd Left: " + driver.getRoot().getLeft().getLeft().getData());
+		//System.out.println("2nd Right: " + driver.getRoot().getLeft().getRight().getData());
 
-		System.out.println("\nRight\n2nd Left: " + driver.getRoot().getRight().getLeft().getData());
-		System.out.println("2nd Right: " + driver.getRoot().getRight().getRight().getData());
+		//System.out.println("\nRight\n2nd Left: " + driver.getRoot().getRight().getLeft().getData());
+		//System.out.println("2nd Right: " + driver.getRoot().getRight().getRight().getData());
 
 	}
 	
