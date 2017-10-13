@@ -210,7 +210,7 @@ public class BinarySearchTree {
 	
 	// evaluating node from traversals 
 	private void evaluate(ContactTreeNode current) {
-		System.out.println(current.getData());
+		System.out.println("- " + current.getData());
 	}
 
 	// --- searches ---

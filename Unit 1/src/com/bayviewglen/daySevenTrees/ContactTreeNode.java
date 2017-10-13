@@ -39,12 +39,6 @@ public class ContactTreeNode {
 		this.data = data;
 	}
 	
-	/*
-	public void setData(Object data) {
-		this.data = (Integer) null;
-	}
-	*/
-	
 	// left
 	
 	public ContactTreeNode getLeft() {

@@ -3,20 +3,23 @@ package com.bayviewglen.daySevenTrees;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class AddressBook {
+public class ContactList {
 	final String VALID_CONTACT_NAME_CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	final String VALID_CONTACT_PHONE_NUMBER = "0123456789";
-	final int lastContactIndex = 999; // used for deleting a contact 
-	private Contact[] contacts;
+	//final int lastContactIndex = 999; // used for deleting a contact 
+	//private Contact[] contacts;
+	private BinarySearchTree contacts;
+	
 	private int numContacts;
 
-	public AddressBook() {
-		contacts = new Contact[1000];
-		numContacts = 0;
+	public ContactList() {
+		BinarySearchTree contacts = new BinarySearchTree();
+		//contacts = new Contact[1000];
+		//numContacts = 0;
 	}
 
 	// --- WELCOME MESSAGE that offers menu options --- 
-	public void welcomeMenu(Scanner keyboard, AddressBook contact) {
+	public void welcomeMenu(Scanner keyboard, ContactList contact) {
 		String optionNum = "";
 
 		System.out.println("\n--- MENU OPTIONS ---");
@@ -48,7 +51,7 @@ public class AddressBook {
 	}
 	
 	// (1) Add a Contact
-	public void addContact(Scanner keyboard, AddressBook contact) {
+	public void addContact(Scanner keyboard, ContactList contact) {
 		String lastName = "";
 		String firstName = "";
 		String phoneNum = "";
@@ -92,11 +95,14 @@ public class AddressBook {
 
 		System.out.println("Great!! Your friend " + tempContact.getLname() + ", " + tempContact.getFname() + " (" + tempContact.getPhone() + ") has been added to your address book!");
 
-		contacts[numContacts] = tempContact;
-		numContacts++;
-
-		sort(); // sorting 
-		print(); // checking 		
+		contacts.add(tempContact);
+		
+		// -- original --
+		//contacts[numContacts] = tempContact;
+		//numContacts++;
+		//sort(); // sorting 
+		
+		printBST(); // checking 		
 	}
 	
 	// --- checks if the user entered a LAST NAME using valid characters ---
@@ -169,20 +175,23 @@ public class AddressBook {
 	public void displayAll() {
 		System.out.println("\n--- DISPLAY ALL CONTACTS ---");
 		
-		if (numContacts == 0) {
+		if (contacts.getRoot() == null) {
 			System.out.println("You don't have any friends yet...");
 		} else {
 			System.out.println("Hi there! You have the following friends in your addressbook: ");
+			sortBST();
 			
+			/*
 			for (int i = 0; i < numContacts; i++) {
 				System.out.println("- " + contacts[i].getLname() + ", " + contacts[i].getFname() + " (" + contacts[i].getPhone() + ")");
 			}
+			*/
 		}
 	}
 	
 
 	// (3) Search for a Specific Contact
-	public void search(Scanner keyboard, AddressBook contact) {
+	public void search(Scanner keyboard, ContactList contact) {
 		String tempLName = "";
 		String tempFName = "";
 		String tempFullName = "";
@@ -237,36 +246,61 @@ public class AddressBook {
 	}
 	
 	
-		// --- searches to see if user has the entered contact name in address book --- 
-		private boolean searchContact(Scanner keyboard, String tempFullName) {
-			boolean haveContact = false;
-			
-			for (int i=0; i<numContacts; i++) {
-				if (contacts[i].getFullName().equals(tempFullName)) {
-					haveContact = true;
-				}
+	// --- searches to see if user has the entered contact name in address book --- 
+	private boolean searchContact(Scanner keyboard, String tempFullName) {
+		boolean haveContact = false;
+		
+		/*
+		for (int i=0; i<numContacts; i++) {
+			if (contacts[i].getFullName().equals(tempFullName)) {
+				haveContact = true;
 			}
-			
-			return haveContact;
 		}
+		*/
+		
+		Contact temp = contacts.searchBST(contacts.getRoot(), tempFullName);
+		if (temp != null) {
+			haveContact = true;
+		}
+			
+		return haveContact;
+	}
 		
 	// (3A) Display Contact Info
 	private void displayInfo(String tempFullName) {
-		int contactIndex = 0;
+		//int contactIndex = 0;
 		
+		//boolean haveContact = false;
+		
+		Contact tempContact = contacts.searchBST(contacts.getRoot(), tempFullName);
+		if (tempContact != null) {
+			System.out.println("Yay! You found your friend!");
+			System.out.println(tempContact.getLname() + ", "  + " has the phone number: " + tempContact.getPhone() + ".");
+		}
+	
+		//tempContact.getFname() <-- add in ^
+		
+		/*
 		for (int i=0; i<numContacts; i++) {
 			if (contacts[i].getFullName().equals(tempFullName)) {
 				contactIndex = i;
 			}
 		}
-		System.out.println("Yay! You found your friend!");
-		System.out.println(contacts[contactIndex].getLname() + ", " + contacts[contactIndex].getFname() + " has the phone number: " + contacts[contactIndex].getPhone());
+		*/
+		
+		//System.out.println("Yay! You found your friend!");
+		//System.out.println(contacts.getRoot());
+		
+		//System.out.println(contacts[contactIndex].getLname() + ", " + contacts[contactIndex].getFname() + " has the phone number: " + contacts[contactIndex].getPhone());
 	}
 
 	// (3B) Delete Contact
 	private void deleteContact(String tempFullName) {
 		System.out.println("Okay then, um... The address book is now unfriending this contact and annihilating her/him from memory.");
 		
+		contacts.delete(tempFullName);
+		
+		/*
 		for (int i=0; i<numContacts; i++) {
 			if (contacts[i].getFullName().equals(tempFullName)) {
 				if (i == lastContactIndex) {
@@ -283,16 +317,30 @@ public class AddressBook {
 			}
 		}
 		numContacts--;
+		*/
 	}
 
+	/*
 	// checking method 
 	public void print() {
 		for (int i=0; i<numContacts; i++) {
 			System.out.println("Last: " + contacts[i].getLname() + ", First: " + contacts[i].getFname() + ", Phone: " + contacts[i].getPhone());
 		}
 	}
+	*/
+	
+	// checking method
+	public void printBST() {
+		contacts.inorderTraversal(contacts.getRoot());
+	}
 	
 	// sorting contacts in order: from smallest to greatest regarding ASCII 
+	public void sortBST() {
+		contacts.inorderTraversal(contacts.getRoot());
+	}
+	
+	/*
+	// original sorting contacts in order: from smallest to greatest regarding ASCII 
 	public void sort() {
 		for (int i=0; i<contacts.length-1; i++) {
 			if (contacts[i] == null || contacts[i+1] == null) {
@@ -305,9 +353,10 @@ public class AddressBook {
 			}
 		}
 	}
+	*/
 
 	// checking if user is done using the address book 
-	public boolean finished(Scanner keyboard, AddressBook contact) {
+	public boolean finished(Scanner keyboard, ContactList contact) {
 		boolean closeBook = false;
 		
 		System.out.println("\nAre you finished with the address book? ");
