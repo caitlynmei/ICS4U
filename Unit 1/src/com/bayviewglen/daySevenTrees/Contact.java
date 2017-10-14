@@ -18,8 +18,8 @@ public class Contact implements Comparator <Contact> {
 	
 	public Contact(String lname, String fname, String phone) {
 		super();
-		this.lname = lname;
-		this.fname = fname;
+		this.lname = lname.toUpperCase();
+		this.fname = fname.toUpperCase();
 		this.phone = phone;
 	}
 	
@@ -40,7 +40,7 @@ public class Contact implements Comparator <Contact> {
 	}
 	
 	public void setLname(String lname) {
-		this.lname = lname;
+		this.lname = lname.toUpperCase();
 	}
 	
 	// Fname
@@ -50,13 +50,13 @@ public class Contact implements Comparator <Contact> {
 	}
 	
 	public void setFname(String fname) {
-		this.fname = fname;
+		this.fname = fname.toUpperCase();
 	}
 	
 	// full name
 	
 	public String getFullName() {
-		return lname + fname;
+		return lname.toUpperCase() + fname.toUpperCase();
 	}
 	
 	// compares
@@ -73,21 +73,5 @@ public class Contact implements Comparator <Contact> {
 		String c = a.lname + a.fname;
 		String d = b.lname + b.fname;
 		return c.compareTo(d); 
-	}
-	
-	/*
-	public int compare(String o1, String o2) {
-        if (o1 == null && o2 == null) {
-             return 0;
-         }
-         if (o1 == null) {
-             return 1;
-         }
-         if (o2 == null) {
-             return -1;
-         }
-         return o1.compareTo(o2);
-     }
-     */
-	
+	}	
 }

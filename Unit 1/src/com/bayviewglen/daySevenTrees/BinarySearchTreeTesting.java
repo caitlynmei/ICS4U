@@ -136,7 +136,7 @@ public class BinarySearchTreeTesting {
 				return false;
 			} else { // dltKey found		
 				// node on left
-				if (parent.getLeft().getData() == dltKey) { 
+				if ((parent.getLeft() != null) && (parent.getLeft().getData() == dltKey)) { 
 					// Case 1: no children
 					if (parent.getLeft().getLeft() == null && parent.getLeft().getRight() == null) { 
 						parent.setLeft(null);
@@ -152,7 +152,7 @@ public class BinarySearchTreeTesting {
 						findLargestParent(parent.getLeft(), largestLeft).setRight(null);					
 					}
 				// node on right		
-				} else if (parent.getRight().getData() == dltKey) { 
+				} else if ((parent.getRight() != null) && (parent.getRight().getData() == dltKey)) { 
 					// Case 1: no children
 					if (parent.getRight().getLeft() == null && parent.getRight().getRight() == null) { 
 						parent.setRight(null);
@@ -165,21 +165,13 @@ public class BinarySearchTreeTesting {
 					} else if (parent.getRight().getLeft() != null && parent.getRight().getRight() != null) {
 						IntTreeNode largestLeft = findLargestRemove(parent.getRight());						
 						parent.getRight().setData(largestLeft.getData());
-						findLargestParent(parent.getLeft(), largestLeft).setRight(null);				
+						findLargestParent(parent.getRight(), largestLeft).setRight(null);				
 					}
 				}
 				return true;
 			}
 		}
 		
-	private IntTreeNode findLargestParent(IntTreeNode parent, IntTreeNode largestLeft) {
-		if (parent.getRight() == largestLeft) {
-			return parent;
-		} else {
-			return findLargestRemove(parent.getRight());
-		}	
-	}
-
 	// deleting: if dltKey is root
 	public boolean deleteRoot(int dltKey) {
 		// Case 1: no children
@@ -219,15 +211,31 @@ public class BinarySearchTreeTesting {
 		}
 	}
 	
-		
 	// deleting: find largest from left node (remove)
 	private IntTreeNode findLargestRemove(IntTreeNode current) {
 		if (current.getRight() == null) {
 			return current;
+		/*
+		} else if (current.getLeft() == null) {
+			return findLargestRemove(current.getRight());
+		*/
 		} else {
 			return findLargestRemove(current.getRight());
 		}		
 	}
+	
+	private IntTreeNode findLargestParent(IntTreeNode parent, IntTreeNode largestLeft) {
+		if (parent.getRight() == largestLeft) {
+			return parent;
+		/*
+		} if (parent.getLeft() == null) {
+			return findLargestRemove(parent.getRight();
+			*/
+		} else {
+			return findLargestRemove(parent.getRight());
+		}	
+	}
+
 	
 	
 	// --- traversals --- 

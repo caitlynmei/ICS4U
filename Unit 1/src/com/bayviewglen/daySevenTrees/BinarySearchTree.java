@@ -62,18 +62,20 @@ public class BinarySearchTree {
 	private boolean delete(ContactTreeNode root, String dltKey) { // change root to parent
 		ContactTreeNode parent = searchParent(root, dltKey);
 
+		/*
 		// checking (testing)
 		if (parent != null) {
 			System.out.println("Parent: " + parent.getData().getFullName());
 		} else {
 			System.out.println("Parent Null");
 		}
+		*/
 
 		if (parent == null) { // dltKey not found
 			return false;
 		} else { // dltKey found
 			// node on left
-			if (parent.getLeft().getData().getFullName().equals(dltKey)) {
+			if ((parent.getLeft() != null) && (parent.getLeft().getData().getFullName().equals(dltKey))) {
 				// Case 1: no children
 				if (parent.getLeft().getLeft() == null && parent.getLeft().getRight() == null) {
 					parent.setLeft(null);
@@ -88,8 +90,8 @@ public class BinarySearchTree {
 					parent.getLeft().setData(largestLeft.getData());
 					findLargestParent(parent.getLeft(), largestLeft).setRight(null);
 				}
-			// node on right
-			} else if (parent.getRight().getData().getFullName().equals(dltKey)) {
+				// node on right
+			} else if ((parent.getRight() != null) && (parent.getRight().getData().getFullName().equals(dltKey))) {
 				// Case 1: no children
 				if (parent.getRight().getLeft() == null && parent.getRight().getRight() == null) {
 					parent.setRight(null);
@@ -102,7 +104,7 @@ public class BinarySearchTree {
 				} else if (parent.getRight().getLeft() != null && parent.getRight().getRight() != null) {
 					ContactTreeNode largestLeft = findLargestRemove(parent.getRight());
 					parent.getRight().setData(largestLeft.getData());
-					findLargestParent(parent.getLeft(), largestLeft).setRight(null);
+					findLargestParent(parent.getRight(), largestLeft).setRight(null);
 				}
 			}
 			return true;
@@ -114,14 +116,14 @@ public class BinarySearchTree {
 		// Case 1: no children
 		if (root.getLeft() == null && root.getRight() == null) {
 			root = null;
-		// Case 2: one child
+			// Case 2: one child
 		} else if (root.getLeft() == null) {
 			root.setData(root.getRight().getData());
 			root.setRight(null);
 		} else if (root.getRight() == null) {
 			root.setData(root.getLeft().getData());
 			root.setLeft(null);
-		// Case 3: 2 children
+			// Case 3: 2 children
 		} else if (root.getLeft() != null && root.getRight() != null) {
 			ContactTreeNode largestLeft = findLargestRemove(root.getLeft());
 			root.setData(largestLeft.getData());
@@ -148,7 +150,7 @@ public class BinarySearchTree {
 		}
 	}
 
-	// deleting: find largest from left node 
+	// deleting: find largest from left node
 	private ContactTreeNode findLargestRemove(ContactTreeNode current) {
 		if (current.getRight() == null) {
 			return current;
@@ -156,8 +158,8 @@ public class BinarySearchTree {
 			return findLargestRemove(current.getRight());
 		}
 	}
-	
-	// deleting: find the parent of the largest left node 
+
+	// deleting: find the parent of the largest left node
 	private ContactTreeNode findLargestParent(ContactTreeNode parent, ContactTreeNode largestLeft) {
 		if (parent.getRight() == largestLeft) {
 			return parent;
@@ -167,8 +169,8 @@ public class BinarySearchTree {
 	}
 
 	// --- traversals ---
-	
-	// inOrder traversal 
+
+	// inOrder traversal
 	public void inorderTraversal(ContactTreeNode current) {
 		if (current.getLeft() != null) { // left subtree
 			inorderTraversal(current.getLeft());
@@ -195,22 +197,23 @@ public class BinarySearchTree {
 		evaluate(current); // process root
 	}
 
-	// postOrder traversal 
+	// postOrder traversal
 	public void postorderTraversal(ContactTreeNode current) {
 		if (current.getLeft() != null) {
 			postorderTraversal(current.getLeft());
 		}
-		
+
 		if (current.getRight() != null) {
 			postorderTraversal(current.getRight());
 		}
-		
+
 		evaluate(current); // process root
 	}
-	
-	// evaluating node from traversals 
+
+	// evaluating node from traversals
 	private void evaluate(ContactTreeNode current) {
-		System.out.println("- " + current.getData());
+		System.out.println("- " + current.getData().getLname() + ", " + current.getData().getFname() + " ("
+				+ current.getData().getPhone() + ")");
 	}
 
 	// --- searches ---
@@ -237,11 +240,9 @@ public class BinarySearchTree {
 	public Contact searchBST(ContactTreeNode root, String targetKey) {
 		if (root == null) { // empty
 			return null;
-		}
-
-		if (targetKey.compareTo(root.getData().getFullName()) < 0) {
+		} else if ((targetKey.compareTo(root.getData().getFullName()) < 0)) {
 			return searchBST(root.getLeft(), targetKey);
-		} else if (targetKey.compareTo(root.getData().getFullName()) > 0) {
+		} else if ((targetKey.compareTo(root.getData().getFullName()) > 0)) {
 			return searchBST(root.getRight(), targetKey);
 		} else { // found target key (root.getData() == targetKey)
 			return root.getData(); // return contact

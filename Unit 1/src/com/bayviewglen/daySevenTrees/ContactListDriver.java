@@ -9,7 +9,7 @@ public class ContactListDriver {
 		ContactList contact = new ContactList();
 		Scanner keyboard = new Scanner(System.in);
 		
-		boolean closeBook = false;
+		boolean closeBook = false; // to check when user is done and can close address book 
 		
 		System.out.println("Welcome to your faithful addressbook!");
 		
