@@ -1,6 +1,9 @@
 package com.bayviewglen.daySevenTrees;
 
-public class ContactTreeDriver {
+import com.bayviewglen.contactList.BinarySearchTree;
+import com.bayviewglen.contactList.Contact;
+
+public class ContactTreeTesting {
 
 	public static void main(String[] args) {
 		

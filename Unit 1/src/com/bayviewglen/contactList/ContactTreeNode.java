@@ -1,4 +1,4 @@
-package com.bayviewglen.daySevenTrees;
+package com.bayviewglen.contactList;
 
 public class ContactTreeNode {
 
