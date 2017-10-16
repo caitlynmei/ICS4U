@@ -186,6 +186,8 @@ public class BinarySearchTree {
 
 	// preOrder traversal
 	public void preorderTraversal(ContactTreeNode current) {
+		evaluate(current); // process root
+		
 		if (current.getLeft() != null) { // left subtree
 			inorderTraversal(current.getLeft());
 		}
@@ -193,8 +195,6 @@ public class BinarySearchTree {
 		if (current.getRight() != null) {
 			inorderTraversal(current.getRight());
 		}
-
-		evaluate(current); // process root
 	}
 
 	// postOrder traversal
