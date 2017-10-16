@@ -4,11 +4,12 @@ import java.util.Arrays;
 
 public class Stack {
 
-	Object[] stack;
-	int howMany = 0;
+	private Object[] stack;
+	private int howMany;
 	
 	public Stack () {
-		stack = new Object[10];
+		stack = new Object[100];
+		howMany = 0;
 	}
 	
 	public void push(Object el) {
@@ -22,12 +23,23 @@ public class Stack {
 	}
 	
 	public Object pop() {
-		return stack[--howMany];
-
+		Object temp = stack[--howMany];
+		
+		if (temp == null) {
+			throw new NullPointerException();
+		}
+		
+		return temp;
 	}
 	
 	public Object peek() {
-		return stack[howMany-1];
+		Object temp = stack[howMany-1];
+		
+		if (temp == null) {
+			throw new NullPointerException();
+		}
+		
+		return temp;
 	}
 	
 	public boolean empty() {

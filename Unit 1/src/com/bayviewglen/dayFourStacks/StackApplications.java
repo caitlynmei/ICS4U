@@ -40,7 +40,6 @@ public class StackApplications {
 		Stack<String> operators = new Stack<String>();
 		Stack<Double> operands = new Stack<Double>();
 		
-		//String numbers = "0123456789";
 		String OPERATORS = "+-*/";
 		
 		System.out.print("\nInfix Expression: ");
@@ -54,7 +53,7 @@ public class StackApplications {
 			} else if (s.equals(")")){
 				if (operators.peek().equals("(")) {
 					operators.pop();
-				} else {
+				} else if (!operators.empty() && OPERATORS.indexOf(operators.peek()) != -1){
 					String op = operators.peek();
 					if (op.equals("+")) {
 						operators.pop();
@@ -74,7 +73,7 @@ public class StackApplications {
 				}
 			} else if (OPERATORS.indexOf(s) == -1) {
 				// these are operands
-				String op = (String) operators.peek();
+				String op = operators.peek();
 				Double temp = Double.parseDouble(s);
 				
 				if (op.equals("+")) {

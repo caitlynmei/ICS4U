@@ -4,11 +4,12 @@ import java.util.Arrays;
 
 public class Queue {
 
-	Object[] queue;
-	int howMany = 0; 
+	private Object[] queue;
+	private int howMany = 0; 
 	
 	public Queue ( ) {
-		queue = new Object[10];
+		queue = new Object[100];
+		int howMany = 0;
 	}
 	
 	public void enqueue(Object el) {
@@ -20,12 +21,21 @@ public class Queue {
 	}
 	
 	public Object dequeue(Object el) {
-		howMany--;
-		return queue[0];
+		Object temp = queue[0];
+		if (temp == null) {
+			throw new NullPointerException();
+		}
+		//howMany--;
+		return temp;
 	}
 	
 	public Object peek() {
-		return queue[0];
+		Object temp = queue[0];
+		if (temp == null) {
+			throw new NullPointerException();
+		}
+		
+		return temp;
 	}
 	
 	public void clear() {
