@@ -116,7 +116,7 @@ public class QuestionTwoSudoku {
 	
 	private static void readingSudoku(int[][] sudoku) {
 		try {
-			Scanner input = new Scanner(new File("data/questionOne.dat"));
+			Scanner input = new Scanner(new File("data/questionTwoSudoku.dat"));
 			for (int r = 0; r < sudoku.length; r++) {
 				for (int c = 0; c < sudoku[r].length; c++) {
 					sudoku[r][c] = input.nextInt();
