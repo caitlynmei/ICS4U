@@ -47,6 +47,8 @@ public class Queen {
 		return -1;
 	}
 
+	// --- for one queen ---
+
 	// --- get delta x of queen from (0,0) ---
 	public int getDeltaX(Queen q) {
 		int x1 = 0;
