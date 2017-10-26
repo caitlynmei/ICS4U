@@ -3,47 +3,26 @@ package com.bayviewglen.queens;
 import java.util.Scanner;
 import java.util.Stack;
 
-public class GameDriver {
+public class Game {
 
-	private static Stack<Queen> stack = new Stack<Queen>();
-	private static int filled;
-
-	public static void main(String[] args) {
-
-		introMessage();
-
-		int numQueens = getN(); // also dimension of board
-
-		// --- placing queens in stack ---
-		Queen first = placeFirstQueen();
-		placeQueenOnBoard(first, numQueens);
-
-		// --- creating board ---
-		String[][] board = new String[numQueens][numQueens];
-		fillBoard(board);
-
-		// --- print filled board ---
-		printBoard(board);
-
-		closingMessage();
-
-	}
+	private Stack<Queen> stack = new Stack<Queen>();
+	private static int filled = 0;
 
 	// --- placing queens on stack (saving board coordinates) ---
 
-	public static Queen placeFirstQueen() {
+	public Queen placeFirstQueen() {
 		Queen first = new Queen();
 		filled = 0; // or 1?
 		stack.push(first);
 		return first;
 	}
 
-	public static void placeQueenOnBoard(Queen first, int numQueens) {
+	public void placeQueenOnBoard(Queen first, int numQueens) {
 		int row = 0;
 		int column = 0;
 
-		Queen current = first;
-		Queen previous = first;
+		Queen current = new Queen();
+		Queen previous = new Queen();
 		boolean done = false;
 
 		// end placing queens down on board when filled == numQueens
@@ -54,16 +33,16 @@ public class GameDriver {
 				if (filled == numQueens) {
 					done = true;
 				} else {			
-					current.setRow(row++);//new Queen(row++, column);
+					current.setRow(++row);//new Queen(row++, column);
 					stack.push(current); // shift down one row
 								
 					if (current != previous) {
-						previous = new Queen(row--, column);
+						previous = new Queen(row - 1, column);
 					}
 				}
 			} else if (conflict(current, previous) && current.getColumn() < numQueens) {
-				current.setColumn(column++); // shift right
-				// stack.push(current);
+				current.setColumn(++column); // shift right
+				//stack.push(current);
 			} else if (conflict(current, previous) && current.getColumn() == numQueens) {
 				Queen temp = stack.pop();
 				filled--;
@@ -85,11 +64,9 @@ public class GameDriver {
 
 	// --- check conflict method ---
 	public static boolean conflict(Queen current, Queen previous) {
-		if (previous.getRow() == 0 && previous.getColumn() == 0) {
+		if (filled == 1) {
 			return false;
-		}
-		
-		if (current.getColumn() == previous.getColumn()) {
+		} else if (current.getColumn() == previous.getColumn()) {
 			return true;
 		} else if (checkSlope(current, previous)) { // checking if queens are on the same diagonal line
 			return true;
@@ -131,13 +108,13 @@ public class GameDriver {
 	}
 
 	// --- intro message ---
-	private static void introMessage() {
+	public void introMessage() {
 		System.out.println("Welcome to nQueens!");
 		System.out.print("Please enter the dimensions (n) for you board. The board will be n by n: ");
 	}
 
 	// --- get numQueens (dimensions) from user ---
-	private static int getN() {
+	public int getN() {
 		Scanner keyboard = new Scanner(System.in);
 		boolean valid = false;
 
@@ -161,7 +138,7 @@ public class GameDriver {
 	}
 
 	// --- filling game board with Queens ---
-	public static void fillBoard(String[][] board) {
+	public void fillBoard(String[][] board) {
 		while (!stack.isEmpty()) {
 			Queen temp = stack.pop();
 			for (int r = 0; r < board.length; r++) {
@@ -176,7 +153,7 @@ public class GameDriver {
 		}
 	}
 
-	public static void printBoard(String[][] board) {
+	public void printBoard(String[][] board) {
 		System.out.println("\nOkay, you're personalized chess board is the ready!!\n");
 
 		for (int r = 0; r < board.length; r++) {
@@ -188,7 +165,7 @@ public class GameDriver {
 
 	}
 
-	private static void closingMessage() {
+	public void closingMessage() {
 		System.out.println("\nThank you for playing with nQueens. Have a great day! : )");
 
 	}
