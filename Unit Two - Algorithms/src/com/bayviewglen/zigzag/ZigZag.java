@@ -22,60 +22,61 @@ public class ZigZag {
 
 	public static void main(String[] args) {
 
-		int[] S = { 1,7,4,5,5}; // original sequence
-		int[] differences = new int[S.length-1]; // differences of sequence 
-		
-		// for tracking the amount of increasing and decreasing differences that make a zig-zag
-		int[] increasing = new int[S.length]; 
-		int[] decreasing = new int[S.length]; 
-		
-		// for tracking if the previous difference of sequence is positive or negative 
+		int[] S = { 1, 7, 4, 5, 5 }; // original sequence
+		int[] differences = new int[S.length - 1]; // differences of sequence
+
+		// for tracking the amount of increasing and decreasing differences that make a
+		// zig-zag
+		int[] increasing = new int[S.length];
+		int[] decreasing = new int[S.length];
+
+		// for tracking if the previous difference of sequence is positive or negative
 		boolean isPositive = false;
 		boolean isNegative = false;
-		
-		// for finding the greatest number of zig-zags tracked 
-		int longestLength = 0; 
-		
-		if (S.length < 2 && S.length != 0) { 
+
+		// for finding the greatest number of zig-zags tracked
+		int longestLength = 0;
+
+		if (S.length < 2 && S.length != 0) {
 			longestLength = S.length;
 		} else { // S.length >= 2
-			for (int i = 0; i < S.length-1; i++) {
-				differences[i] = S[i+1] - S[i];
+			for (int i = 0; i < S.length - 1; i++) {
+				differences[i] = S[i + 1] - S[i];
 			}
-			
+
 			increasing[0] = 1;
 			decreasing[0] = 1;
-			
+
 			for (int i = 0; i < differences.length; i++) {
 				if (i == 0) {
 					if (differences[i] > 0) {
-						increasing[i+1] = increasing[i] + 1;
-						decreasing[i+1] = decreasing[i];
+						increasing[i + 1] = increasing[i] + 1;
+						decreasing[i + 1] = decreasing[i];
 						isPositive = true;
 					} else if (differences[i] < 0) {
-						decreasing[i+1] = decreasing[i] + 1;
-						increasing[i+1] = increasing[i];
+						decreasing[i + 1] = decreasing[i] + 1;
+						increasing[i + 1] = increasing[i];
 						isNegative = true;
 					}
 				} else {
 					if (differences[i] > 0 && !isPositive) {
-						increasing[i+1] = decreasing[i] + 1;
-						decreasing[i+1] = decreasing[i];
+						increasing[i + 1] = decreasing[i] + 1;
+						decreasing[i + 1] = decreasing[i];
 						isPositive = true;
 						isNegative = false;
 					} else if (differences[i] < 0 && !isNegative) {
-						decreasing[i+1] = increasing[i] + 1;
-						increasing[i+1] = increasing[i];
+						decreasing[i + 1] = increasing[i] + 1;
+						increasing[i + 1] = increasing[i];
 						isNegative = true;
 						isPositive = false;
 					} else {
-						increasing[i+1] = increasing[i];
-						decreasing[i+1] = decreasing[i];
+						increasing[i + 1] = increasing[i];
+						decreasing[i + 1] = decreasing[i];
 					}
 				}
 			}
-			
-			for (int i = 0; i<S.length; i++) {
+
+			for (int i = 0; i < S.length; i++) {
 				if (increasing[i] > longestLength) {
 					longestLength = increasing[i];
 				} else if (decreasing[i] > longestLength) {
@@ -83,20 +84,21 @@ public class ZigZag {
 				}
 			}
 		}
-		
+
 		// printing
-		
+
 		System.out.print("Given the sequence: ");
-		
-		for (int i = 0; i<S.length; i++) {
-			if (i == S.length-1) {
+
+		for (int i = 0; i < S.length; i++) {
+			if (i == S.length - 1) {
 				System.out.print("and " + S[i]);
 			} else {
 				System.out.print(S[i] + ", ");
-			}	
+			}
 		}
-		
-		System.out.print(", the length of the longest subsequence that is a zig-zag sequence is: " + longestLength + ".");
+
+		System.out
+				.print(", the length of the longest subsequence that is a zig-zag sequence is: " + longestLength + ".");
 	}
 
 }
