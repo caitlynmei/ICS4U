@@ -84,7 +84,7 @@ public class quiz {
 		int temp = 0;
 
 		try {
-			Scanner input = new Scanner(new File("Quiz.dat"));
+			Scanner input = new Scanner(new File("Data/Quiz.dat"));
 			for (int i = 0; i < 4; i++) { // assuming it gives me the next 4 numbers , so just one case
 				data[i] = input.nextInt();
 			}

@@ -27,7 +27,7 @@ public class Coins {
 		for (int coin : coins) {
 			for (int i = 1; i < solutions.length; i++) {
 				if (coin == 1) {
-					solutions[i] += solutions[i - coin] + 1;
+					solutions[i] = solutions[i - coin] + 1;
 				} else if (i >= coin && solutions[i - coin] + 1 < solutions[i]) {
 					solutions[i] = solutions[i - coin] + 1;
 				}

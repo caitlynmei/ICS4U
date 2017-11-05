@@ -21,7 +21,60 @@ public class ZigZag {
 	 */
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+
+		int[] S = { 1, 4, 3, -7, 2 }; // original sequence
+		int[] increasing = new int[S.length]; // differences
+		int[] decreasing = new int[S.length]; // differences
+		int optimalStart = 0; // first index of zig-zag sequence
+		int optimalEnd = 0; // last index of zig-zag sequence
+		int longestLength = 0;
+
+		boolean isPositive = false;
+
+		 int increasingStart = 0;
+		// int increasingEnd = 0;
+		 int decreasingStart = 0;
+		// int decreasingEnd = 0;
+
+		if (S.length < 2 && S.length != 0) { // check if S.length = null works
+			longestLength = S.length;
+		} else { // S.length >= 2
+			for (int i = 0; i < S.length; i++) {
+				if (i == 0) {
+					increasing[i] = 1;
+					decreasing[i] = 1;
+				} else {
+					if (i == 1) {
+						if (S[i] - S[i - 1] > 0) { // if zig-zag is positive
+							//isPositive = true;
+							increasingStart = i;
+							increasing[i] = increasing[i - 1] + 1;
+							decreasing[i] = decreasing[i - 1];
+						} else if (S[i] - S[i - 1] < 0) { // if zig-zag is negative
+							//isPositive = false;
+							decreasingStart = i;
+							decreasing[i] = decreasing[i - 1] + 1;
+							increasing[i] = increasing[i - 1];
+						}
+						
+					} else {
+						if (S[i] - S[i - 1] > 0 && isPositive) { // if zig-zag is positive
+							isPositive = true;
+							increasingStart = i;
+							increasing[i] = increasing[i - 1] + 1;
+							decreasing[i] = decreasing[i - 1];
+
+						} else if (S[i] - S[i - 1] < 0 && !isPositive) { // if zig-zag is negative
+							isPositive = false;
+							decreasingStart = i;
+							decreasing[i] = decreasing[i - 1] + 1;
+							increasing[i] = increasing[i - 1];
+							
+						}
+					}
+				}
+			}
+		}
 
 	}
 
