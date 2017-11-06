@@ -26,24 +26,54 @@ public class NeighbourFund {
 	 */
 
 	public static void main(String[] args) {
-		int[] donations = {10, 3, 2, 5, 7, 8};
-		int maxCollected = 0; // max number of donations that can be collected 
-		int maxAmount = 0; // max amount of donations collected 
-		int[] combinations = new int[donations.length];
+		int[] donations = { 10, 3, 2, 5, 7, 8 };
+		int maxCollected = 0; // max number of donations that can be collected
+		int maxAmount = 0; // max amount of donations collected
+
+		boolean isNeighbour = true;
 		
 		
-		maxCollected = donations.length / 2; // num of neighbours that are willing to donate 
-		
-		for (int i=0; i<donations.length; i++) {
-			for (int j=0; j<donations.length; j++) {
-				//if ()
+		// if null
+		if (donations.length % 2 == 0) {
+			maxCollected = donations.length / 2; // num of neighbours that are willing to donate
+		} else {
+			maxCollected = 1 + donations.length / 2; // num of neighbours that are willing to donate
+		}
+
+		int[] combinations = new int[maxCollected];
+
+		if (maxCollected < 2 && maxCollected != 0) {
+			for (int i = 0; i < donations.length; i++) {
+				if (i == 0) {
+					combinations[0] = donations[0];
+				} else if (donations.length == 2 && i == 1){
+					if (donations[i] > donations[i - 1]) {
+						combinations[i - 1] = donations[i];
+					}
+				}
+			}
+		} else { // if maxCollected is >= 2
+			for (int i = 0; i < donations.length; i++) {
+				if (i == 0) {
+					combinations[0] = donations[0];
+				} else {
+					if (donations[i] > combinations[i-1]) {
+						combinations[i - 1] = donations[i];
+					}
+				}
+					
+					/*
+				} else {
+					if (donations[i] > donations[i - 1]) {
+						combinations[i - 1] = donations[i];
+					}
+				}
+				*/
 			}
 		}
-		
+
+		System.out.println(3 / 2 + "The maximum amount of donations that can be collected is: ");
+
 	}
-	
-	
-	
-	
 
 }

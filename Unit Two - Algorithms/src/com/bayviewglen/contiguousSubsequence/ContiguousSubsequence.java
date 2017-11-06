@@ -1,5 +1,9 @@
 package com.bayviewglen.contiguousSubsequence;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 public class ContiguousSubsequence {
 
 	public static void main(String[] args) {
@@ -10,6 +14,8 @@ public class ContiguousSubsequence {
 		int optimalStart = 0; // first index of contiguous sequence
 		int optimalEnd = 0; // last index of contiguous sequence
 
+		//read(S);
+		
 		// starting from first index of list S, checks if next index of S should be part
 		// of the optimal contiguous sequence
 		for (int i = 0; i < S.length; i++) {
@@ -44,4 +50,18 @@ public class ContiguousSubsequence {
 
 	}
 
+	public static int[] read(int[] S) {
+		try {
+			Scanner input = new Scanner(new File("Data/ContiguousSubsequence.dat"));
+			for (int r = 0; r < 10001; r++) {
+				S[r] = input.nextInt();
+			}
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		return S;
+		
+	}
+	
 }

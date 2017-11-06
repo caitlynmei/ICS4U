@@ -1,5 +1,9 @@
 package com.bayviewglen.zigzag;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 public class ZigZag {
 
 	/*
@@ -22,9 +26,12 @@ public class ZigZag {
 
 	public static void main(String[] args) {
 
-		int[] S = { 1, 7, 4, 5, 5 }; // original sequence
+		int[] S = {5, 100, 99, 99, 99, 0, 5, 2   }; // original sequence
 		int[] differences = new int[S.length - 1]; // differences of sequence
 
+		//read(S);
+		
+		
 		// for tracking the amount of increasing and decreasing differences that make a
 		// zig-zag
 		int[] increasing = new int[S.length];
@@ -99,6 +106,20 @@ public class ZigZag {
 
 		System.out
 				.print(", the length of the longest subsequence that is a zig-zag sequence is: " + longestLength + ".");
+	}
+
+	public static int[] read(int[] S) {
+		try {
+			Scanner input = new Scanner(new File("Data/ZigZag.dat"));
+			for (int r = 0; r < 1000; r++) {
+				S[r] = input.nextInt();
+			}
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		return S;
+		
 	}
 
 }
