@@ -3,7 +3,7 @@ package com.bayviewglen.firstFifty;
 import java.math.BigInteger;
 
 public class twoFibonacci {
-	
+
 	public static void main(String[] args) {
 
 		/*
@@ -16,37 +16,35 @@ public class twoFibonacci {
 		 * four million, find the sum of the even-valued terms.
 		 */
 
-		BigInteger ZERO = new BigInteger("0");
-		
-		int n = 10;
-		BigInteger[] solutions = new BigInteger[n];
-		BigInteger sum = new BigInteger("0");
+		int n = 33;
+		long[] solutions = new long[n];
+		long sum = 0;
 
 		fibonacci(solutions, n);
 
 		for (int i = 0; i < n; i++) {
-			if (solutions[i].mod(new BigInteger("2")).equals(ZERO)) {
+			if (solutions[i] % 2 == 0) {
 				System.out.print(solutions[i] + "  ");
 			}
 		}
 		System.out.println();
-		
+
 		for (int i = 0; i < n; i++) {
-			if (solutions[i].mod(new BigInteger("2")).equals(ZERO)) {
-				sum = sum.add(solutions[i]);
+			if (solutions[i] % 2 == 0) {
+				sum += solutions[i];
 			}
 		}
-		
+
 		System.out.println("The sum of the first " + n + " terms in the Fibonacci sequence is: " + sum);
 
 	}
 
-	private static void fibonacci(BigInteger[] solutions, int n) {
-		solutions[1] = new BigInteger("1");
-		solutions[2] = new BigInteger("1");
+	private static void fibonacci(long[] solutions, int n) {
+		solutions[1] = 1;
+		solutions[2] = 1;
 
 		for (int i = 3; i < n; i++) {
-			solutions[i] = solutions[i - 1].add(solutions[i - 2]);
+			solutions[i] = solutions[i - 1] + solutions[i - 2];
 		}
 	}
 
