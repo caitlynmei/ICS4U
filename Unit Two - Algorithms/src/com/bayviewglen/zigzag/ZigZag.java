@@ -42,7 +42,7 @@ public class ZigZag {
 		boolean isPositive = false;
 		boolean isNegative = false;
 
-		// for finding the greatest number of zig-zags tracked
+		// for finding the greatest number of zig-zags tracked 
 		int longestLength = 0;
 
 		if (S.length < 2 && S.length != 0) {
