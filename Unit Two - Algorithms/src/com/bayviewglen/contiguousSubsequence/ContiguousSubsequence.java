@@ -8,13 +8,16 @@ public class ContiguousSubsequence {
 
 	public static void main(String[] args) {
 
+		// #3
+		
 		int[] S = { 5, 15, -30, 10, -5, 40, 10 }; // original list S; input
 		int[] sum = new int[S.length]; // holds the optimal sums for each index
 		int maxSum = 0; // maximum sum of the optimal contiguous sequence
 		int optimalStart = 0; // first index of contiguous sequence
 		int optimalEnd = 0; // last index of contiguous sequence
 
-		//read(S);
+		// testing from data file
+		// read(S);
 		
 		// starting from first index of list S, checks if next index of S should be part
 		// of the optimal contiguous sequence
@@ -50,6 +53,7 @@ public class ContiguousSubsequence {
 
 	}
 
+	// testing: there are 10001 numbers in the data file 
 	public static int[] read(int[] S) {
 		try {
 			Scanner input = new Scanner(new File("Data/ContiguousSubsequence.dat"));

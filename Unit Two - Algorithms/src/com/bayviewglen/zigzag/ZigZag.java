@@ -7,7 +7,8 @@ import java.util.Scanner;
 public class ZigZag {
 
 	/*
-	 * 1. A sequence of numbers is called a zig-zag sequence if the differences
+	 * #1 
+	 * A sequence of numbers is called a zig-zag sequence if the differences
 	 * between successive numbers strictly alternate between positive and negative.
 	 * The first difference (if one exists) may be either positive or negative. A
 	 * sequence with fewer than two elements is trivially a zig-zag sequence.
@@ -26,12 +27,12 @@ public class ZigZag {
 
 	public static void main(String[] args) {
 
-		int[] S = {5, 100, 99, 99, 99, 0, 5, 2   }; // original sequence
+		int[] S = { 5, 100, 99, 99, 99, 0, 5, 2 }; // original sequence
 		int[] differences = new int[S.length - 1]; // differences of sequence
 
-		//read(S);
-		
-		
+		// testing from data file
+		// read(S);
+
 		// for tracking the amount of increasing and decreasing differences that make a
 		// zig-zag
 		int[] increasing = new int[S.length];
@@ -92,7 +93,7 @@ public class ZigZag {
 			}
 		}
 
-		// printing
+		// printing to console 
 
 		System.out.print("Given the sequence: ");
 
@@ -108,18 +109,19 @@ public class ZigZag {
 				.print(", the length of the longest subsequence that is a zig-zag sequence is: " + longestLength + ".");
 	}
 
+	// testing: there are 1000 numbers in the data file
 	public static int[] read(int[] S) {
 		try {
 			Scanner input = new Scanner(new File("Data/ZigZag.dat"));
 			for (int r = 0; r < 1000; r++) {
 				S[r] = input.nextInt();
 			}
-			
+
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 		return S;
-		
+
 	}
 
 }
