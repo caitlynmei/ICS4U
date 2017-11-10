@@ -26,54 +26,93 @@ public class NeighbourFund {
 	 */
 
 	public static void main(String[] args) {
-		int[] donations = { 10, 3, 2, 5, 7, 8 };
-		int maxCollected = 0; // max number of donations that can be collected
-		int maxAmount = 0; // max amount of donations collected
+		int[] donations = { 10, 3, 2, 5, 7, 8 }; // original list of donations each neighbour is willing to donate
+		int[] backwardsDonations = null; // backwards list of donations each neighbour is willing to donate
+		int sum = 0; // max amount of donations collected
+		// int maxCollected = 0; // max number of neighbours that are willing to donate
 
-		boolean isNeighbour = true;
-		
-		
-		// if null
-		if (donations.length % 2 == 0) {
-			maxCollected = donations.length / 2; // num of neighbours that are willing to donate
-		} else {
-			maxCollected = 1 + donations.length / 2; // num of neighbours that are willing to donate
+		// checking if donations list is empty and assigning amount of donating
+		// neighbours to maxCollected
+		if (donations != null || donations.length > 0) {
+			// maxCollected = donations.length / 2;
+			backwardsDonations = new int[donations.length]; // backwards list of donations each neighbour is willing to
+															// donate
+			for (int index = 0, i = donations.length - 1; i >= 0; i--) {
+				backwardsDonations[index++] = donations[i];
+			}
 		}
 
-		int[] combinations = new int[maxCollected];
+		int[] frontSolutions = new int[donations.length]; // starting from first neighbour on list
+		int[] backSolutions = new int[donations.length]; // starting from last neighbour on list
 
-		if (maxCollected < 2 && maxCollected != 0) {
+		if (donations.length < 2 && donations.length != 0) {
 			for (int i = 0; i < donations.length; i++) {
 				if (i == 0) {
-					combinations[0] = donations[0];
-				} else if (donations.length == 2 && i == 1){
+					frontSolutions[i] = donations[0];
+				} else if (donations.length == 2 && i == 1) {
 					if (donations[i] > donations[i - 1]) {
-						combinations[i - 1] = donations[i];
+						frontSolutions[i - 1] = donations[i];
 					}
 				}
 			}
+		} else if (donations.length == 3) {
+			// starting from front of list
+			for (int i = 0; i < donations.length; i++) {
+				frontSolutions[i] = donations[0];
+			}
+
+			// starting from back of list
+			for (int i = donations.length; i > 0; i--) {
+				backSolutions[i] = backwardsDonations[0];
+			}
+
 		} else { // if maxCollected is >= 2
+			// starting from front of list
 			for (int i = 0; i < donations.length; i++) {
-				if (i == 0) {
-					combinations[0] = donations[0];
+				if (i < 3) { // i == 0 || i == 1 || i == 2
+					frontSolutions[i] = donations[0];
+				} else if (i == 3 && (donations[i - 1] + donations[i - 3] > donations[i - 1])) {
+					frontSolutions[i] = donations[i - 1] + donations[i - 3];
 				} else {
-					if (donations[i] > combinations[i-1]) {
-						combinations[i - 1] = donations[i];
+					if (donations[i - 1] + frontSolutions[i - 2] > frontSolutions[i - 1]) {
+						frontSolutions[i] = donations[i - 1] + frontSolutions[i - 2];
+					} 
+					if ((donations[i - 1] + frontSolutions[i - 3] > frontSolutions[i])
+							&& (donations[i - 1] + frontSolutions[i - 3] > frontSolutions[i - 1])) {
+						frontSolutions[i] = donations[i - 1] + frontSolutions[i - 3];
 					}
 				}
-					
-					/*
+			}
+
+			// starting from back of list
+			for (int i = 0; i < backwardsDonations.length; i++) {
+				if (i < 3) { // i == 0 || i == 1 || i == 2
+					backSolutions[i] = backwardsDonations[0];
+				} else if (i == 3
+						&& backwardsDonations[i - 1] + backwardsDonations[i - 3] > backwardsDonations[i - 1]) {
+					backSolutions[i] = backwardsDonations[i - 1] + backwardsDonations[i - 3];
 				} else {
-					if (donations[i] > donations[i - 1]) {
-						combinations[i - 1] = donations[i];
+					if (backwardsDonations[i - 1] + backSolutions[i - 2] > backSolutions[i - 1]) {
+						backSolutions[i] = backwardsDonations[i - 1] + backSolutions[i - 2];
+					}
+					if ((backwardsDonations[i - 1] + backSolutions[i - 3] > backSolutions[i - 1])
+							&& (backwardsDonations[i - 1] + backSolutions[i - 3] > backSolutions[i])) {
+						backSolutions[i] = backwardsDonations[i - 1] + backSolutions[i - 3];
 					}
 				}
-				*/
 			}
 		}
 
-		System.out.println(3 / 2 + "The maximum amount of donations that can be collected is: ");
+		// compare front and back --> take largest amount
+		for (int i = 0; i < donations.length; i++) {
+			sum = 0;
+			if (frontSolutions[i] > backSolutions[i]) {
+				sum = frontSolutions[i];
+			} else if (backSolutions[i] > frontSolutions[i]) {
+				sum = backSolutions[i];
+			}
+		}
 
+		System.out.println("The maximum amount of donations that can be collected is: $" + sum + ".");
 	}
-
 }
