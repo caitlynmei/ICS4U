@@ -1,7 +1,5 @@
 package com.bayviewglen.firstFifty;
 
-import java.math.BigInteger;
-
 public class twoFibonacci {
 
 	public static void main(String[] args) {
@@ -16,12 +14,13 @@ public class twoFibonacci {
 		 * four million, find the sum of the even-valued terms.
 		 */
 
-		int n = 33;
+		int n = 34;
 		long[] solutions = new long[n];
 		long sum = 0;
 
+		//int len = fibonacci(solutions, n);
 		fibonacci(solutions, n);
-
+		
 		for (int i = 0; i < n; i++) {
 			if (solutions[i] % 2 == 0) {
 				System.out.print(solutions[i] + "  ");
@@ -30,7 +29,7 @@ public class twoFibonacci {
 		System.out.println();
 
 		for (int i = 0; i < n; i++) {
-			if (solutions[i] % 2 == 0) {
+			if (solutions[i] % 2 == 0 && solutions[i] < 4000000) {
 				sum += solutions[i];
 			}
 		}
@@ -40,12 +39,16 @@ public class twoFibonacci {
 	}
 
 	private static void fibonacci(long[] solutions, int n) {
+		//int limit = 4000000;
 		solutions[1] = 1;
 		solutions[2] = 1;
+		//int x = 0;
 
 		for (int i = 3; i < n; i++) {
 			solutions[i] = solutions[i - 1] + solutions[i - 2];
 		}
+		
+		//return x;
 	}
 
 }
