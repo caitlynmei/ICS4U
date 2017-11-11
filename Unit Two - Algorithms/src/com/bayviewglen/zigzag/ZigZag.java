@@ -116,9 +116,11 @@ public class ZigZag {
 			for (int r = 0; r < 1000; r++) {
 				S[r] = input.nextInt();
 			}
-
+			input.close();
+			
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			System.out.println("File not found.");
+			//e.printStackTrace();
 		}
 		return S;
 

@@ -60,9 +60,11 @@ public class ContiguousSubsequence {
 			for (int r = 0; r < 10001; r++) {
 				S[r] = input.nextInt();
 			}
+			input.close();	
 			
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			System.out.println("File not found.");
+			//e.printStackTrace();
 		}
 		return S;
 		

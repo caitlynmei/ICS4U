@@ -146,9 +146,11 @@ public class NeighbourFund {
 			for (int r = 0; r < 100000; r++) {
 				donations[r] = input.nextInt();
 			}
-
+			input.close();
+			
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			System.out.println("File not found.");
+			//e.printStackTrace();
 		}
 		return donations;
 
