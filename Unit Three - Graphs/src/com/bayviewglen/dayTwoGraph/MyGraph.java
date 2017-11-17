@@ -45,6 +45,8 @@ public class MyGraph {
 			}
 
 			print(vertices, numEdges, adjacencyList);
+			
+			input.close();
 
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found.");

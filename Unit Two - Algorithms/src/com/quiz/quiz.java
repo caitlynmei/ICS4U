@@ -26,6 +26,9 @@ public class quiz {
 	 */
 
 	public static void main(String[] args) {
+		int[][] data = readingData(); 
+		
+		/*
 		int[] factors = new int[4]; // the 4 options to get to 1
 		readingNumbers(factors);
 
@@ -62,7 +65,7 @@ public class quiz {
 				}
 			}
 		}
-
+		 
 		System.out.println("The steps taken to reach " + sum + " were: ");
 
 		// okay, I know the printing steps part doesn't work, but I would have created
@@ -77,26 +80,104 @@ public class quiz {
 		}
 
 		System.out.print(", using " + solutions[sum] + " steps.");
-
+*/
 	}
 
-	private static void readingNumbers(int[] data) {
-		int temp = 0;
-
+	private static int[][] readingData() {
+		int[][] data = null;
+		int[] n = null;
+		
 		try {
 			Scanner input = new Scanner(new File("Data/Quiz.dat"));
-			for (int i = 0; i < 4; i++) { // assuming it gives me the next 4 numbers , so just one case
-				data[i] = input.nextInt();
+
+			while (input.hasNext()) {
+				int numCases = Integer.parseInt(input.nextLine().trim());
+				
+				data = new int[numCases][];
+				n = new int[numCases];
+				
+				for (int i = 0; i < numCases; i++) {
+					n[i] = Integer.parseInt(input.next());
+					int temp[] = new int[3];
+					for (int j = 0; j < 3; j++) {
+						temp[j] = Integer.parseInt(input.next());
+						data[i] = temp;
+					}
+				}
 			}
-
-			/*
-			 * for (int r = 0; r < solutions.length; r++) { temp = input.nextLine();
-			 * solutions[r] = temp.split(" "); }
-			 */
-
+			input.close();
+			
+			//print(n, data);
+			
+			int[][] solutions = findSolutions(n, data);
+			
+			printSolutions(n, solutions);
+			
+			
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			System.out.println("File note found.");
 		}
 
+		return data;
+	}
+
+	private static void printSolutions(int[] n, int[][] solutions) {
+		for (int r=0; r<solutions.length; r++) {
+			System.out.println("Test Case #" + (r+1));
+			System.out.print("n: " + n[r] + "\nSolutions: ");
+			for (int c=0; c<solutions[0].length; c++) {
+				System.out.print(solutions[r][c] + " ");
+			}
+			System.out.println("\n");
+		}
+	}
+
+	private static int[][] findSolutions(int[] n, int[][] data) {
+		int[][] fullSolutions = new int[data.length][];
+		String[][] fullSteps = new String[data.length][];
+		for (int r=0; r<data.length; r++) {
+			int sum = n[r];
+			String[] steps = new String[sum + 1];
+
+			int[] options = new int[4];
+			options[0] = 1;
+			
+			// placing 4 options into an array; "options"
+			for (int c=1; c<options.length; c++) {
+				options[c] = data[r][c-1];
+			}		
+			int[] solutions = new int[sum+1]; 
+			
+			// going through the 4 options
+			for (int option : options) {
+				for (int i = 2; i <= sum; i++) {
+ 					solutions[1] = 0;
+					if (option == 1) {
+						solutions[i] = solutions[i - 1] + 1;
+						//steps[i] += "subtract " + option + ", ";
+					} else if (i % option == 0) {
+						solutions[i] = Math.min(solutions[i], 1 + solutions[i/option]);
+						if (solutions[i/option] + 1 < solutions[i]) {
+							//steps[i] += "divide by " + option + ", ";
+						} else if (solutions[i/option] + 1 <= solutions[i]){
+							//steps[i] += "divide " + option + ", ";
+						}
+					}
+ 				}
+			}
+			fullSolutions[r] = solutions;
+		}
+		return fullSolutions;
+	}
+
+	private static void print(int[] n, int[][] data) {
+		for (int r=0; r<data.length; r++) {
+			System.out.println("Test Case #" + (r+1));
+			System.out.print("n: " + n[r] + "\nOptions: ");
+			for (int c=0; c<data[0].length; c++) {
+				System.out.print(data[r][c] + " ");
+			}
+			System.out.println("\n");
+		}
 	}
 }
