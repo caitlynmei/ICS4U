@@ -7,23 +7,21 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Graph {
+public class MyGraph {
 
 	public static void main(String[] args) {
 		// vertices are ints
 		// links are edges
 
-		LinkedList[] adjacencyList = null;
-		LinkedList<Integer> edges = new LinkedList<Integer>();
-
-		final int vertices = 0;
-		int numEdges = 0;
-
-		getAdjList(vertices, numEdges, adjacencyList);
+		final int vertices = 0;// getVertices();
+		int numEdges = 0;// getEdges();
+		LinkedList[] adjacencyList = getAdjList(vertices, numEdges);
 
 	}
 
-	private static void getAdjList(int vertices, int numEdges, LinkedList[] adjacencyList) {
+	private static LinkedList[] getAdjList(int vertices, int numEdges) {
+		LinkedList[] adjacencyList = null;
+
 		try {
 			Scanner input = new Scanner(new File("testData/tinyGraph.dat"));
 
@@ -44,13 +42,26 @@ public class Graph {
 					int temp2 = Integer.parseInt(input.next());
 					adjacencyList[temp1].add(temp2);
 				}
-
 			}
+
+			print(vertices, numEdges, adjacencyList);
 
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found.");
 			// e.printStackTrace();
 		}
+		return adjacencyList;
+	}
 
+	private static void print(int vertices, int numEdges, LinkedList[] adjacencyList) {
+		System.out.println(vertices + " vertices, " + numEdges + " edges.");
+
+		for (int i = 0; i < vertices; i++) {
+			System.out.print(i + ": ");
+			for (Object edges : adjacencyList[i]) {
+				System.out.print(edges + " ");
+			}
+			System.out.println();
+		}
 	}
 }
