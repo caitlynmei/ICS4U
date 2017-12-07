@@ -1,0 +1,33 @@
+body{
+	background-color: #9CDBF2; 
+	color: #3E0C91;
+	font-size: large;
+} 
+
+p{
+	font-family: cursive;
+}
+
+.class1, p.class2{
+	color: red;
+}
+
+.class2{
+	background-color: green;
+}
+
+.class3{
+	border: 1px blue dashed;
+	border-radius: 15px;
+}
+
+#paragraph1{  
+	border-radius: 10px;
+}
+
+p img{
+	width: 25%;
+}
+
+/* Comments !! */
+
