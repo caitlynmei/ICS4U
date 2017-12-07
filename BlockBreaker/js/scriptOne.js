@@ -1,5 +1,6 @@
 //var x = document.getQuerySelectorAll('.class1');
 // document.location.href = "";
+// //test
 var canvas = document.getElementById("myCanvas");
 var context = canvas.getContext("2d"); // 2D rendering context
 var ballRadius = 30; // orig 10
