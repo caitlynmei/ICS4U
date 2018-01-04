@@ -1,0 +1,130 @@
+* { box-sizing: border-box }
+
+/* Slideshow Container */
+.slideshow-container {
+	max-width: 1000px;
+	position: relative;
+	margin: auto;
+}
+
+/* Default to Hide Images */
+.mySlides {
+	display: none;
+}
+
+/* Next and Previous Buttons */
+.previous, .next {
+	crusor: pointer;
+	position: absolute;
+	top: 50%;
+	width: auto;
+	margin-top: -22px;
+	padding: 16px;
+	color: white;
+	font-weight: bold;
+	font-size: 18px;
+	transition: 0.6s ease; /* ease: specifies a transition effect with a slow start, then fast, then end slowly; */
+	border-radius: 0 3px 3px 0; /* top-left corner, top-right, bottom-right, bottom-left */
+}
+
+/* Position Next Button to Right */
+.next {
+	right: 0;
+	border-radius: 3px 0 0 3px;
+}
+
+/* During hover, add black partly see-through background color */
+.prev: hover, .next: hover {
+	background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Caption Text */
+.text {
+	color: #f2f2f2;
+	font-size: 15px;
+	position: absolute;
+	padding: 8px 12px;
+	bottom: 8px;
+	width: 100%;
+	text-align: center;
+}	
+
+/* Number Text (x/3) */
+.numbertext {
+	color: #f2f2f2;
+	font-size: 15px;
+	padding: 8px 12px;
+	position: absolute;
+	bottom: 8px;
+	width: 100%;
+	text-align: center;
+}
+
+/* Dots */
+.dot {
+	cursor: pointer;
+	height: 15px;
+	width: 15px;
+	margin: 0 2px;
+	background-color: #bbb;
+	border-radius: 50%;
+	display: inline-block;
+	transition: background-color 0.6s ease;
+}
+
+.active, .dot: hover {
+	background-color: #717171;
+}
+
+/* Fading Animation */
+.fade {
+	-webkit-animation-name: fade;
+	 -webkit-animation-duration: 1.5s;
+	 animation-name: fade;
+	 animation-duration: 1.5s;
+
+}
+
+@-webkit-keyframes fade {
+	from {opacity: .4}
+	to {opacity: 1}
+}
+
+@keyframes fade {
+	from {opacity: .4}
+	to {opacity: 1}
+}
+
+body{
+	background-color: 'white';
+} 
+
+/*
+p{
+	font-family: cursive;
+}
+
+//#D9E1E5;
+//#D7EDF0;
+
+.class1, p.class2{
+	color: red;
+}
+
+.class2{
+	background-color: green;
+}
+
+.class3{
+	border: 1px blue dashed;
+	border-radius: 15px;
+}
+
+#paragraph1{  
+	border-radius: 10px;
+}
+
+p img{
+	width: 25%;
+}
+*/
