@@ -1,11 +1,11 @@
 body{
 	background-color: #9CDBF2; 
 	color: #F90762;
-	font-size: large;
+	font-size: "apercu mono";
 } 
 
 p{
-	font-family: cursive;
+	font-family: "apercu mono";
 }
 
 /*
