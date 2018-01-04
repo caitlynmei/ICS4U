@@ -3,40 +3,40 @@
 	<head>
 		<title>Khan's Topological Sorting Algorithm</title>
 			<link rel="stylesheet" type="text/css" href="style/style.css">
-		
-			<style>
-				* { padding: 0; margin: 0; }
-				canvas { background: #8CE3F9; display: block; margin: 0 auto; margin-top: 100px }
-			</style>
 	</head>
 
 	<body>
-		<canvas id="myCanvas" width = "600" height = "500"></canvas>
+		<!-- <canvas id="myCanvas" width = "600" height = "500"></canvas> -->
 
+		<h2>Automatic Slideshow</h2>
+		<p>Change image every 10 sec:</p>
+		
 		<!-- Slideshow -->
 		<div class = "slideshow-container">
 
 			<!-- Images with Number and Caption Text (full width) -->
 			<div class = "mySlides fade">
 				<div class = "numbertext">1 / 3</div>
-				<img scr = "images/dog.jpg" style = "width: 100%">			
-				<div class = "text">Caption Text</div>
+				<img src = "images/dog.jpg" style = "width: 100%">			
+				<div class = "text">Caption One</div>
 			</div>
 
 			<div class = "mySlides fade">
 				<div class = "numbertext">2 / 3</div>
-				<img scr = "images/dog.jpg" style = "width: 100%">
+				<img src = "images/dog.jpg" style = "width: 100%">
 				<div class = "text">Caption Two</div>
 			</div>
 
 			<div class = "mySlides fade">
 				<div class = "numbertext">3 / 3</div>
-				<img scr = "imgages/dog.img" style = "width: 100%">
+				<img src = "images/dog.jpg" style = "width: 100%">
 				<div class = "text">Caption Three</div>
 			</div>
 
 			<!-- Next and Previous Buttons -->
-			<!-- <a> anchor element: creates a hyperlink to other web pages, files, locations on same page, email addresses, or other URL  -->
+			<!-- <a> anchor element: creates a hyperlink to other web pages, files, locations on same page, email addresses, or other URL 
+			&#10094; <- symbol for "<"
+			&#10095; <- symbol for ">" -->
 			<a class = "previous" onclick = "plusSlides(-1)">&#10094;</a>
 			<a class = "next" onclick = "plusSlides(1)">&#10095;</a>
 		</div>
@@ -44,6 +44,15 @@
 
 		<!-- Dots -->
 		<!-- <span> is used to group inline-elements in a document, provides a way to add a hook to a part of text or document -->
+		<!-- Automatic Slideshow
+		<div style = "text-align: center">
+			<span class = "dot"></span>
+			<span class = "dot"></span>
+			<span class = "dot"></span>
+		</div>
+		-->
+
+		<!-- User Click -->
 		<div style = "text-align: center">
 			<span class = "dot" onclick = "currentSlide(1)"></span>
 			<span class = "dot" onclick = "currentSlide(2)"></span>
