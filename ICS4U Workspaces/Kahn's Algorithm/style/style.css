@@ -1,17 +1,29 @@
-* { padding: 0; margin: 0; }
-canvas {background: #eee; display: block; margin: 0 auto; margin-top: 20px;}
+* { 
+	padding: 0; 
+	margin: 0; 
+}
+
+canvas {
+	background: #eee; 
+	display: block; 
+	margin: 0 auto; 
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
 
 body {
 	font-family: "Book Antiqua", "Times New Roman", Times, Palatino, serif; 
 	margin: 0;
 	margin-top: 20px;
-	margin-left: 20px;
+	margin-left: 120px;
+	margin-right: 120px;
 }
 
 h1 {
 	font-family: "Apercu Mono", "Palatino Linotype", "Book Antiqua", "Times New Roman", Times, Palatino, serif; 
 	margin-top: 30px;
 	text-align: center;
+	background-color: #E6E6FF;
 }
 
 h2 {
@@ -19,15 +31,15 @@ h2 {
 }
 
 ul, ol {
-	margin-left: 40px;
+	margin-left: 60px;
 }
 
 ul {
 	font-weight: normal; 
 }
 
-li span { 
-	font-weight: normal; 
+mark {
+    background-color: #D9F2FF;
 }
 
 /* Adding blank space after this item */
@@ -40,4 +52,8 @@ li span {
 .spaceBefore { 
 	margin-top: 1em;
 	display: block;
+}
+
+.highlightMe {
+	background-color: #D9F2FF;  
 }
