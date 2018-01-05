@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Kahn's Algorithm</title>
+			<link rel="stylesheet" type="text/css" href="style/style.css">
+	</head>
+
+	<body>
+		<h1>Kahn's Topological Sorting Algorithm</h1><br><br>
+
+		<h2 class="spaceAfter">Topological Sorting</h2> 
+		<p class="spaceAfter">What is topological sorting? Hmmm... Let's take a look:</p>
+		<ul class="spaceAfter"; style="list-style-type: disc">
+			<li>sorts a directed graph</li><br>
+			<li>uses a <b>linear ordering</b> of the graph's vertices</li>
+			<ul style="list-style-type: circle">
+				<li>i.e.: let u and v be two adjacent vertices. For every directed edge uv, u is ordered before v</li>
+				<li>(*Note: an edge is the connection of two adjacent vertices: u and v)</li>
+			</ul><br>
+			<li>the graph be a <b>directed acyclic graph</b>, or <b>DAG</b></li><br>
+			<li>a DAG has no directed cycles, thus has a minimum of one topological sort</li><br>
+			<li>at least one vertex has an in-degree of 0 (no incoming edges)</li><br>
+			<li> that vertex can be used as the first vertex in topological sorting</li><br>
+			<li>a DAG also has at least one vertex with an out-degree of 0</li><br>
+			<li>algorithms for topological sorting, such as Kahn's algorithm, run in linear time </li>
+			<ul style="list-style-type: circle">
+				<li>number of nodes (V), or vertices, and number of edges (E)</li>
+				<li>thus is O(V+E)
+				</li>
+			</ul>
+		</ul><br>
+		<p class="spaceAfter"; style="list-style-type: disc">Topological sorting can give an order for organizing tasks that must be done in a sequence. A common example would be scheduling (like helping you with time management).</p>
+		<ul class="spaceAfter"; style="list-style-type: disc">
+			<li>this is when task 3 can be executed only after task 2 and task 1 are complete</li>
+			<li>edges of the DAG would be 1 --> 3 and 2 --> 3</li>
+		</ul>
+		<p>The result of using topological sorting of the graph, would be <i>an</i> order (there can be various different ways that your tasks are completed).</p><br><br>
+
+		<img id="dog" src = "images/dog.jpg" style = "width: 300px">
+
+		<h2 class="spaceAfter">Steps for Kahn's Algorithm</h2>
+		<p>Using topological ordering for a DAG:</p><br>
+		<ol style="font-weight: bold;">
+			<li>construct a list array <i>adj[]</i> with references to an adjacency list for each vertex</li><br>
+			<li>for each present vertex, find the number of incoming edges (in-degree)</li>
+			<ul style="list-style-type: disc">
+				<li>construct an array <i>indegree[]</i> to hold in-degrees (initialized as 0) of each vertex</li>
+				<li>traverse the adjacency lists of <i>adj[]</i> to fill in-degrees for each vertex</li>
+			</ul><br>
+			<li>initialize an integer variable <i>count</i> for number of visited vertices to be 0</li><br>
+			<li>construct an queue <i>queue</i> and add (enqueue) all vertices with an in-degree 0</li><br>
+			<li>construct a vector <i>topOrder</i> to hold the ordering of vertices</li>
+			<ul style="list-style-type: disc">
+				<li>the <b>vector class</b> implements a dynamic array of objects, meaning its size can grow or shrink</li> 
+				<li>its components can be accessed through an integer index like an array</li>
+				<li>click <a href="https://docs.oracle.com/javase/7/docs/api/java/util/Vector.html">here</a> to go to the Java API</li>
+			</ul><br>
+			<li>using a loop, traverse through each vertex in <i>queue</i></li>
+			<ul style="list-style-type: disc">
+				<li>remove (dequeue) a vertex <i>u</i> and add it to <i>topOrder</i></li>
+				<li>decrease in-degree for all adjacent vertices of <i>u</i> by 1</li>
+				<li>if in-degree of an adjacent vertex become 0, add to <i>queue</i></li>
+				<li>increment <i>count</i> by 1</li>
+				<li>continue until <i>queue</i> is empty</li>
+			</ul><br>
+			<li>if <i>count</i> does not equal number of vertices in graph, there was a cycle. Thus, a topological sort is impossible</li>
+		</ol><br><br>
+
+		<h2 class="spaceAfter">Kahn's Algorithm in Java</h2>
+		<p>place code here, remember to format</p><br><br>
+
+		<h2 class="spaceAfter">Visual Diagram</h2>
+
+		<p>Canvas:</p>
+		<canvas id="myCanvas" width="600" height="800" style="border: 2px solid #d3d3d3;"></canvas>
+
+		<script type="text/javascript" src="js/script.js"></script>
+	</body>
+</html>
+
