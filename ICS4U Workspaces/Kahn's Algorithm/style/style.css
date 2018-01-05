@@ -5,10 +5,11 @@
 
 canvas {
 	background: #eee; 
-	display: block; 
 	margin: 0 auto; 
-	margin-top: 50px;
 	margin-bottom: 50px;
+	/* to center canvas:
+	display: block; 
+	*/
 }
 
 body {
@@ -54,6 +55,17 @@ mark {
 	display: block;
 }
 
+/* Highlighting Headers */
 .highlightMe {
 	background-color: #D9F2FF;  
+}
+
+/* Indentations */
+.indent {
+    text-indent: 50px;
+}
+
+/* Green (for comments in Java code) */
+.green {
+	color: #006600;
 }
