@@ -75,8 +75,8 @@
 			
 		int numVertices; // number of vertices
 
-		// an Array of List which contains
-		// references to the Adjacency List of each vertex
+		// a List Array which contains references to 
+		// the Adjacency List of each vertex
 		List &lt;Integer&gt; adj[];
 
 		// --- Graph constructor --- 
@@ -104,16 +104,17 @@
 			// this step takes O(V+E) time
 			for (int i = 0; i &lt; numVertices; i++) {
 				ArrayList&lt;Integer&gt; temp = (ArrayList&lt;Integer&gt;) adj[i];
-				for (int node : temp) {
-					indegree[node]++;
+				for (int vertex : temp) {
+					indegree[vertex]++;
 				}
 			}
 
 			// create a queue and enqueue all vertices with in-degree 0
 			Queue&lt;Integer&gt; queue = new LinkedList&lt;Integer&gt;();
 			for (int i = 0; i &lt; numVertices; i++) {
-				if (indegree[i] == 0)
+				if (indegree[i] == 0) {
 					queue.add(i);
+				}
 			}
 
 			int count = 0; // number of visited vertices
@@ -121,19 +122,20 @@
 			// create a vector to store result (a topological ordering of the vertices)
 			Vector&lt;Integer&gt; topOrder = new Vector&lt;Integer&gt;();
 			while (!queue.isEmpty()) {
-				// extract front of queue (or perform dequeue)
+				// remove front of queue (or perform dequeue)
 				// and add it to topological order
 				int u = queue.poll(); 
-				// .poll --&gt; retrieves and removes the head of this queue, or returns null 
-				// if this queue is empty
+				// .poll --&gt; retrieves and removes the head of this queue, or 
+				// returns null if this queue is empty
 				topOrder.add(u);
 
-				// iterate through all its neighbouring nodes of dequeued node u 
+				// iterate through all its neighbouring nodes of dequeued vertex u 
 				// and decrease their in-degree by 1
-				for (int node : adj[u]) {
-					// if in-degree becomes zero, add it to queue
-					if (--indegree[node] == 0)
-						queue.add(node);
+				for (int vertex : adj[u]) {
+					// if in-degree of vertex becomes zero, add it to queue
+					if (--indegree[vertex] == 0) {
+						queue.add(vertex);
+					}
 				}
 				count++;
 			}
@@ -149,29 +151,33 @@
 				System.out.print(i + " ");
 			}
 		}
+	}
+	
+	// driver for Kahn's algorithm from above using example in the Visual Diagram
+	public class KahnDriver {
 
-		// driver for Kahn's algorithm from above using example in the Visual Diagram
-		public class KahnDriver {
+		public static void main(String[] args) {
+			// Create a graph given in the above diagram
+			Graph graph = new Graph(7);
+			graph.addEdge(0, 1);
+			graph.addEdge(0, 4);
+			graph.addEdge(0, 6);
+			graph.addEdge(2, 6);
+			graph.addEdge(3, 1);
+			graph.addEdge(3, 5);
+			graph.addEdge(3, 6);
+			graph.addEdge(4, 3);
+			graph.addEdge(4, 6);
 
-			public static void main(String[] args) {
-				// Create a graph given in the above diagram
-				Graph graph = new Graph(6);
-				graph.addEdge(5, 2);
-				graph.addEdge(5, 0);
-				graph.addEdge(4, 0);
-				graph.addEdge(4, 1);
-				graph.addEdge(2, 3);
-				graph.addEdge(3, 1);
-				System.out.println("This is Topological Sort using Kahn's algorithm: ");
-				graph.topologicalSort();
-			}
+			System.out.println("This is Topological Sort using Kahn's algorithm: ");
+			graph.topologicalSort();
 		}
 	}
 	</pre><br><br>
 
-		<h2 class="spaceAfter"><mark>Visual Diagram</mark></h2>
+		<h2 class="spaceAfter"><mark>Visual Diagram of Graph</mark></h2>
 
-		<canvas id="myCanvas" width="600" height="400" style="border: 2px solid #d3d3d3;"></canvas>
+		<canvas id="myCanvas" width="1000" height="600" style="border: 2px solid #d3d3d3;"></canvas>
 
 		<script type="text/javascript" src="js/script.js"></script>
 	</body>
