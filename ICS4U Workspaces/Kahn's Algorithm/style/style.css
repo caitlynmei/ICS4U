@@ -43,6 +43,21 @@ mark {
     background-color: #D9F2FF;
 }
 
+pre {
+    background-color: #fefefc;
+    color: #585858;
+    font-family: Menlo,Monaco,"Andale Mono","lucida console","Courier New",monospace;
+    font-size: 14px;
+    padding: 1.8em 6px 1.8em 16px;
+    margin-bottom: 1.5em;
+    display: block;
+    overflow: auto;
+    overflow-y: auto;
+    border: 1px solid #e2e2da;
+    border-radius: 5px;
+    line-height: 1.5em;
+}
+
 /* Adding blank space after this item */
 .spaceAfter { 
 	margin-bottom: 1em;
