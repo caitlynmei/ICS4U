@@ -4,6 +4,12 @@
 var canvas = document.getElementById("myCanvas");
 var context = canvas.getContext("2d");
 
+// for graph diagram 
+var rightPressed = false; // initially not pressed, thus false
+document.addEventListener("keydown", keyDownHandler, false); // when pressed, function will be executed 
+document.addEventListener("keyup", keyUpHandler, false);
+var count = 0; // counts which step topOrder is on
+
 // first y coordinate for adj list
 var adjY = 150;
 
@@ -38,6 +44,27 @@ var arrowBottomY = vBottomY; // bottom y coordinate
 var arrowTipX = arrowTopX + 55;
 var arrowTipY = vTopY + 10;
 
+// x and y coordinates of the left side of topOrder table
+var topOrderX = vTopX - 20;
+var topOrderY = vBottomY + 110;
+
+
+// --- functions --- 
+
+// --- changing steps --- 
+// 39 is > key
+// 37 is < key
+function keyDownHandler(e) { // "e" is an event, parameter 
+	if (e.keyCode == 39) {
+		rightPressed = true;
+	}
+}
+
+function keyUpHandler(e) {
+	if (e.keyCode == 39) {
+		rightPressed = false;
+	}
+}
 
 title();
 adjList();
@@ -46,18 +73,21 @@ drawGraph();
 
 // draw title 
 function title() {
+	context.beginPath();
 	context.font = "27px apercu mono";
 	context.fillStyle = "purple";
 	context.textAlign = "center";
 	context.fillText("Kahn\'s Algorithm", myCanvas.width / 2, 50);
+	context.closePath();
 }
 
 // draw adjacency list of each vertex 
 function adjList() {
+	context.beginPath()
 	context.font = "18px Menlo";
 	context.fillStyle = "black";
 	context.textAlign = "left";
-	context.fillText("Adjacency List of Each Vertex (Outgoing Vertices)", 50, adjY);
+	context.fillText("adj[] (Outgoing Vertices for Each Vertex)", 50, adjY);
 	context.fillText("0:   1,   4,   6", 60, adjY + 20);
 	context.fillText("1:   ", 60, adjY + 40);
 	context.fillText("2:   6", 60, adjY + 60);
@@ -65,10 +95,12 @@ function adjList() {
 	context.fillText("4:   3,   6", 60, adjY + 100);	
 	context.fillText("5: ", 60, adjY + 120);	
 	context.fillText("6: ", 60, adjY + 140);
+	context.closePath();
 }
 
 // draw list for indegrees of each vertex
 function indegreeList() {
+	context.beginPath();
 	context.font = "18px Menlo";
 	context.fillStyle = "black";
 	context.textAlign = "left";
@@ -80,18 +112,22 @@ function indegreeList() {
 	context.fillText("4:   1", 60, inY + 100);	
 	context.fillText("5:   1", 60, inY + 120);	
 	context.fillText("6:   4", 60, inY + 140);
+	context.closePath();
 }
 
 // draw graph 
 function drawGraph() {
 	drawVertices();
 	drawNumbers();
-	drawArrows();	
+	drawArrows();
+	drawTopOrder();
 }
 
 // draw vertices
 function drawVertices() {
-	context.fillStyle = "#CCFFFF"; 
+	context.fillStyle = "#CCFFFF";
+	context.strokeStyle = "black";
+	//context.strokeStyle = "#e2e2da"; ** for after added 
 
 	// top row of vertices
 	context.beginPath();
@@ -99,16 +135,19 @@ function drawVertices() {
 	context.fill();
 	context.stroke();
 	context.closePath();
+
 	context.beginPath();
 	context.arc(vTopX + 140, vTopY, 25, 0, 2*Math.PI, false);
 	context.fill();
 	context.stroke();
 	context.closePath();
+
 	context.beginPath();
 	context.arc(vTopX + 280, vTopY, 25, 0, 2*Math.PI, false);
 	context.fill();
 	context.stroke();
 	context.closePath();
+
 	context.beginPath();
 	context.arc(vTopX + 420, vTopY, 25, 0, 2*Math.PI, false);
 	context.fill();
@@ -121,11 +160,13 @@ function drawVertices() {
 	context.fill();
 	context.stroke();
 	context.closePath();
+
 	context.beginPath();
 	context.arc(vBottomX + 140, vBottomY, 25, 0, 2*Math.PI, false);
 	context.fill();
 	context.stroke();
 	context.closePath();
+
 	context.beginPath();
 	context.arc(vBottomX + 280, vBottomY, 25, 0, 2*Math.PI, false);
 	context.fill();
@@ -135,6 +176,7 @@ function drawVertices() {
 
 // label numbers of each vertex 
 function drawNumbers() {
+	context.beginPath();
 	context.font = "30px Menlo";
 	context.fillStyle = "black";
 	context.textAlign = "left";
@@ -149,18 +191,34 @@ function drawNumbers() {
 	context.fillText("4", numBottomX, numBottomY);
 	context.fillText("5", numBottomX + 140, numBottomY);
 	context.fillText("6", numBottomX + 280, numBottomY);
+	context.closePath();
 }
 
 // draw arrows
 function drawArrows() {
+	context.beginPath();
+	context.strokeStyle = "#ff0000";
+	context.fillStyle = "#ff0000"; 
 	// top arrows (following vertex labels are for its outgoing vertices)
 	// vertex 0:
 	context.moveTo(arrowTopX, arrowTopY);
 	context.lineTo(arrowTopX + 70, arrowTopY);
-	context.strokeStyle = "#ff0000";
 	context.stroke();
-	context.fillStyle = "#ff0000"; 
 	context.fillText(">", arrowTipX, arrowTipY);
+
+	context.moveTo(arrowTopX - 30, arrowTopY + 35);
+	context.lineTo(arrowTopX + 28, arrowBottomY - 32);
+	context.stroke();
+
+	// arrow tips (different angles) for edges 
+	var arrowTip04 = new Image(); 
+	arrowTip04.src = "images/arrow_tip_04.PNG"; // vertex 0 - 4 edge 
+	context.drawImage(arrowTip04, arrowTopX, arrowBottomY - 32);
+	// ***********
+
+	context.moveTo(arrowTopX - 10, arrowTopY + 25);
+	context.lineTo(arrowBottomX + 215, arrowBottomY - 20);
+	context.stroke();
 
 	// vertex 2:
 	context.moveTo(arrowTopX + 252, arrowTopY + 35);
@@ -170,7 +228,7 @@ function drawArrows() {
 
 	// vertex 3:
 	context.moveTo(arrowTopX + 355, arrowTopY + 22);
-	context.lineTo(arrowBottomX + 120, arrowBottomY - 35);
+	context.lineTo(arrowBottomX + 120, arrowBottomY - 30);
 	context.stroke();
 	// arrow head!!
 	context.moveTo(arrowTopX + 375, arrowTopY + 33);
@@ -179,13 +237,112 @@ function drawArrows() {
 	
 	// bottom arrows  
 	// vertex 4:
-	
-
-	// vertex 5: 
-	// vertex 6:
+	context.moveTo(arrowTopX + 52, arrowBottomY - 30);
+	context.lineTo(arrowTopX + 349, arrowTopY);
+	context.stroke();
+	context.closePath();
 }
 
+// draw vertices in queue
+function queue() {
 
+}
+
+// illustrates vertices added to topOrder (topological order) list 
+// after it has an indegree of 0
+function drawTopOrder() {
+	drawTable();
+	topOrderText();
+	// indexes in topOrder (top row of table)
+	context.beginPath();
+	context.font = "22px Menlo";
+	context.fillStyle = "black";
+	context.fillText("0", topOrderX + 28, topOrderY - 8);
+	context.fillText("1", topOrderX + 94, topOrderY - 8);
+	context.fillText("2", topOrderX + 160, topOrderY - 8);
+	context.fillText("3", topOrderX + 226, topOrderY - 8);
+	context.fillText("4", topOrderX + 292, topOrderY - 8);
+	context.fillText("5", topOrderX + 358, topOrderY - 8);
+	context.fillText("6", topOrderX + 424, topOrderY - 8);
+	context.closePath();
+	topOrderVertices();
+}
+
+// text for topOrder
+function topOrderText() {
+	context.beginPath();
+	context.font = "18px Menlo";
+	context.fillText("topOrder (holds vertices with indegree 0): ", topOrderX, topOrderY - 40);
+	context.fillText("index: ", topOrderX - 70, topOrderY - 8);
+	context.fillText("vertices: ", topOrderX - 70, topOrderY + 30);
+	context.closePath();
+}
+
+// draws the table for the topolocial order list 
+function drawTable() {
+	context.beginPath();
+	// horizontal lines for table
+	context.strokeStyle = "black";
+	context.moveTo(topOrderX, topOrderY);
+	context.lineTo(topOrderX + 462, topOrderY);
+	context.stroke();
+
+	context.moveTo(topOrderX, topOrderY - 30);
+	context.lineTo(topOrderX + 462, topOrderY - 30);
+	context.stroke();
+
+	context.moveTo(topOrderX, topOrderY + 50);
+	context.lineTo(topOrderX + 462, topOrderY + 50);
+	context.stroke();
+
+	// vertical lines for table
+	context.moveTo(topOrderX, topOrderY - 30);
+	context.lineTo(topOrderX, topOrderY + 50);
+	context.stroke();
+
+	context.moveTo(topOrderX + 66, topOrderY - 30);
+	context.lineTo(topOrderX + 66, topOrderY + 50);
+	context.stroke();
+
+	context.moveTo(topOrderX + 132, topOrderY - 30);
+	context.lineTo(topOrderX + 132, topOrderY + 50);
+	context.stroke();
+
+	context.moveTo(topOrderX + 198, topOrderY - 30);
+	context.lineTo(topOrderX + 198, topOrderY + 50);
+	context.stroke();
+
+	context.moveTo(topOrderX + 264, topOrderY - 30);
+	context.lineTo(topOrderX + 264, topOrderY + 50);
+	context.stroke();
+
+	context.moveTo(topOrderX + 330, topOrderY - 30);
+	context.lineTo(topOrderX + 330, topOrderY + 50);
+	context.stroke();
+
+	context.moveTo(topOrderX + 396, topOrderY - 30);
+	context.lineTo(topOrderX + 396, topOrderY + 50);
+	context.stroke();
+
+	context.moveTo(topOrderX + 462, topOrderY - 30);
+	context.lineTo(topOrderX + 462, topOrderY + 50);
+	context.stroke();
+
+	context.closePath();
+}
+
+// vertices in topOrder with indegree 0
+function topOrderVertices() {
+	if (rightPressed && count === 0) {
+		// indegree list
+		context.strokeStyle = "blue";
+		context.fillText("0:   0", 60, inY + 20);
+		context.fillText("2:   0", 60, inY + 60);
+		// topOrder table
+		context.fillText("0", topOrderX + 28, topOrderY + 20);
+		context.fillText("2", topOrderX + 94, topOrderY + 20);
+	}
+}
 
 /*
 context.font = "20px apercu mono";

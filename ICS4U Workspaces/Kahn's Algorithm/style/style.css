@@ -30,6 +30,7 @@ body {
 h1 {
 	font-family: "Apercu Mono", "Palatino Linotype", "Book Antiqua", "Times New Roman", Times, Palatino, serif; 
 	margin-top: 30px;
+	margin-left: 45px;
 	text-align: center;
 	background-color: #E6E6FF;
 }
@@ -47,7 +48,7 @@ ul {
 }
 
 mark {
-    background-color: #D9F2FF;
+    background-color: #D9F2FF; 
 }
 
 pre {
