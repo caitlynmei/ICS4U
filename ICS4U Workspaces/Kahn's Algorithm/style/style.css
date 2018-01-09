@@ -4,9 +4,16 @@
 }
 
 canvas {
-	background: #eee; 
-	margin: 0 auto; 
+	background: #fefefc;
+	/*margin: 0 auto; */
 	margin-bottom: 50px;
+    display: block;
+    overflow: auto;
+    overflow-y: auto;
+    border: 1px solid #e2e2da;
+    border-radius: 5px;
+    line-height: 1.5em;
+
 	/* to center canvas:
 	display: block; 
 	*/
@@ -28,7 +35,7 @@ h1 {
 }
 
 h2 {
-	font-family: "Palatino Linotype";
+	font-family: "Palatino Linotype", "Book Antiqua", "Times New Roman", Times, Palatino, serif;
 }
 
 ul, ol {
@@ -46,7 +53,7 @@ mark {
 pre {
     background-color: #fefefc;
     color: #585858;
-    font-family: Menlo,Monaco,"Andale Mono","lucida console","Courier New",monospace;
+    font-family: Menlo, Monaco, "Andale Mono", "lucida console", "Courier New", monospace;
     font-size: 14px;
     padding: 1.8em 6px 1.8em 16px;
     margin-bottom: 1.5em;
