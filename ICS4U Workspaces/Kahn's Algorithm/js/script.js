@@ -193,19 +193,11 @@ function sortedButton() {
 	context.clearRect(0, 0, myCanvas.width, myCanvas.height);
 	drawBackground();
 	context.beginPath()
-	context.font = "18px Menlo";
-	context.fillStyle = "#6593F5";
-	// adj list
-	context.fillText("3:   1,   5,   6", 60, adjY + 80);
-	// indegree list
-	context.fillText("1:   0", 60, inY + 40);
-	context.fillText("5:   0", 60, inY + 120);	
-	context.fillText("6:   0", 60, inY + 140);
-	// topOrder table
+	context.fillStyle = "#477ef3";
 	context.font = "22px Menlo";
+	// topOrder table
 	context.fillText("5", topOrderX + 358, topOrderY + 30);
 	context.fillText("6", topOrderX + 424, topOrderY + 30);
-	context.fillStyle = "black";
 	context.fillText("0", topOrderX + 28, topOrderY + 30);
 	context.fillText("2", topOrderX + 94, topOrderY + 30);
 	context.fillText("4", topOrderX + 160, topOrderY + 30);
@@ -262,13 +254,33 @@ function indegreeList() {
 		context.clearRect(60, inY + 80, 50, 20);
 		context.clearRect(60, inY + 120, 50, 20);
 	} else if (count === 3) {
-		context.clearRect(60, inY + 120, 50, 20); 
-	} else if (count === 4) {
-		context.clearRect(60, inY + 60, 50, 20);
+		context.clearRect(60, inY + 20, 50, 26);
+		context.clearRect(60, inY + 80, 50, 20);
 		context.clearRect(60, inY + 120, 50, 20);
+		context.fillText("1:   1", 60, inY + 40); 
+		context.fillText("4:   0", 60, inY + 100);
+	} else if (count === 4) {
+		context.clearRect(60, inY + 20, 50, 26);
+		context.clearRect(60, inY + 60, 50, 20);
+		context.clearRect(60, inY + 80, 50, 20);
+		context.clearRect(60, inY + 120, 50, 20);
+		context.fillText("1:   1", 60, inY + 40); 
+		context.fillText("4:   0", 60, inY + 100);
 	} else if (count === 5) {
 		context.clearRect(60, inY + 20, 50, 20);
-		context.clearRect(60, inY + 100, 50, 50);
+		context.clearRect(60, inY + 60, 50, 20);
+		context.clearRect(60, inY + 80, 50, 20);
+		context.clearRect(60, inY + 100, 50, 50); 
+		context.fillText("3:   0", 60, inY + 80);
+		context.fillText("4:   0", 60, inY + 100);
+	} else if (count === 6) {
+		context.clearRect(60, inY + 20, 50, 20);
+		context.clearRect(60, inY + 60, 50, 100);
+		context.fillText("1:   0", 60, inY + 40);
+		context.fillText("3:   0", 60, inY + 80);
+		context.fillText("4:   0", 60, inY + 100);
+		context.fillText("5:   0", 60, inY + 120);	
+		context.fillText("6:   0", 60, inY + 140);
 	}
 }
 
@@ -537,11 +549,4 @@ function drawTable() {
 	context.stroke();
 
 	context.closePath();
-}
-
-// vertices in topOrder with indegree 0
-function changeSlide() {
-	if (count == 1) {
-	// 
-	}
 }
