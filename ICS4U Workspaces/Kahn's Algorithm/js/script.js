@@ -5,10 +5,15 @@ var canvas = document.getElementById("myCanvas");
 var context = canvas.getContext("2d");
 
 // for graph diagram 
-var rightPressed = false; // initially not pressed, thus false
-document.addEventListener("keydown", keyDownHandler, false); // when pressed, function will be executed 
-document.addEventListener("keyup", keyUpHandler, false);
 var count = 0; // counts which step topOrder is on
+document.getElementById("beginBtn").addEventListener("click", startButton); // start button
+document.getElementById("btnOne").addEventListener("click", buttonOne); // step 1 button
+document.getElementById("btnTwo").addEventListener("click", buttonTwo); // step 2 button
+document.getElementById("btnThree").addEventListener("click", buttonThree); // step 2 button
+document.getElementById("btnFour").addEventListener("click", buttonFour); // step 2 button
+document.getElementById("btnFive").addEventListener("click", buttonFive); // step 2 button
+document.getElementById("sortedBtn").addEventListener("click", sortedButton); // step 2 button
+
 
 // first y coordinate for adj list
 var adjY = 150;
@@ -46,36 +51,174 @@ var arrowTipY = vTopY + 10;
 
 // x and y coordinates of the left side of topOrder table
 var topOrderX = vTopX - 20;
-var topOrderY = vBottomY + 110;
+var topOrderY = vBottomY + 160;
 
 
 // --- functions --- 
 
-// --- changing steps --- 
-// 39 is > key
-// 37 is < key
-function keyDownHandler(e) { // "e" is an event, parameter 
-	if (e.keyCode == 39) {
-		rightPressed = true;
-	}
-}
-
-function keyUpHandler(e) {
-	if (e.keyCode == 39) {
-		rightPressed = false;
-	}
-}
-
+// --- go --- 
 title();
-adjList();
-indegreeList(); 
-drawGraph();
+function drawBackground() {
+	title();
+	adjList();
+	indegreeList(); 
+	drawGraph();
+}
+
+// start button for diagram steps 
+function startButton() {
+	alert ("Hi! Please click on the following buttons beside me for the next steps to see how Kahn's Algorithm works!\n\nCheck out Step 1!");
+	drawBackground();
+}
+
+function buttonOne() {
+	count = 1;
+	alert ("Step 1:\nVertices 0 and 2 have an in-degree of 0. Add them to topOrder list.");
+	context.clearRect(0, 0, myCanvas.width, myCanvas.height);
+	drawBackground();
+	context.beginPath()
+	context.font = "18px Menlo";
+	context.fillStyle = "#6593F5";
+	// indegree list
+	context.fillText("0:   0", 60, inY + 20);
+	context.fillText("2:   0", 60, inY + 60);
+	// topOrder table
+	context.font = "22px Menlo";
+	context.fillText("0", topOrderX + 28, topOrderY + 30);
+	context.fillText("2", topOrderX + 94, topOrderY + 30);
+	context.closePath();
+}
+
+function buttonTwo() {
+	count = 2;
+	alert ("Step 2:\nLet\'s take a look at vertex 0. For its adjacent vertices 1, 4, and 6, decrement in-degrees by one. If in-degrees for adjacent vertices (like 3) become 0, add them to topOrder.");
+	context.clearRect(0, 0, myCanvas.width, myCanvas.height);
+	drawBackground();
+
+	context.beginPath()
+	context.font = "18px Menlo";
+	context.fillStyle = "#6593F5";
+	// adj list
+	context.fillText("0:   1,   4,   6", 60, adjY + 20);
+	// indegree list
+	context.fillText("1:   1", 60, inY + 40);
+	context.fillText("4:   0", 60, inY + 100);	
+	context.fillText("6:   3", 60, inY + 140);
+	context.fillStyle = "black";
+	context.fillText("0:   0", 60, inY + 20);
+	context.fillText("2:   0", 60, inY + 60);
+	// topOrder table
+	context.font = "22px Menlo";
+	context.fillStyle = "#6593F5";
+	context.fillText("4", topOrderX + 160, topOrderY + 30);
+	context.fillStyle = "black";
+	context.fillText("0", topOrderX + 28, topOrderY + 30);
+	context.fillText("2", topOrderX + 94, topOrderY + 30);
+}
+
+function buttonThree() {
+	count = 3;
+	alert ("Step 3:\nLet\'s take a look at vertex 2. For its adjacent vertex 6, decrement its in-degree by one to 2.");
+	context.clearRect(0, 0, myCanvas.width, myCanvas.height);
+	drawBackground();
+	context.beginPath()
+	context.font = "18px Menlo";
+	context.fillStyle = "#6593F5";
+	// adj list
+	context.fillText("2:   6", 60, adjY + 60);
+	// indegree list
+	context.fillText("6:   2", 60, inY + 140);
+	// topOrder table
+	context.font = "22px Menlo";
+	context.fillStyle = "black";
+	context.fillText("0", topOrderX + 28, topOrderY + 30);
+	context.fillText("2", topOrderX + 94, topOrderY + 30);
+	context.fillText("4", topOrderX + 160, topOrderY + 30);
+	context.closePath();
+}
+
+function buttonFour() {
+	count = 4;
+	alert ("Step 4:\nLet\'s take a look at vertex 4. For its adjacent vertices 3 and 6, decrement in-degrees by one. In-degree for adjacent vertex 3 becomes 0, add it to topOrder.");
+	context.clearRect(0, 0, myCanvas.width, myCanvas.height);
+	drawBackground();
+	context.beginPath()
+	context.font = "18px Menlo";
+	context.fillStyle = "#6593F5";
+	// adj list
+	context.fillText("4:   3,   6", 60, adjY + 100);
+	// indegree list
+	context.fillText("3:   0", 60, inY + 80);
+	context.fillText("6:   1", 60, inY + 140);
+	// topOrder table
+	context.font = "22px Menlo";
+	context.fillText("3", topOrderX + 226, topOrderY + 30);
+	context.fillStyle = "black";
+	context.fillText("0", topOrderX + 28, topOrderY + 30);
+	context.fillText("2", topOrderX + 94, topOrderY + 30);
+	context.fillText("4", topOrderX + 160, topOrderY + 30);
+	context.closePath();
+}
+
+function buttonFive() {
+	count = 5;
+	alert ("Step 5:\nLet\'s take a look at vertex 3. For its adjacent vertex 6, decrement its in-degree by one. In-degree for adjacent vertex 6 becomes 0, add it to topOrder.\n\nThere are no outgoing adjacent vertices for the remaining vertices 1, 5, and 6 in topOrder.\n\nThus, the graph is now sorted topologically!!");
+	context.clearRect(0, 0, myCanvas.width, myCanvas.height);
+	drawBackground();
+	context.beginPath()
+	context.font = "18px Menlo";
+	context.fillStyle = "#6593F5";
+	// adj list
+	context.fillText("3:   1,   5,   6", 60, adjY + 80);
+	// indegree list
+	context.fillText("1:   0", 60, inY + 40);
+	context.fillText("5:   0", 60, inY + 120);	
+	context.fillText("6:   0", 60, inY + 140);
+	// topOrder table
+	context.font = "22px Menlo";
+	context.fillText("5", topOrderX + 358, topOrderY + 30);
+	context.fillText("6", topOrderX + 424, topOrderY + 30);
+	context.fillStyle = "black";
+	context.fillText("0", topOrderX + 28, topOrderY + 30);
+	context.fillText("2", topOrderX + 94, topOrderY + 30);
+	context.fillText("4", topOrderX + 160, topOrderY + 30);
+	context.fillText("3", topOrderX + 226, topOrderY + 30);
+	context.fillText("1", topOrderX + 292, topOrderY + 30);
+	context.closePath();
+}
+
+function sortedButton() {
+	count = 6;
+	alert ("The graph is now sorted topologically!! :)");
+	context.clearRect(0, 0, myCanvas.width, myCanvas.height);
+	drawBackground();
+	context.beginPath()
+	context.font = "18px Menlo";
+	context.fillStyle = "#6593F5";
+	// adj list
+	context.fillText("3:   1,   5,   6", 60, adjY + 80);
+	// indegree list
+	context.fillText("1:   0", 60, inY + 40);
+	context.fillText("5:   0", 60, inY + 120);	
+	context.fillText("6:   0", 60, inY + 140);
+	// topOrder table
+	context.font = "22px Menlo";
+	context.fillText("5", topOrderX + 358, topOrderY + 30);
+	context.fillText("6", topOrderX + 424, topOrderY + 30);
+	context.fillStyle = "black";
+	context.fillText("0", topOrderX + 28, topOrderY + 30);
+	context.fillText("2", topOrderX + 94, topOrderY + 30);
+	context.fillText("4", topOrderX + 160, topOrderY + 30);
+	context.fillText("3", topOrderX + 226, topOrderY + 30);
+	context.fillText("1", topOrderX + 292, topOrderY + 30);
+	context.closePath();
+}
 
 // draw title 
 function title() {
 	context.beginPath();
 	context.font = "27px apercu mono";
-	context.fillStyle = "purple";
+	context.fillStyle = "#1D7CF2";
 	context.textAlign = "center";
 	context.fillText("Kahn\'s Algorithm", myCanvas.width / 2, 50);
 	context.closePath();
@@ -113,9 +256,23 @@ function indegreeList() {
 	context.fillText("5:   1", 60, inY + 120);	
 	context.fillText("6:   4", 60, inY + 140);
 	context.closePath();
+
+	if (count === 2) {
+		context.clearRect(60, inY + 20, 50, 26);
+		context.clearRect(60, inY + 80, 50, 20);
+		context.clearRect(60, inY + 120, 50, 20);
+	} else if (count === 3) {
+		context.clearRect(60, inY + 120, 50, 20); 
+	} else if (count === 4) {
+		context.clearRect(60, inY + 60, 50, 20);
+		context.clearRect(60, inY + 120, 50, 20);
+	} else if (count === 5) {
+		context.clearRect(60, inY + 20, 50, 20);
+		context.clearRect(60, inY + 100, 50, 50);
+	}
 }
 
-// draw graph 
+// --- draw graph ---
 function drawGraph() {
 	drawVertices();
 	drawNumbers();
@@ -125,8 +282,8 @@ function drawGraph() {
 
 // draw vertices
 function drawVertices() {
-	context.fillStyle = "#CCFFFF";
-	context.strokeStyle = "black";
+	context.fillStyle = "#E6E6FF";//"#F2D9FF";//"#CCFFFF";
+	context.strokeStyle = "#A7CCD1";
 	//context.strokeStyle = "#e2e2da"; ** for after added 
 
 	// top row of vertices
@@ -197,8 +354,8 @@ function drawNumbers() {
 // draw arrows
 function drawArrows() {
 	context.beginPath();
-	context.strokeStyle = "#ff0000";
-	context.fillStyle = "#ff0000"; 
+	context.strokeStyle = "#6593F5";
+	context.fillStyle = "#6593F5"; 
 	// top arrows (following vertex labels are for its outgoing vertices)
 	// vertex 0:
 	context.moveTo(arrowTopX, arrowTopY);
@@ -209,12 +366,6 @@ function drawArrows() {
 	context.moveTo(arrowTopX - 30, arrowTopY + 35);
 	context.lineTo(arrowTopX + 28, arrowBottomY - 32);
 	context.stroke();
-
-	// arrow tips (different angles) for edges 
-	var arrowTip04 = new Image(); 
-	arrowTip04.src = "images/arrow_tip_04.PNG"; // vertex 0 - 4 edge 
-	context.drawImage(arrowTip04, arrowTopX, arrowBottomY - 32);
-	// ***********
 
 	context.moveTo(arrowTopX - 10, arrowTopY + 25);
 	context.lineTo(arrowBottomX + 215, arrowBottomY - 20);
@@ -234,18 +385,75 @@ function drawArrows() {
 	context.moveTo(arrowTopX + 375, arrowTopY + 33);
 	context.lineTo(arrowBottomX + 255, arrowBottomY - 35);
 	context.stroke();
-	
+
 	// bottom arrows  
 	// vertex 4:
 	context.moveTo(arrowTopX + 52, arrowBottomY - 30);
 	context.lineTo(arrowTopX + 349, arrowTopY);
 	context.stroke();
 	context.closePath();
+	arrowTips();
 }
 
-// draw vertices in queue
-function queue() {
+// arrow tips (different angles) / arched arrows for edges 
+function arrowTips() {
+	var arrowTip04 = new Image(); 
+	arrowTip04.src = "images/arrow_tip_04.PNG"; // vertex 0 - 4 edge 
+	arrowTip04.onload = function (e){
+    	context.drawImage(arrowTip04, arrowTopX + 13, arrowBottomY - 55, 18, 25);
+    }
 
+    var arrowTip06 = new Image(); 
+	arrowTip06.src = "images/arrow_tip_06.PNG"; // vertex 0 - 4 edge 
+	arrowTip06.onload = function (e){
+    	context.drawImage(arrowTip06, arrowTopX + 265, arrowBottomY - 38, 24, 23);
+    }
+
+    var arrowTip26 = new Image(); 
+    arrowTip26.src = "images/arrow_tip_26.PNG"; // vertex 2 - 6 edge 
+	arrowTip26.onload = function (e){
+    	context.drawImage(arrowTip26, arrowTopX + 291, arrowBottomY - 55, 22, 24);
+    }
+
+    var arrow31 = new Image(); 
+	arrow31.src = "images/arrow_31.png"; // vertex 3 - 1 edge 
+	arrow31.onload = function (e){
+    	context.drawImage(arrow31, arrowTopX + 76, arrowTopY - 76, 300, 60);
+    }
+    var arrowTip31 = new Image(); 
+	arrowTip31.src = "images/arrow_tip_35.png"; // vertex 3 - 1 edge 
+	arrowTip31.onload = function (e){
+    	context.drawImage(arrowTip31, arrowTopX + 103, arrowTopY - 57, 20, 23);
+    }
+
+    var arrowTip35 = new Image(); 
+    arrowTip35.src = "images/arrow_tip_35.PNG"; // vertex 3 - 5 edge 
+	arrowTip35.onload = function (e){
+    	context.drawImage(arrowTip35, arrowTopX + 187, arrowBottomY - 50, 20, 23);
+    }
+
+    var arrowTip36 = new Image(); 
+    arrowTip36.src = "images/arrow_tip_36.PNG"; // vertex 3 - 6 edge 
+	arrowTip36.onload = function (e){
+    	context.drawImage(arrowTip36, arrowTopX + 318, arrowBottomY - 52, 20, 22);
+    }
+
+    var arrowTip43 = new Image(); 
+    arrowTip43.src = "images/arrow_tip_43.PNG"; // vertex 4 - 3 edge 
+	arrowTip43.onload = function (e){
+    	context.drawImage(arrowTip43, arrowTopX + 329, arrowTopY - 6, 25, 23);
+    }
+
+    var arrow46 = new Image(); 
+	arrow46.src = "images/arrow_46.png"; // vertex 4 - 6 edge 
+	arrow46.onload = function (e){
+    	context.drawImage(arrow46, arrowTopX + 50, arrowBottomY + 10, 300, 60);
+    }
+    var arrowTip46 = new Image(); 
+	arrowTip46.src = "images/arrow_tip_43.PNG"; // vertex 4 - 6 edge 
+	arrowTip46.onload = function (e){
+    	context.drawImage(arrowTip46, arrowTopX + 297, arrowBottomY + 29, 25, 23);
+    }
 }
 
 // illustrates vertices added to topOrder (topological order) list 
@@ -265,7 +473,7 @@ function drawTopOrder() {
 	context.fillText("5", topOrderX + 358, topOrderY - 8);
 	context.fillText("6", topOrderX + 424, topOrderY - 8);
 	context.closePath();
-	topOrderVertices();
+	//changeSlide();
 }
 
 // text for topOrder
@@ -332,42 +540,8 @@ function drawTable() {
 }
 
 // vertices in topOrder with indegree 0
-function topOrderVertices() {
-	if (rightPressed && count === 0) {
-		// indegree list
-		context.strokeStyle = "blue";
-		context.fillText("0:   0", 60, inY + 20);
-		context.fillText("2:   0", 60, inY + 60);
-		// topOrder table
-		context.fillText("0", topOrderX + 28, topOrderY + 20);
-		context.fillText("2", topOrderX + 94, topOrderY + 20);
+function changeSlide() {
+	if (count == 1) {
+	// 
 	}
 }
-
-/*
-context.font = "20px apercu mono";
-context.strokeText("Hello, again", 300, 100);
-
-context.fillStyle = "#3EF3D7";
-context.fillRect(0, 0, 150, 75);
-
-// Create Gradient 
-var grd = context.createRadialGradient(95, 50, 5, 90, 60, 100);
-grd.addColorStop(0, "red");
-grd.addColorStop(1, "white");
-
-// Fill with Gradient
-context.fillStyle = grd;
-context.fillRect(95, 50, 150, 100);
-
-//var canvas =  document.getElementById("myCanvas");
-//var context = canvas.getContext("2d");
-context.beginPath();
-context.arc(95, 50, 40, 0, 2*Math.PI);
-context.stroke();
-
-var img = document.getElementById("dog");
-context.drawImage(img, 0, 200);
-*/
-
-
