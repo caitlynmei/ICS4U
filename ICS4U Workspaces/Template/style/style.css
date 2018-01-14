@@ -1,5 +1,5 @@
 body{
-	background-color: #9CDBF2; 
+	background-color: #B7F0FC; 
 	color: #3E0C91;
 	font-size: large;
 } 
@@ -27,6 +27,17 @@ p{
 
 p img{
 	width: 25%;
+}
+
+div {
+    height: 60px;
+    width: 100px;
+    border-radius: 5px;
+    background-color: #69D2E7;
+    text-align: center;
+    color: #FFFFFF;
+    font-family: Verdana, Arial, Sans-Serif;
+    opacity: 0.5;
 }
 
 /* Comments !! */
