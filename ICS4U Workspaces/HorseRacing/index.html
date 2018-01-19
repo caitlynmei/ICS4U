@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Horse Racing</title>
+			<script type "text/javascript" src="js/jquery.js"></script>
+			<script type "text/javascript" src="js/jquery-ui.js"></script>
+			<script type="text/javascript" src="js/script.js"></script>
+			<link rel="stylesheet" type="text/css" href="style/jquery-ui.css">
+			<link rel="stylesheet" type="text/css" href="style/style.css">
+	</head>
+
+	<body>
+		<h1 id="test">Horse Racing</h1>
+		<p>Howdy everyone! Who's ready to bet on some horse racing?<br>Great! Let's start!!</p><br>
+		<p>This is the chart with each players' wallet (a.k.a money available) ... </p>
+
+		<div id="dialog-form" title="Create new user">
+		  <p class="validateTips">All form fields are required.</p>
+		 
+		  <form>
+		    <fieldset>
+		      <label for="name">Name</label>
+		      <input type="text" name="name" id="name" value="Jane Smith" class="text ui-widget-content ui-corner-all">
+		      <label for="wallet">Wallet</label>
+		      <input type="text" name="wallet" id="wallet" value="1000" class="text ui-widget-content ui-corner-all">
+		 
+		      <!-- Allow form submission with keyboard without duplicating the dialog button -->
+		      <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+		    </fieldset>
+		  </form>
+		</div>
+		 
+		 
+		<div id="users-contain" class="ui-widget">
+		  <h1>Existing Users:</h1>
+		  <table id="users" class="ui-widget ui-widget-content">
+		    <thead>
+		      <tr class="ui-widget-header ">
+		        <th>Name</th>
+		        <th>Wallet</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      <tr>
+		        <td>Lily</td>
+		        <td>1000</td>
+		      </tr>
+		      <tr> 
+		      	<td>Chris</td>
+		      	<td>1000</td>
+		    </tbody>
+		  </table>
+		</div>
+
+		<button id="create-user">Create new user</button>
+
+		<!-- Horses -->
+		<p>Click on the <b>Generate</b> button to release the list of horses.</p>
+		<button id="create-user">Generate!</button>
+		<p>These are the horses participating in today's race... </p>
+
+
+	</body>
+</html>
+
