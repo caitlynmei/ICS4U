@@ -1,4 +1,17 @@
 
+canvas {
+  background: #fefefc; 
+  margin: 0 auto; 
+  margin-bottom: 20px;
+    display: block;
+    overflow: auto;
+    overflow-y: auto;
+    border: 1px solid #e2e2da;
+    border-radius: 5px;
+    line-height: 1.5em;
+}
+
+
 label, input { 
   	display:block; 
 }

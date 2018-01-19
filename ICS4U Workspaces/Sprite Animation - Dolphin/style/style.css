@@ -1,0 +1,12 @@
+
+canvas {
+  background: #fefefc; 
+  border: 10px solid #333;
+  border-radius: 5px;
+  line-height: 1.5em;
+}
+
+body {
+  padding: 50px;
+}
+

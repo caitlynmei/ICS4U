@@ -1,10 +1,56 @@
+
+var canvas = document.getElementById("myCanvas");
+var context = canvas.getContext("2d");
+
+
+// dolphin sprite
+var dolphinImg = new Image();
+dolphinImg.src = "images/Dolphin.png";
+
 /*
-$(document).ready(function(){ // .ready after page loaded 
-	alert("jquery is here.");
-	$("#test").remove();
-})
+function sprite(options) {
+  var x = { };
+  x.context = options.context;
+  x.width = options.width;
+  x.height = options.heigth;
+  x.image = options.image;
+
+  x.render = function() {
+    context.drawImage(dolphinImg, 0, 0, 100, 100, 0, 0, 100, 100);
+
+  }
+
+  return x;
+}
 */
- 
+
+function sprite(url, pos, size, speed, frames, dir, once) {
+    this.url = "images/Dolphin.png";
+    this.pos = pos; // the x and y coordinate in the image for this sprite
+    this.size = size; // size of the sprite (just one keyframe)
+    this.speed = typeof speed === 'number' ? speed : 0; // speed in frames/sec for animating
+    this.frames = frames; // an array of frame indexes for animating: [0, 1, 2, 1]
+    this._index = 0;
+    this.dir = dir || 'horizontal'; // which direction to move in the sprite map when animating: 'horizontal' (default) or 'vertical'
+    this.once = once; // true to only run the animation once, defaults to false
+};
+
+var dolphin = sprite({
+  width: 100,
+  height: 100,
+  image: dolphinImg
+});
+
+
+
+dolphin.render();
+/*
+sprite.prototype.update = function(dt) {
+    this._index += this.speed*dt;
+}*/
+
+
+
 // initializing variables
 var minWalletAmount = 1; // minimum amount of money from a player's wallet to bet with $1
 //var horses = getHorses();
@@ -138,9 +184,11 @@ $(document).ready(function(){
  
 } )
 
+/*
 var i;
 for (i = 0; i < playerNames.length; i++) {
   document.write(playerNames);
 }
 
 document.write(playerNames);
+*/
