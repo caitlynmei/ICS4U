@@ -3,7 +3,7 @@ var canvas = document.getElementById("myCanvas");
 var context = canvas.getContext("2d");
  
 var myImage = new Image();
-myImage.src = "https://www.kirupa.com/stuff/sprites_blue.png";
+myImage.src = "images/Dolphin.png";
 myImage.addEventListener("load", loadImage, false);
  
 function loadImage(e) {
