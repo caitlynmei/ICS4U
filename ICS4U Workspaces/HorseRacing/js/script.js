@@ -3,53 +3,46 @@ var canvas = document.getElementById("myCanvas");
 var context = canvas.getContext("2d");
 
 
-// dolphin sprite
-var dolphinImg = new Image();
-dolphinImg.src = "images/Dolphin.png";
-
-/*
-function sprite(options) {
-  var x = { };
-  x.context = options.context;
-  x.width = options.width;
-  x.height = options.heigth;
-  x.image = options.image;
-
-  x.render = function() {
-    context.drawImage(dolphinImg, 0, 0, 100, 100, 0, 0, 100, 100);
-
-  }
-
-  return x;
+// --- dolphin sprite animation ---
+var myImage = new Image();
+myImage.src = "images/Dolphin_Sprite2.png";
+myImage.addEventListener("load", loadImage, false);
+ 
+function loadImage(e) {
+  animate();
 }
-*/
 
-function sprite(url, pos, size, speed, frames, dir, once) {
-    this.url = "images/Dolphin.png";
-    this.pos = pos; // the x and y coordinate in the image for this sprite
-    this.size = size; // size of the sprite (just one keyframe)
-    this.speed = typeof speed === 'number' ? speed : 0; // speed in frames/sec for animating
-    this.frames = frames; // an array of frame indexes for animating: [0, 1, 2, 1]
-    this._index = 0;
-    this.dir = dir || 'horizontal'; // which direction to move in the sprite map when animating: 'horizontal' (default) or 'vertical'
-    this.once = once; // true to only run the animation once, defaults to false
-};
+// variables 
+var shift = 0; // onto the next sprite image
+var frameWidth = 148;
+var frameHeight = 161;
+var totalFrames = 3;
+var currentFrame = 0; // counter 
 
-var dolphin = sprite({
-  width: 100,
-  height: 100,
-  image: dolphinImg
-});
+// animation
+function animate() {
+  context.clearRect(120, 25, 148, 161);
+  //context.clearRect(120, 25, 300, 300);
+ 
+  //draw each frame + place them in the middle
+  context.drawImage(myImage, shift, 0, frameWidth, frameHeight,
+                    120, 25, frameWidth, frameHeight);
+ 
+  shift += frameWidth + 1;
+ 
+  /*
+    Start at the beginning once you've reached the
+    end of your sprite!
+  */
+  if (currentFrame == (totalFrames - 1)) {
+    shift = 0;
+    currentFrame = 0;
+  }
+ 
+  currentFrame++;
+}
 
-
-
-dolphin.render();
-/*
-sprite.prototype.update = function(dt) {
-    this._index += this.speed*dt;
-}*/
-
-
+setInterval(animate, 800);
 
 // initializing variables
 var minWalletAmount = 1; // minimum amount of money from a player's wallet to bet with $1
