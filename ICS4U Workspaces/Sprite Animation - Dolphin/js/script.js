@@ -3,11 +3,7 @@ var canvas = document.getElementById("myCanvas");
 var context = canvas.getContext("2d");
  
 var myImage = new Image();
-<<<<<<< HEAD
-myImage.src = "images/Dolphin.png";
-=======
 myImage.src = "images/Dolphin_Sprite4New.png";
->>>>>>> 72e269c0cf167053281d51d40f03a60971d3cadb
 myImage.addEventListener("load", loadImage, false);
  
 function loadImage(e) {
