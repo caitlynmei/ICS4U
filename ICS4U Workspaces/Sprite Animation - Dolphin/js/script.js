@@ -3,7 +3,7 @@ var canvas = document.getElementById("myCanvas");
 var context = canvas.getContext("2d");
  
 var myImage = new Image();
-myImage.src = "images/Dolphin_Sprite4New.png";
+myImage.src = "images/Dolphin_Sprite_Use.PNG";
 myImage.addEventListener("load", loadImage, false);
  
 function loadImage(e) {
@@ -40,4 +40,4 @@ function animate() {
   currentFrame++;
 }
 
-setInterval(animate, 600);
+setInterval(animate, 500);

@@ -2,27 +2,26 @@
 var canvas = document.getElementById("myCanvas");
 var context = canvas.getContext("2d");
 
-
 // --- dolphin sprite animation ---
+
+// variables 
+var shift = 0; // onto the next sprite image
+var frameWidth = 196.57;
+var frameHeight = 198;
+var totalFrames = 4;
+var currentFrame = 0; // counter  
+
 var myImage = new Image();
-myImage.src = "images/Dolphin_Sprite2.png";
+myImage.src = "images/Dolphin_Sprite_Use.PNG";
 myImage.addEventListener("load", loadImage, false);
  
 function loadImage(e) {
   animate();
 }
-
-// variables 
-var shift = 0; // onto the next sprite image
-var frameWidth = 148;
-var frameHeight = 161;
-var totalFrames = 3;
-var currentFrame = 0; // counter 
-
+ 
 // animation
 function animate() {
-  context.clearRect(120, 25, 148, 161);
-  //context.clearRect(120, 25, 300, 300);
+  context.clearRect(120, 25, 196.57, 198);
  
   //draw each frame + place them in the middle
   context.drawImage(myImage, shift, 0, frameWidth, frameHeight,
@@ -42,7 +41,9 @@ function animate() {
   currentFrame++;
 }
 
-setInterval(animate, 800);
+setInterval(animate, 500);
+
+
 
 // initializing variables
 var minWalletAmount = 1; // minimum amount of money from a player's wallet to bet with $1
@@ -74,9 +75,9 @@ $(document).ready(function(){
 
     //emailRegex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
     name = $( "#name" ),
-    wallet = $( "#wallet" ),
-    // password = $( "#password" ),
-    allFields = $( [] ).add( name ).add( wallet ),//.add( password ),
+    //wallet = $( "#wallet" ),
+    betting = $( "#betting" ),
+    allFields = $( [] ).add( name ).add( wallet ).add(betting),//.add( password ),
     tips = $( ".validateTips" );
  
   function updateTips( t ) {
@@ -99,10 +100,10 @@ $(document).ready(function(){
     }
   }
 
-  function checkNum (o, min, max) { // fix the check amount for wallet 
+  function checkNum (o, n, min, max) { // fix the check amount for wallet 
     if ( o.val().length > max || o.val().length < min ) {
       o.addClass( "ui-state-error" );
-      updateTips( "Your betting power cannot exceed the amount in your " + n + ", nor be negative." );
+      updateTips( "You can only bet with numeric money. Your betting power also cannot exceed the amount in your wallet, nor be negative." );
       return false;
     } else {
       return true;
@@ -124,25 +125,19 @@ $(document).ready(function(){
     allFields.removeClass( "ui-state-error" );
  
     valid = valid && checkLength( name, "username", 3, 16 );
-    valid = valid && checkLength( wallet, "wallet", 1, 6); 
-    //valid = valid && checkLength( password, "password", 5, 16 );
+    valid = valid && checkNum( betting, "betting", 1, 6 );
+    //valid = valid && checkLength( wallet, "wallet", 1, 6); 
  
     valid = valid && checkRegexp( name, /^[a-z]([0-9a-z_\s])+$/i, "Username may consist of a-z, 0-9, underscores, spaces and must begin with a letter." );
-    valid = valid && checkRegexp( wallet, /^([0-9_\d])+$/i, "You can only bet with numeric money. Please enter a number." ); // fix 
+    valid = valid && checkRegexp( betting, /^([0-9_\d])+$/i, "You can only bet with numeric money. Please enter a number." ); // fix 
     // valid = valid && checkRegexp( password, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9" );
     // i from regexp makes it case-insensitive
 
     if ( valid ) {
       playerNames += name.val();
-      /*
-      var i;
-      for (i = 0; i < 3; i++) {
-        document.write(playerNames + " ");
-      }*/
       $( "#users tbody" ).append( "<tr>" +
         "<td>" + name.val() + "</td>" +
-        "<td>" + wallet.val() + "</td>" +
-        //"<td>" + password.val() + "</td>" +
+        "<td>" + betting.val() + "</td>" +
       "</tr>" );
       dialog.dialog( "close" );
     }
@@ -177,11 +172,3 @@ $(document).ready(function(){
  
 } )
 
-/*
-var i;
-for (i = 0; i < playerNames.length; i++) {
-  document.write(playerNames);
-}
-
-document.write(playerNames);
-*/

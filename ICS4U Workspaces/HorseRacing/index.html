@@ -1,66 +1,74 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Horse Racing</title>
+		<title>Dolphin Racing</title>
 			<link rel="stylesheet" type="text/css" href="style/jquery-ui.css">
 			<link rel="stylesheet" type="text/css" href="style/style.css">
 	</head>
 
 	<body>
-		<h1 id="test">Horse Racing</h1>
-		<p>Howdy everyone! Who's ready to bet on some horse racing?<br>Great! Let's start!!</p><br>
-		<p>This is the chart with each players' wallet (a.k.a money available) ... </p>
-
-		<div id="dialog-form" title="Create new user">
-		  <p class="validateTips">All form fields are required.</p>
+		<h1 id="test">Dolphin Racing</h1>
+		<p>Howdy everyone! Who's ready to make a few bets on dolphin racing?<br>Great! Let's start!!</p><br>
+		<p>The chart below is the sign up sheet for this round. Each players' wallet (a.k.a money available). Every player will start off with $1000. Please include your name and amount of money which you will be betting. Click on the <b>Sign Up User</b> button to continue.</p>
+		<p>Currently, as an example for you, we have a Lily and a Chris on the list.</p>
+		
+		<div id="dialog-form" title="Sign up new user">
+		  <p class="validateTips">Please fill in all form fields in order to sign up.</p>
 		 
 		  <form>
 		    <fieldset>
 		      <label for="name">Name</label>
-		      <input type="text" name="name" id="name" value="Jane Smith" class="text ui-widget-content ui-corner-all">
+		      <input type="text" name="name" id="name" placeholder="Enter your name" class="text ui-widget-content ui-corner-all">
 		      <label for="wallet">Wallet</label>
-		      <input type="text" name="wallet" id="wallet" value="1000" class="text ui-widget-content ui-corner-all">
-		 
+		      <input type="text" name="wallet" id="wallet" value="$1000" readonly class="text ui-widget-content ui-corner-all">		 
+		      <label for="betting">Betting Amount</label>
+		      <input type="text" name="betting" id="betting" placeholder="Enter your betting amount" class="text ui-widget-content ui-corner-all">
+
 		      <!-- Allow form submission with keyboard without duplicating the dialog button -->
-		      <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+		      <input type="submit" tabindex="-1" style="position: absolute; top: -1000px">
 		    </fieldset>
 		  </form>
 		</div>
 		 
 		 
 		<div id="users-contain" class="ui-widget">
-		  <h1>Existing Users:</h1>
+		  <h1>Sign Up List:</h1>
 		  <table id="users" class="ui-widget ui-widget-content">
 		    <thead>
 		      <tr class="ui-widget-header ">
 		        <th>Name</th>
 		        <th>Wallet</th>
+		        <th>Betting Amount</th>
 		      </tr>
 		    </thead>
 		    <tbody>
 		      <tr>
 		        <td>Lily</td>
 		        <td>1000</td>
+		        <td>1000</td>
 		      </tr>
 		      <tr> 
 		      	<td>Chris</td>
+		      	<td>1000</td>
 		      	<td>1000</td>
 		    </tbody>
 		  </table>
 		</div>
 
-		<button id="create-user">Create new user</button>
+		<button id="create-user">Sign up new user</button> <!-- sign up button -->
 
 		<!-- Horses -->
-		<p>Click on the <b>Generate</b> button to release the list of horses.</p>
-		<button id="create-user">Generate!</button>
-		<p>These are the horses participating in today's race... </p>
+		<div id = "dolphin-race">		
+			<p>Click on the <b>Generate</b> button to release the list of dolphins.</p>
+			<button id="create-user">Generate!</button>
+			<p>These are the dolphins participating in today's race... </p>
 
-		<canvas id="myCanvas" width="550" height="350"></canvas>
+			<canvas id="myCanvas" width="550" height="350"></canvas>
 
-		<script type "text/javascript" src="js/jquery.js"></script>
-		<script type "text/javascript" src="js/jquery-ui.js"></script>
-		<script type="text/javascript" src="js/script.js"></script>
+			<script type "text/javascript" src="js/jquery.js"></script>
+			<script type "text/javascript" src="js/jquery-ui.js"></script>
+			<script type="text/javascript" src="js/script.js"></script>
+		</div>
 
 	</body>
 </html>
