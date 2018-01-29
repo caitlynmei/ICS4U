@@ -46,12 +46,12 @@ setInterval(animate, 500);
 
 
 // initializing variables
-var minWalletAmount = 1; // minimum amount of money from a player's wallet to bet with $1
+var minWalletAmount = 2; // minimum amount of money from a player's wallet to bet with $2
 //var horses = getHorses();
 var players = [];
-//var originalPlayer = {name: "Lily", wallet: 1000};
 var playerNames = [];
 var playerWallets = [];
+var playerBets = [];
 //var players = getPlayers();
 //String[] playerNames = getPlayerNames(players); // playerNames array
 //int[] playerWallets = getPlayerWallets(players); // playerWallets array
@@ -75,9 +75,9 @@ $(document).ready(function(){
 
     //emailRegex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
     name = $( "#name" ),
-    //wallet = $( "#wallet" ),
+    wallet = $( "#wallet" ),
     betting = $( "#betting" ),
-    allFields = $( [] ).add( name ).add( wallet ).add(betting),//.add( password ),
+    allFields = $( [] ).add( name ).add( wallet ).add( betting ),//.add( password ),
     tips = $( ".validateTips" );
  
   function updateTips( t ) {
@@ -134,9 +134,13 @@ $(document).ready(function(){
     // i from regexp makes it case-insensitive
 
     if ( valid ) {
-      playerNames += name.val();
+      playerNames.push(name.val()); // add names
+      playerBets.push(parseInt(betting.val()));
+      playerWallets.push(parseInt(wallet.val() - betting.val()));
+
       $( "#users tbody" ).append( "<tr>" +
         "<td>" + name.val() + "</td>" +
+        "<td>" + wallet.val() + "</td>" +
         "<td>" + betting.val() + "</td>" +
       "</tr>" );
       dialog.dialog( "close" );
