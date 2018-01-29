@@ -46,15 +46,24 @@ setInterval(animate, 500);
 
 
 // initializing variables
-var minWalletAmount = 2; // minimum amount of money from a player's wallet to bet with $2
-//var horses = getHorses();
 var players = [];
 var playerNames = [];
 var playerWallets = [];
 var playerBets = [];
-//var players = getPlayers();
-//String[] playerNames = getPlayerNames(players); // playerNames array
-//int[] playerWallets = getPlayerWallets(players); // playerWallets array
+
+var minWalletAmount = 2; // minimum amount of money from a player's wallet to bet with $2
+var horses = getHorses();
+
+function getHorses() {
+  int numHorses = 86;
+  horseList = ["Kincsem", "Black Caviar", "Peppers Pride", "Eclipse", "Karayel", "Ormonde", "Prestige", "Ribot", "Colin", "Macon", "Frankel", "Highflyer", "Nearco", "Barcaldine",
+    "Personal Ensign", "Tremont", "Asteroid", "Braque", "Crucifix", "Goldfinder", "Kurifuji (Toshifuji)", "Nereide", "Tokino Minoru", "Handsomechamp", "Bahram", "Combat",
+    "Grand Flaneur", "Patience", "Regulus", "St. Simon", "Alipes", "American Eclipse", "Caracalla", "Maruzensky", "Sweetbriar", "Tiffin", "El Rio Rey", "Heliskier", "Kitano Dai O",
+    "Malt Queen", "Mannamead", "Perdita II", "The Tetrarch", "Zarkava", "Bay Middleton", "Bustin Stones", "Candy Ride", "Cavaliere d’Arpino", "Claude", "Hurry On", "Quintessence",
+    "Tolgus", "Ajax", "Dice", "Emerson", "Flying Childers", "Husson", "Kneller", "Landaluce", "Landgraf", "Melair", "Norfolk", "Precocious", "Reset", "Fasliyev", "Teofilo",
+    "Treve", "Queen\'s Logic", "Agnes Tachyon", "Blood Royal", "Certify", "Fuji Kiseki", "Golden Fleece", "Lammtarra", "Madelia", "Raise a Native", "Snap", "Vindication", 
+    "White Moonstone", "Blue Train", "Boniform", "Cobweb", "Danzig", "Kantharos", "Footstepsinthesand", "Pharis"]; 
+}
 
 /*
 boolean gameOver = false;
@@ -170,8 +179,14 @@ $(document).ready(function(){
     addUser();
   });
  
+  // Create New User Button in Sign Up List 
   $( "#create-user" ).button().on( "click", function() {
     dialog.dialog( "open" );
+  });
+
+  // Generate Dolphin List Button 
+  $( "#dolphinList" ).button().on( "click", function() {
+    alert("here");
   });
  
 } )
