@@ -53,9 +53,11 @@ var playerBets = [];
 
 var minWalletAmount = 2; // minimum amount of money from a player's wallet to bet with $2
 var horses = getHorses();
+var horsesLength = horses.length; // length of master horse list, 86
+var horsesInRace = generateRaceHorses();
 
+// --- gets master list of horses --- 
 function getHorses() {
-  int numHorses = 86;
   horseList = ["Kincsem", "Black Caviar", "Peppers Pride", "Eclipse", "Karayel", "Ormonde", "Prestige", "Ribot", "Colin", "Macon", "Frankel", "Highflyer", "Nearco", "Barcaldine",
     "Personal Ensign", "Tremont", "Asteroid", "Braque", "Crucifix", "Goldfinder", "Kurifuji (Toshifuji)", "Nereide", "Tokino Minoru", "Handsomechamp", "Bahram", "Combat",
     "Grand Flaneur", "Patience", "Regulus", "St. Simon", "Alipes", "American Eclipse", "Caracalla", "Maruzensky", "Sweetbriar", "Tiffin", "El Rio Rey", "Heliskier", "Kitano Dai O",
@@ -63,7 +65,49 @@ function getHorses() {
     "Tolgus", "Ajax", "Dice", "Emerson", "Flying Childers", "Husson", "Kneller", "Landaluce", "Landgraf", "Melair", "Norfolk", "Precocious", "Reset", "Fasliyev", "Teofilo",
     "Treve", "Queen\'s Logic", "Agnes Tachyon", "Blood Royal", "Certify", "Fuji Kiseki", "Golden Fleece", "Lammtarra", "Madelia", "Raise a Native", "Snap", "Vindication", 
     "White Moonstone", "Blue Train", "Boniform", "Cobweb", "Danzig", "Kantharos", "Footstepsinthesand", "Pharis"]; 
+
+  return horseList;
 }
+
+// --- generates list of horses in current race --- 
+// returns 4 - 8 horses
+function generateRaceHorses() {
+  var numHorsesInRace = 0;
+  var minHorses = 4;
+  var maxHorses = 8;
+
+  numHorsesInRace = Math.floor((Math.random() * (maxHorses - minHorses) + minHorses));
+
+  var horsesInRace = []; // holds chosen horses in horse array
+  //boolean isUniqueHorse = false; // to check if the index generated from randomizer is not repeated
+
+  var currentHorseIndex = 0;
+
+  var i;
+  for (i = 0; i < numHorsesInRace; i++) {
+    currentHorseIndex = Math.floor((Math.random() * horsesLength));
+    horsesInRace[i] = currentHorseIndex;
+
+    if (alreadyInRace(i, currentHorseIndex, horsesInRace) === true) {
+      i--;
+    }
+  }
+
+  return horsesInRace;
+}
+
+// ---------- checks if horse is already in the race ---------
+// ---> sequential search
+function alreadyInRace(currentIndex, horse, horsesInRace) {
+    var i;
+    for (i = 0; i < horsesInRace.length - 1; i++) {
+      if (horsesInRace[i] === horse && i !== currentIndex) {
+        return true;
+      }
+    }
+
+    return false;
+  }
 
 /*
 boolean gameOver = false;
