@@ -38,22 +38,18 @@ h1 {
   	margin: .6em 0; 
 }
 
-.dollarSign {
-  content:"€";
-}
-
-div#users-contain { 
+div#users-contain, div#dolphinsInRace { 
    	width: 350px; 
    	margin: 20px 0; 
 }
 
-div#users-contain table { 
+div#users-contain table, div#dolphinsInRace table { 
    	margin: 1em 0; 
    	border-collapse: collapse; 
    	width: 100%; 
 }
 
-div#users-contain table td, div#users-contain table th { 
+div#users-contain table td, div#users-contain table th, div#dolphinsInRace table td, div#dolphinsInRace table th{ 
    	border: 1px solid #eee; 
    	padding: .6em 10px; 
    	text-align: left; 

@@ -1,6 +1,8 @@
 
 var canvas = document.getElementById("myCanvas");
 var context = canvas.getContext("2d");
+document.getElementById("dolphinsInRace").style.visibility = "hidden"; 
+document.getElementById("myCanvas").style.visibility = "hidden";
 
 // --- dolphin sprite animation ---
 
@@ -53,7 +55,7 @@ var playerBets = [];
 
 var minWalletAmount = 2; // minimum amount of money from a player's wallet to bet with $2
 var horses = getHorses();
-var horsesLength = horses.length; // length of master horse list, 86
+var horsesLength = horses.length; // length of master horse list, 86 dolphins 
 var horsesInRace = generateRaceHorses();
 
 // --- gets master list of horses --- 
@@ -61,7 +63,7 @@ function getHorses() {
   horseList = ["Kincsem", "Black Caviar", "Peppers Pride", "Eclipse", "Karayel", "Ormonde", "Prestige", "Ribot", "Colin", "Macon", "Frankel", "Highflyer", "Nearco", "Barcaldine",
     "Personal Ensign", "Tremont", "Asteroid", "Braque", "Crucifix", "Goldfinder", "Kurifuji (Toshifuji)", "Nereide", "Tokino Minoru", "Handsomechamp", "Bahram", "Combat",
     "Grand Flaneur", "Patience", "Regulus", "St. Simon", "Alipes", "American Eclipse", "Caracalla", "Maruzensky", "Sweetbriar", "Tiffin", "El Rio Rey", "Heliskier", "Kitano Dai O",
-    "Malt Queen", "Mannamead", "Perdita II", "The Tetrarch", "Zarkava", "Bay Middleton", "Bustin Stones", "Candy Ride", "Cavaliere d’Arpino", "Claude", "Hurry On", "Quintessence",
+    "Malt Queen", "Mannamead", "Perdita II", "The Tetrarch", "Zarkava", "Bay Middleton", "Bustin Stones", "Candy Ride", "Cavaliere d\'Arpino", "Claude", "Hurry On", "Quintessence",
     "Tolgus", "Ajax", "Dice", "Emerson", "Flying Childers", "Husson", "Kneller", "Landaluce", "Landgraf", "Melair", "Norfolk", "Precocious", "Reset", "Fasliyev", "Teofilo",
     "Treve", "Queen\'s Logic", "Agnes Tachyon", "Blood Royal", "Certify", "Fuji Kiseki", "Golden Fleece", "Lammtarra", "Madelia", "Raise a Native", "Snap", "Vindication", 
     "White Moonstone", "Blue Train", "Boniform", "Cobweb", "Danzig", "Kantharos", "Footstepsinthesand", "Pharis"]; 
@@ -99,15 +101,74 @@ function generateRaceHorses() {
 // ---------- checks if horse is already in the race ---------
 // ---> sequential search
 function alreadyInRace(currentIndex, horse, horsesInRace) {
-    var i;
-    for (i = 0; i < horsesInRace.length - 1; i++) {
-      if (horsesInRace[i] === horse && i !== currentIndex) {
-        return true;
+  var i;
+  for (i = 0; i < horsesInRace.length - 1; i++) {
+    if (horsesInRace[i] === horse && i !== currentIndex) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+function printHorses() {
+  var i;
+  for (i = 0; i < horsesInRace.length; i++) {
+    $("#dolphinsInRace tbody").append( "<tr>" +
+        "<td>" + (i+1) + "</td>" + "<td>" + horses[horsesInRace[i]] + "</td>" + "</tr>" );
+    /*
+    if (i === horsesInRace.length - 1) {
+      $("#dolphinsInRace").append(" and " + horses[horsesInRace[i]] + ".")
+    } else {
+      $("#dolphinsInRace").append(" " + horses[horsesInRace[i]] + ",");
+    }*/
+  }
+}
+
+// ----- checks if player has entered a valid number for betting horse -----
+/*
+function getValidHorseNumberInput(int minHorseChoice, int maxHorseChoice, Scanner keyboard) {
+  boolean isValid = false;
+
+  var userBettingHorseNumber = 0;
+  while (!isValid) {
+      try {
+       
+        if (userBettingHorseNumber >= minHorseChoice && userBettingHorseNumber <= maxHorseChoice) {
+          isValid = true;
+        } else {
+          System.out.print("Please enter a number for one of the horses shown in the table (1 - " + maxHorseChoice + "): ");
+        }
+      } catch (Exception ex) {
+        System.out.print("Please enter a valid horse number: ");
       }
     }
 
-    return false;
+    return userBettingHorseNumber;
+}
+
+// ----- checks if player has entered a valid number for betting horse -----
+  public static int getValidHorseNumberInput(int minHorseChoice, int maxHorseChoice, Scanner keyboard) {
+    boolean isValid = false;
+
+    int userBettingHorseNumber = 0;
+    while (!isValid) {
+      try {
+        userBettingHorseNumber = Integer.parseInt(keyboard.nextLine());
+        if (userBettingHorseNumber >= minHorseChoice && userBettingHorseNumber <= maxHorseChoice) {
+          isValid = true;
+        } else {
+          System.out.print("Please enter a number for one of the horses shown in the table (1 - " + maxHorseChoice + "): ");
+        }
+      } catch (Exception ex) {
+        System.out.print("Please enter a valid horse number: ");
+      }
+    }
+
+    return userBettingHorseNumber;
   }
+
+*/ 
 
 /*
 boolean gameOver = false;
@@ -153,6 +214,7 @@ $(document).ready(function(){
     }
   }
 
+  // --- checks if player has entered a valid amount of betting money ---
   function checkNum (o, n, min, max) { // fix the check amount for wallet 
     if ( o.val().length > max || o.val().length < min ) {
       o.addClass( "ui-state-error" );
@@ -230,8 +292,11 @@ $(document).ready(function(){
 
   // Generate Dolphin List Button 
   $( "#dolphinList" ).button().on( "click", function() {
-    alert("here");
+    //alert("here");
+    printHorses();
+    document.getElementById("dolphinsInRace").style.visibility = "visible"; 
+    document.getElementById("myCanvas").style.visibility = "visible";
+
   });
  
 } )
-

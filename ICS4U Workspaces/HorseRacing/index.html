@@ -51,24 +51,41 @@
 		      	<td>Chris</td>
 		      	<td>1000</td>
 		      	<td>1000</td>
+		      </tr>
 		    </tbody>
 		  </table>
 		</div>
 
 		<button id="create-user">Sign up new user</button> <!-- sign up button -->
 		<br><br><br><br><br>
-		<!-- Horses -->
-		<div id = "dolphinRace">		
-			<p>Click on the <b>Generate</b> button to release the list of dolphins.</p>
-			<button id="dolphinList">Generate!</button>
-			<p>These are the dolphins participating in today's race... </p>
+		
+		<!-- Horses -->		
+		<p>Click on the <b>Generate</b> button to release the list of dolphins.</p>
+		<button id="dolphinList">Generate!</button>
+		
+		<p id = "testing"></p>
 
-			<canvas id="myCanvas" width="550" height="350"></canvas>
-
-			<script type "text/javascript" src="js/jquery.js"></script>
-			<script type "text/javascript" src="js/jquery-ui.js"></script>
-			<script type="text/javascript" src="js/script.js"></script>
+		<div id = "dolphinsInRace" class="ui-widget">
+			<p>These are the dolphins participating in today's race...<br></p> <!-- ******font family fix -->
+			<table id="dolphinTable" class="ui-widget ui-widget-content">
+		    <thead>
+		      <tr class="ui-widget-header ">
+		        <th></th>
+		        <th>Name</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      <tr>
+		      </tr>
+		    </tbody>
+		  </table>
 		</div>
+
+		<canvas id="myCanvas" width="550" height="350"></canvas>
+		
+		<script type "text/javascript" src="js/jquery.js"></script>
+		<script type "text/javascript" src="js/jquery-ui.js"></script>
+		<script type="text/javascript" src="js/script.js"></script>
 
 		<!-- Replay Button -->
 
