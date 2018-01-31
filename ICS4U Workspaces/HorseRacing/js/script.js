@@ -6,7 +6,6 @@ document.getElementById("signUp").style.visibility = "hidden";
 document.getElementById("myCanvas").style.visibility = "hidden";
 
 // --- dolphin sprite animation ---
-
 // variables 
 var shift = 0; // onto the next sprite image
 var frameWidth = 196.57;
@@ -46,20 +45,20 @@ function animate() {
 
 setInterval(animate, 500);
 
-
-
-// initializing variables
+// initializing player variables
 var players = [];
 var playerNames = [];
 var playerWallets = [];
 var playerBets = [];
+var minWalletAmount = 2; // minimum amount of money from a player's wallet to bet with $2 ***********
 
-var minWalletAmount = 2; // minimum amount of money from a player's wallet to bet with $2
+// ---  horse methods ---
+// initializing horse variables 
 var horses = getHorses();
 var horsesLength = horses.length; // length of master horse list, 86 dolphins 
 var horsesInRace = generateRaceHorses();
 
-// --- gets master list of horses --- 
+// gets master list of horses
 function getHorses() {
   horseList = ["Kincsem", "Black Caviar", "Peppers Pride", "Eclipse", "Karayel", "Ormonde", "Prestige", "Ribot", "Colin", "Macon", "Frankel", "Highflyer", "Nearco", "Barcaldine",
     "Personal Ensign", "Tremont", "Asteroid", "Braque", "Crucifix", "Goldfinder", "Kurifuji (Toshifuji)", "Nereide", "Tokino Minoru", "Handsomechamp", "Bahram", "Combat",
@@ -72,7 +71,7 @@ function getHorses() {
   return horseList;
 }
 
-// --- generates list of horses in current race --- 
+// generates list of horses in current race
 // returns 4 - 8 horses
 function generateRaceHorses() {
   var numHorsesInRace = 0;
@@ -82,8 +81,6 @@ function generateRaceHorses() {
   numHorsesInRace = Math.floor((Math.random() * (maxHorses - minHorses) + minHorses));
 
   var horsesInRace = []; // holds chosen horses in horse array
-  //boolean isUniqueHorse = false; // to check if the index generated from randomizer is not repeated
-
   var currentHorseIndex = 0;
 
   var i;
@@ -99,8 +96,7 @@ function generateRaceHorses() {
   return horsesInRace;
 }
 
-// ---------- checks if horse is already in the race ---------
-// ---> sequential search
+// checks if horse is already in the race
 function alreadyInRace(currentIndex, horse, horsesInRace) {
   var i;
   for (i = 0; i < horsesInRace.length - 1; i++) {
@@ -209,7 +205,7 @@ $(document).ready(function(){
     }
   }
 
-  // --- checks if player has entered a valid amount of betting money ---
+  // checks if player has entered a valid amount of betting money 
   function checkNum (o, n, min, max) { // fix the check amount for wallet 
     if ( o.val().length > max || o.val().length < min ) {
       o.addClass( "ui-state-error" );
@@ -290,12 +286,12 @@ $(document).ready(function(){
     //alert("here");
     printHorses();
     document.getElementById("dolphinsInRace").style.visibility = "visible"; 
-    document.getElementById("myCanvas").style.visibility = "visible";
   });
 
   // Continue Button One
   $( "#continueOneBtn" ).button().on( "click", function() {
     document.getElementById("signUp").style.visibility = "visible";
+    document.getElementById("myCanvas").style.visibility = "visible";
   });
  
 } )
