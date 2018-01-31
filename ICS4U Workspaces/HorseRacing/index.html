@@ -9,64 +9,13 @@
 	<body>
 		<h1 id="test">Dolphin Racing</h1>
 		<p>Howdy everyone! Who's ready to make a few bets on dolphin racing?<br>Great! Let's start!!</p>
-		<p>The chart below is the sign up sheet for this round. Each players' wallet (a.k.a money available). Every player will start off with $1000. Please include your name and amount of money which you will be betting. Click on the <b>Sign Up User</b> button to continue.</p>
-		<p>Currently, as an example for you, we have a Lily and a Chris on the list.</p>
-		
-		<div id="dialog-form" title="Sign up new user">
-		  <p class="validateTips">Please fill in all form fields in order to sign up.</p>
-		 
-		  <form>
-		    <fieldset>
-		      <label for="name">Name</label>
-		      <input type="text" name="name" id="name" placeholder="Enter your name" class="text ui-widget-content ui-corner-all">
-		      <label for="wallet">Wallet ($)</label>
-		      <input type="text" name="wallet" id="wallet" value="1000" readonly class="text ui-widget-content ui-corner-all">		 
-		      <label for="betting">Betting Amount ($)</label>
-		      <input type="text" name="betting" id="betting" placeholder="Enter your betting amount" class="text ui-widget-content ui-corner-all">
-
-		      <!-- Allow form submission with keyboard without duplicating the dialog button -->
-		      <input type="submit" tabindex="-1" style="position: absolute; top: -1000px">
-		    </fieldset>
-		  </form>
-		</div>
-		 
-		 
-		<div id="users-contain" class="ui-widget">
-		  <h1>Sign Up List:</h1>
-		  <table id="users" class="ui-widget ui-widget-content">
-		    <thead>
-		      <tr class="ui-widget-header ">
-		        <th>Name</th>
-		        <th>Wallet ($)</th>
-		        <th>Betting Amount ($)</th>
-		      </tr>
-		    </thead>
-		    <tbody>
-		      <tr>
-		        <td>Lily</td>
-		        <td>1000</td>
-		        <td>1000</td>
-		      </tr>
-		      <tr> 
-		      	<td>Chris</td>
-		      	<td>1000</td>
-		      	<td>1000</td>
-		      </tr>
-		    </tbody>
-		  </table>
-		</div>
-
-		<button id="create-user">Sign up new user</button> <!-- sign up button -->
-		<br><br><br><br><br>
 		
 		<!-- Horses -->		
-		<p>Click on the <b>Generate</b> button to release the list of dolphins.</p>
+		<p>First, click on the <b>Generate</b> button to release the list of dolphins participating in today's race.</p>
 		<button id="dolphinList">Generate!</button>
-		
-		<p id = "testing"></p>
 
 		<div id = "dolphinsInRace" class="ui-widget">
-			<p>These are the dolphins participating in today's race...<br></p> <!-- ******font family fix -->
+			<p>The dolphins racing are...<br></p> <!-- ******font family fix -->
 			<table id="dolphinTable" class="ui-widget ui-widget-content">
 		    <thead>
 		      <tr class="ui-widget-header ">
@@ -79,8 +28,63 @@
 		      </tr>
 		    </tbody>
 		  </table>
+		  
+		  <br><br>
+		  <p>Alright, so now that you know which dolphins are racing today, please click on the <b>Continue</b> button.</p>
+		  <button id="continueOneBtn">Continue</button>
 		</div>
 
+		<div id = "signUp">
+			<p>The chart below is the sign up sheet for this round. Each players' wallet (a.k.a money available). Every player will start off with $1000. Please include your name and amount of money which you will be betting. Click on the <b>Sign Up User</b> button to continue.</p>
+			<p>Currently, as an example for you, we have a Lily and a Chris on the list. (P.S. They are betting all their money because they are that confident. Maybe you should too.)</p>
+			
+			<div id="dialog-form" title="Sign up new user">
+			  <p class="validateTips">Please fill in all form fields in order to sign up.</p>
+			 
+			  <form>
+			    <fieldset>
+			      <label for="name">Name</label>
+			      <input type="text" name="name" id="name" placeholder="Enter your name" class="text ui-widget-content ui-corner-all">
+			      <label for="wallet">Wallet ($)</label>
+			      <input type="text" name="wallet" id="wallet" value="1000" readonly class="text ui-widget-content ui-corner-all">		 
+			      <label for="betting">Betting Amount ($)</label>
+			      <input type="text" name="betting" id="betting" placeholder="Enter your betting amount" class="text ui-widget-content ui-corner-all">
+
+			      <!-- Allow form submission with keyboard without duplicating the dialog button -->
+			      <input type="submit" tabindex="-1" style="position: absolute; top: -1000px">
+			    </fieldset>
+			  </form>
+			</div>
+			 
+			 
+			<div id="users-contain" class="ui-widget">
+			  <h1>Sign Up List:</h1>
+			  <table id="users" class="ui-widget ui-widget-content">
+			    <thead>
+			      <tr class="ui-widget-header ">
+			        <th>Name</th>
+			        <th>Wallet ($)</th>
+			        <th>Betting Amount ($)</th>
+			      </tr>
+			    </thead>
+			    <tbody>
+			      <tr>
+			        <td>Lily</td>
+			        <td>1000</td>
+			        <td>1000</td>
+			      </tr>
+			      <tr> 
+			      	<td>Chris</td>
+			      	<td>1000</td>
+			      	<td>1000</td>
+			      </tr>
+			    </tbody>
+			  </table>
+			</div>
+
+			<button id="create-user">Sign up new user</button> <!-- sign up button -->
+			<br><br><br><br><br>
+		</div>
 		<canvas id="myCanvas" width="550" height="350"></canvas>
 		
 		<script type "text/javascript" src="js/jquery.js"></script>

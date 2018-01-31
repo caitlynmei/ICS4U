@@ -2,6 +2,7 @@
 var canvas = document.getElementById("myCanvas");
 var context = canvas.getContext("2d");
 document.getElementById("dolphinsInRace").style.visibility = "hidden"; 
+document.getElementById("signUp").style.visibility = "hidden";
 document.getElementById("myCanvas").style.visibility = "hidden";
 
 // --- dolphin sprite animation ---
@@ -116,12 +117,6 @@ function printHorses() {
   for (i = 0; i < horsesInRace.length; i++) {
     $("#dolphinsInRace tbody").append( "<tr>" +
         "<td>" + (i+1) + "</td>" + "<td>" + horses[horsesInRace[i]] + "</td>" + "</tr>" );
-    /*
-    if (i === horsesInRace.length - 1) {
-      $("#dolphinsInRace").append(" and " + horses[horsesInRace[i]] + ".")
-    } else {
-      $("#dolphinsInRace").append(" " + horses[horsesInRace[i]] + ",");
-    }*/
   }
 }
 
@@ -296,7 +291,11 @@ $(document).ready(function(){
     printHorses();
     document.getElementById("dolphinsInRace").style.visibility = "visible"; 
     document.getElementById("myCanvas").style.visibility = "visible";
+  });
 
+  // Continue Button One
+  $( "#continueOneBtn" ).button().on( "click", function() {
+    document.getElementById("signUp").style.visibility = "visible";
   });
  
 } )
