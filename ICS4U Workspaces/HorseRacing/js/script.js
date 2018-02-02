@@ -50,7 +50,8 @@ var players = [];
 var playerNames = [];
 var playerWallets = [];
 var playerBets = [];
-var minWalletAmount = 2; // minimum amount of money from a player's wallet to bet with $2 ***********
+var chosenDolphins = [];
+var minWalletAmount = 0; // minimum amount of money from a player's wallet to bet with $0
 
 // ---  horse methods ---
 // initializing horse variables 
@@ -170,7 +171,7 @@ while (!gameOver) {
 
 /*
 $(document).ready(function(){
-  alert("Welcome to Horse Racing!!")
+  alert("Welcome to today's Dolphin Race!!")
 })
 */
 
@@ -182,7 +183,8 @@ $(document).ready(function(){
     name = $( "#name" ),
     wallet = $( "#wallet" ),
     betting = $( "#betting" ),
-    allFields = $( [] ).add( name ).add( wallet ).add( betting ),//.add( password ),
+    chosenDolphin = $( "#chosenDolphin" ),
+    allFields = $( [] ).add( name ).add( wallet ).add( betting ).add( chosenDolphin ),//.add( password ),
     tips = $( ".validateTips" );
  
   function updateTips( t ) {
@@ -194,7 +196,7 @@ $(document).ready(function(){
     }, 500 );
   }
  
-  function checkLength( o, n, min, max ) {
+  function checkName( o, n, min, max ) {
     if ( o.val().length > max || o.val().length < min ) {
       o.addClass( "ui-state-error" );
       updateTips( "Length of " + n + " must be between " +
@@ -206,10 +208,21 @@ $(document).ready(function(){
   }
 
   // checks if player has entered a valid amount of betting money 
-  function checkNum (o, n, min, max) { // fix the check amount for wallet 
+  function checkBet (o, n, min, max) { // fix the check amount for wallet 
     if ( o.val().length > max || o.val().length < min ) {
       o.addClass( "ui-state-error" );
       updateTips( "You can only bet with numeric money. Your betting power also cannot exceed the amount in your wallet, nor be negative." );
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  // checks if player has entered a valid dolphin number 
+  function checkDolphin (o, n, min, max) { // fix the check amount for dolphin number 
+    if ( o.val().length > max || o.val().length < min ) {
+      o.addClass( "ui-state-error" );
+      updateTips( "You can only bet on an assigned racing number for a dolphin in today's race. Please enter a valid number." );
       return false;
     } else {
       return true;
@@ -230,12 +243,16 @@ $(document).ready(function(){
     var valid = true;
     allFields.removeClass( "ui-state-error" );
  
-    valid = valid && checkLength( name, "username", 3, 16 );
-    valid = valid && checkNum( betting, "betting", 1, 6 );
+    valid = valid && checkName( name, "username", 1, 16 );
+    valid = valid && checkBet( betting, "betting", 1, 4 );
+    valid = valid && checkDolphin( chosenDolphin, "chosenDolphin", 1, 2 );
+
     //valid = valid && checkLength( wallet, "wallet", 1, 6); 
  
-    valid = valid && checkRegexp( name, /^[a-z]([0-9a-z_\s])+$/i, "Username may consist of a-z, 0-9, underscores, spaces and must begin with a letter." );
+    valid = valid && checkRegexp( name, /^[a-z]([0-9a-z_\s])+$/i, "Your player name may consist of a-z, 0-9, underscores, spaces and must begin with a letter." );
     valid = valid && checkRegexp( betting, /^([0-9_\d])+$/i, "You can only bet with numeric money. Please enter a number." ); // fix 
+    // ************************************* below 
+    valid = valid && checkRegexp( chosenDolphin, /^([0-9_\d])+$/i, "You can only enter an assigned racing number for a dolphin in today's race. Please enter a valid number." ); // fix 
     // valid = valid && checkRegexp( password, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9" );
     // i from regexp makes it case-insensitive
 
@@ -243,11 +260,13 @@ $(document).ready(function(){
       playerNames.push(name.val()); // add names
       playerBets.push(parseInt(betting.val()));
       playerWallets.push(parseInt(wallet.val() - betting.val()));
+      chosenDolphins.push(parseInt(chosenDolphin.val()));
 
       $( "#users tbody" ).append( "<tr>" +
         "<td>" + name.val() + "</td>" +
         "<td>" + wallet.val() + "</td>" +
         "<td>" + betting.val() + "</td>" +
+        "<td>" + chosenDolphin.val() + "</td>" + 
       "</tr>" );
       dialog.dialog( "close" );
     }

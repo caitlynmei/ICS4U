@@ -35,12 +35,16 @@
 		</div>
 
 		<div id = "signUp">
-			<p>The chart below is the sign up sheet for this round. Each players' wallet (a.k.a money available). Every player will start off with $1000. Please include your name and amount of money which you will be betting. Click on the <b>Sign Up User</b> button to continue.</p>
-			<p>Currently, as an example for you, we have a Lily and a Chris on the list. (P.S. They are betting all their money because they are that confident. Maybe you should too.)</p>
+			<p>The chart below is the sign up sheet for this round. Players will take turns entering a chosen horse number and the amount they want to bet on in this race. Each players' wallet (a.k.a money available) will start off with $1000. (*Note: If a player does not wish to bet during this round but still would like to feel included, please enter $0 in the "Betting Amount" field.)</p>
+			
+			<p> Please include your name, amount of money and the corresponding number to the dolphin which you will be betting when you sign up.</p><br>
+
+			<p>Click on the <b>Sign Up User</b> button to sign up!</p>
+
+			<p>Currently, as an example for you, we have a Lily and a Chris on the list. (P.S. They are betting all their money because they are <i>that</i> confident. Maybe you should too.)</p>
 			
 			<div id="dialog-form" title="Sign up new user">
 			  <p class="validateTips">Please fill in all form fields in order to sign up.</p>
-			 
 			  <form>
 			    <fieldset>
 			      <label for="name">Name</label>
@@ -49,6 +53,8 @@
 			      <input type="text" name="wallet" id="wallet" value="1000" readonly class="text ui-widget-content ui-corner-all">		 
 			      <label for="betting">Betting Amount ($)</label>
 			      <input type="text" name="betting" id="betting" placeholder="Enter your betting amount" class="text ui-widget-content ui-corner-all">
+			      <label for="chosenDolphin">Chosen Dolphin Number</label>
+			      <input type="text" name="chosenDolphin" id="chosenDolphin" placeholder="Enter your dolphin's number" class="text ui-widget-content ui-corner-all">
 
 			      <!-- Allow form submission with keyboard without duplicating the dialog button -->
 			      <input type="submit" tabindex="-1" style="position: absolute; top: -1000px">
@@ -65,6 +71,7 @@
 			        <th>Name</th>
 			        <th>Wallet ($)</th>
 			        <th>Betting Amount ($)</th>
+			        <th>Chosen Dolphin </th>
 			      </tr>
 			    </thead>
 			    <tbody>
@@ -72,11 +79,13 @@
 			        <td>Lily</td>
 			        <td>1000</td>
 			        <td>1000</td>
+			        <td>Dolphin X</td>
 			      </tr>
 			      <tr> 
 			      	<td>Chris</td>
 			      	<td>1000</td>
 			      	<td>1000</td>
+			      	<td>Dolphin Y</td>
 			      </tr>
 			    </tbody>
 			  </table>
