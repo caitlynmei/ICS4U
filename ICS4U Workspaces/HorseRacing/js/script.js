@@ -129,7 +129,7 @@ function generateRaceDolphins() {
   var currentDolphinIndex = 0;
 
   var i;
-  for (i = 0; i < numDolphinsInRace; i++) {
+  for (i = 0; i <= numDolphinsInRace; i++) {
     currentHorseIndex = Math.floor((Math.random() * dolphinsLength));
     dolphinsInRace[i] = currentHorseIndex;
 
@@ -311,7 +311,7 @@ function animate() {
 
       // --- dolphin 5 ---
       if (dolphinsInRace.length >= 5) {
-        context.clearRect(0, dy5, (dWidth + distnace5), dHeight);
+        context.clearRect(0, dy5, (dWidth + distance5), dHeight);
  
         //draw each frame and place them in the middle
         context.drawImage(myImage, shiftFrame5, 0, sWidth, sHeight, distance5, dy5, dWidth, dHeight);
