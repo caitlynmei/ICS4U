@@ -36,7 +36,7 @@ function animate() {
    // Start at the beginning once you've reached the
    // end of your sprite!
   
-  if (currentFrame == (totalFrames - 1)) {
+  if (currentFrame === (totalFrames - 1)) {
     shift = 0;
     currentFrame = 0;
   }
@@ -142,7 +142,7 @@ function generateRaceDolphins() {
 }
 
 // checks if horse is already in the race
-function alreadyInRace(currentIndex, dolphin, dolphinsInRace) { // *******sketch param
+function alreadyInRace(currentIndex, dolphin, dolphinsInRace) { // ***sketchy parameters
   var i;
   for (i = 0; i < dolphinsInRace.length - 1; i++) {
     if (dolphinsInRace[i] === dolphin && i !== currentIndex) {
@@ -185,18 +185,60 @@ var myImage = new Image();
 myImage.src = "images/Dolphin_Sprite_Use.PNG";
 
 // variables 
-var shiftFrame = 0; // shifts onto the next dolphin image in sprite
 var sWidth = 196.57; // width of source dolphin image
 var sHeight = 198; // height of source dolphin image
 
-var dx = 0; // dolphin destination x coordinate
-var dy = 0; // dolphin destination y coordinate
-var dWidth = sWidth / (dolphinsInRace.length / 2); // ******* fix sizing // width ofdestination dolphin image
-var dHeight = sHeight / (dolphinsInRace.length / 2); // width of destination dolphin image
-var stepsInRace = []; // array holds the number of "steps" each dolphin takes *************
+var dWidth = sWidth / 3; // ******* fix sizing // width ofdestination dolphin image
+var dHeight = sHeight / 3; // width of destination dolphin image
 
-var totalFrames = 4;
-var currentFrame = 0; // counter
+//var stepsInRace = []; // array holds the number of "steps" each dolphin takes *************
+var finishLine = myCanvas.width - dWidth; 
+var dolphinRaceOver = false;
+
+  var dx1 = Math.floor((Math.random() * 20) + 5); // dolphin destination x coordinate
+  var dy1 = 8; // dolphin destination y coordinates; plus 8 px is just for padding at top
+  var dx2 = Math.floor((Math.random() * 20) + 5); // dolphin destination x coordinate
+  var dy2 = dHeight + dy1; // dolphin destination y coordinates
+  var dx3 = Math.floor((Math.random() * 20) + 5); // dolphin destination x coordinate
+  var dy3 = dHeight + dy2; // dolphin destination y coordinates
+  var dx4 = Math.floor((Math.random() * 20) + 5); // dolphin destination x coordinate
+  var dy4 = dHeight + dy3; // dolphin destination y coordinates
+  var dx5 = Math.floor((Math.random() * 20) + 5); // dolphin destination x coordinate
+  var dy5 = dHeight + dy4; // dolphin destination y coordinates
+  var dx6 = Math.floor((Math.random() * 20) + 5); // dolphin destination x coordinate
+  var dy6 = dHeight + dy5; // dolphin destination y coordinates
+  var dx7 = Math.floor((Math.random() * 20) + 5); // dolphin destination x coordinate
+  var dy7 = dHeight + dy6; // dolphin destination y coordinates
+  var dx8 = Math.floor((Math.random() * 20) + 5); // dolphin destination x coordinate
+  var dy8 = dHeight + dy7; // dolphin destination y coordinates
+
+  var distance1 = 0;
+  var distance2 = 0;
+  var distance3 = 0;
+  var distance4 = 0;
+  var distance5 = 0;
+  var distance6 = 0;
+  var distance7 = 0;
+  var distance8 = 0;
+
+  var totalFrames = 4;
+  var currentFrame1 = 0; // counter
+  var currentFrame2 = 0; // counter
+  var currentFrame3 = 0; // counter
+  var currentFrame4 = 0; // counter
+  var currentFrame5 = 0; // counter
+  var currentFrame6 = 0; // counter
+  var currentFrame7 = 0; // counter
+  var currentFrame8 = 0; // counter
+
+  var shiftFrame1 = 0; // shifts onto the next dolphin image in sprite
+  var shiftFrame2 = 0;
+  var shiftFrame3 = 0;
+  var shiftFrame4 = 0;
+  var shiftFrame5 = 0;
+  var shiftFrame6 = 0;
+  var shiftFrame7 = 0;
+  var shiftFrame8 = 0;
 
 myImage.addEventListener("load", loadImage, false);
  
@@ -205,39 +247,144 @@ function loadImage(e) {
 }
  
 // animation
-function animate() {
-  context.clearRect(0, dy, (dWidth + dx), dHeight);
+function animate() {    
+    //while (!dolphinRaceOver) {
+      // --- dolphin 1 ---
+      context.clearRect(0, dy1, (dWidth + distance1), dHeight);
  
-  //draw each frame and place them in the middle
-  context.drawImage(myImage, shiftFrame, 0, sWidth, sHeight, dx, dy, dWidth, dHeight);
-  shiftFrame += sWidth;
-  dx += dWidth; // dolphin travels
+      //draw each frame and place them in the middle
+      context.drawImage(myImage, shiftFrame1, 0, sWidth, sHeight, distance1, dy1, dWidth, dHeight);
+      shiftFrame1 += sWidth;
+      distance1 += dx1; // dolphin travels
+     
+      /*
+        Start at the beginning once you've reached the
+        end of your sprite!
+      */
+      if (currentFrame1 === (totalFrames - 1)) {
+        shiftFrame1 = 0;
+        currentFrame1 = 0;
+      }
+      currentFrame1++;
+
+      // --- dolphin 2 ---
+      context.clearRect(0, dy2, (dWidth + distance2), dHeight);
  
-  /*
-  var j;
-  for (j = 0; j < dolphinsInRace.length; j++) {
-    stepsInRace[j] = stepsInRace[j] + Math.floor((Math.random() * 4) + 1);
-  }*/
+      //draw each frame and place them in the middle
+      context.drawImage(myImage, shiftFrame2, 0, sWidth, sHeight, distance2, dy2, dWidth, dHeight);
+      shiftFrame2 += sWidth;
+      distance2 += dx2; // dolphin travels
+     
+      if (currentFrame2 === (totalFrames - 1)) {
+        shiftFrame2 = 0;
+        currentFrame2 = 0;
+      }
+      currentFrame2++;
 
-  /*
-    Start at the beginning once you've reached the
-    end of your sprite!
-  */
-  if (currentFrame == (totalFrames - 1)) {
-    shiftFrame = 0;
-    currentFrame = 0;
-  }
+      // --- dolphin 3 ---
+      context.clearRect(0, dy3, (dWidth + distance3), dHeight);
+ 
+      //draw each frame and place them in the middle
+      context.drawImage(myImage, shiftFrame3, 0, sWidth, sHeight, distance3, dy3, dWidth, dHeight);
+      shiftFrame3 += sWidth;
+      distance3 += dx3; // dolphin travels
+     
+      if (currentFrame3 === (totalFrames - 1)) {
+        shiftFrame3 = 0;
+        currentFrame3 = 0;
+      }
+      currentFrame3++;
 
+      // --- dolphin 4 ---
+      context.clearRect(0, dy4, (dWidth + distance4), dHeight);
+ 
+      //draw each frame and place them in the middle
+      context.drawImage(myImage, shiftFrame4, 0, sWidth, sHeight, distance4, dy4, dWidth, dHeight);
+      shiftFrame4 += sWidth;
+      distance4 += dx4; // dolphin travels
+     
+      if (currentFrame4 === (totalFrames - 1)) {
+        shiftFrame4 = 0;
+        currentFrame4 = 0;
+      }
+      currentFrame4++;
+
+      // --- dolphin 5 ---
+      if (dolphinsInRace.length >= 5) {
+        context.clearRect(0, dy5, (dWidth + distnace5), dHeight);
+ 
+        //draw each frame and place them in the middle
+        context.drawImage(myImage, shiftFrame5, 0, sWidth, sHeight, distance5, dy5, dWidth, dHeight);
+        shiftFrame5 += sWidth;
+        distance5 += dx5; // dolphin travels
+       
+        if (currentFrame5 === (totalFrames - 1)) {
+          shiftFrame5 = 0;
+          currentFrame5 = 0;
+        }
+        currentFrame5++;
+      }
+
+      // --- dolphin 6 ---
+      if (dolphinsInRace.length >= 6) {
+        context.clearRect(0, dy6, (dWidth + distance6), dHeight);
+ 
+        //draw each frame and place them in the middle
+        context.drawImage(myImage, shiftFrame6, 0, sWidth, sHeight, distance6, dy6, dWidth, dHeight);
+        shiftFrame6 += sWidth;
+        distance6 += dx6; // dolphin travels
+       
+        if (currentFrame6 === (totalFrames - 1)) {
+          shiftFrame6 = 0;
+          currentFrame6 = 0;
+        }
+        currentFrame6++;
+      }
+
+      // --- dolphin 7 ---
+      if (dolphinsInRace.length >= 7) {
+        context.clearRect(0, dy7, (dWidth + distance7), dHeight);
+ 
+        //draw each frame and place them in the middle
+        context.drawImage(myImage, shiftFrame7, 0, sWidth, sHeight, distance7, dy7, dWidth, dHeight);
+        shiftFrame7 += sWidth;
+        distance7 += dx7; // dolphin travels
+       
+        if (currentFrame7 === (totalFrames - 1)) {
+          shiftFrame7 = 0;
+          currentFrame7 = 0;
+        }
+        currentFrame7++;
+      }
+
+      // --- dolphin 8 ---
+      if (dolphinsInRace.length === 8) {
+        context.clearRect(0, dy8, (dWidth + distance8), dHeight);
+ 
+        //draw each frame and place them in the middle
+        context.drawImage(myImage, shiftFrame8, 0, sWidth, sHeight, distance8, dy8, dWidth, dHeight);
+        shiftFrame8 += sWidth;
+        distance8 += dx8; // dolphin travels
+       
+        if (currentFrame8 === (totalFrames - 1)) {
+          shiftFrame8 = 0;
+          currentFrame8 = 0;
+        }
+        currentFrame8++;
+      }
+
+
+      if (distance1 >= finishLine) {
+        dolphinRaceOver = true;
+        alert("End my suffering... *cries*");
+      }
   /*
   if (dx === (myCanvas.width - dWidth) ) {
     gameOver = true;
   }*/
- 
-  currentFrame++;
 }
 
-setInterval(animate, 500);
-
+//setInterval(animate, 350);
 
 $(document).ready(function(){
    
@@ -376,6 +523,7 @@ $(document).ready(function(){
   // Start Race Button
   $( "#startRaceBtn" ).button().on( "click", function() {
     document.getElementById("raceDolphins").style.visibility = "visible";
+    setInterval(animate, 300);
   });
  
 } )
