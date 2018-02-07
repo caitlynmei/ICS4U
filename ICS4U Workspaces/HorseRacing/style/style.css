@@ -1,3 +1,4 @@
+
 title {
   font-style: apercu mono;
   font-size: 30px;
@@ -15,7 +16,6 @@ canvas {
   line-height: 1.5em;
 }
 
-
 label, input { 
   display:block; 
 }
@@ -27,38 +27,38 @@ input.text {
 }
 
 fieldset { 
-   	padding:0; 
-   	border:0; 
-   	margin-top:25px; 
+  padding:0; 
+  border:0; 
+  margin-top:25px; 
 }
 
 h1 { 
-   	font-size: 1.2em; 
-  	margin: .6em 0; 
+  font-size: 1.2em; 
+  margin: .6em 0; 
 }
 
-div#users-contain, div#dolphinsInRace { 
-   	width: 350px; 
-   	margin: 20px 0; 
+div#users-contain, div#dolphinsInRace, div#winningDolphins { 
+  width: 350px; 
+  margin: 20px 0; 
 }
 
-div#users-contain table, div#dolphinsInRace table { 
-   	margin: 1em 0; 
-   	border-collapse: collapse; 
-   	width: 100%; 
+div#users-contain table, div#dolphinsInRace table, div#winningDolphins table { 
+  margin: 1em 0; 
+  border-collapse: collapse; 
+  width: 100%; 
 }
 
-div#users-contain table td, div#users-contain table th, div#dolphinsInRace table td, div#dolphinsInRace table th{ 
-   	border: 1px solid #eee; 
-   	padding: .6em 10px; 
-   	text-align: left; 
+div#users-contain table td, div#users-contain table th, div#dolphinsInRace table td, div#dolphinsInRace table th, div#winningDolphins table td, div#winningDolphins table th{ 
+  border: 1px solid #eee; 
+  padding: .6em 10px; 
+  text-align: left; 
 }
 
 .ui-dialog .ui-state-error { 
-   	padding: .3em; 
+  padding: .3em; 
 }
 
 .validateTips { 
  	border: 1px solid transparent; 
-   	padding: 0.3em; 
+  padding: 0.3em; 
 }
