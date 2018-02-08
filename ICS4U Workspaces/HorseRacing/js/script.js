@@ -49,14 +49,21 @@ setInterval(animate, 500);
 */
 
 // --- initializing player variables ---
-// var players = []; 
 var playerNames = []; // array holds each player's name
 var playerWallets = []; // array holds the amount of money in each player's wallet
 var playerBets = []; // array holds the amount of money each player bets
 var minWalletAmount = 0; // minimum amount of money from a player's wallet to bet with; $0
 var maxWalletAmount = 1000; // maximum (initial) amount of money from a player's wallet to bet with; $1000
 
-// --- initializing horse variables ---
+/*
+var gameOver = false;
+
+while (!gameOver) {
+  dolphinRace();
+  gameOver = promptForGameOver();
+}*/
+
+// --- initializing dolphin variables ---
 var dolphins = ["Kincsem", "Black Caviar", "Peppers Pride", "Eclipse", "Karayel", "Ormonde", "Prestige", "Ribot", "Colin", "Macon", "Frankel", "Highflyer", "Nearco", "Barcaldine",
     "Personal Ensign", "Tremont", "Asteroid", "Braque", "Crucifix", "Goldfinder", "Kurifuji (Toshifuji)", "Nereide", "Tokino Minoru", "Handsomechamp", "Bahram", "Combat",
     "Grand Flaneur", "Patience", "Regulus", "St. Simon", "Alipes", "American Eclipse", "Caracalla", "Maruzensky", "Sweetbriar", "Tiffin", "El Rio Rey", "Heliskier", "Kitano Dai O",
@@ -81,27 +88,27 @@ function generateRaceDolphins() {
 
   numDolphinsInRace = Math.floor((Math.random() * (maxDolphins - minDolphins) + minDolphins));
 
-  var dolphinsInRace = []; // holds generated dolphins 
+  var dolphinsinRace = []; // holds generated dolphins 
   var currentDolphinIndex = 0;
 
   var i;
   for (i = 0; i <= numDolphinsInRace; i++) {
-    currentHorseIndex = Math.floor((Math.random() * dolphinsLength));
-    dolphinsInRace[i] = currentHorseIndex;
+    currentDolphinIndex = Math.floor((Math.random() * dolphinsLength));
+    dolphinsinRace[i] = currentDolphinIndex;
 
-    if (alreadyInRace(i, currentDolphinIndex, dolphinsInRace) === true) {
+    if (alreadyInRace(i, currentDolphinIndex, dolphinsinRace) === true) {
       i--;
     }
   }
 
-  return dolphinsInRace;
+  return dolphinsinRace;
 }
 
 // checks if dolphin is already in the race
-function alreadyInRace(currentIndex, dolphin, dolphinsInRace) { // ***sketchy parameters
+function alreadyInRace(currentIndex, dolphin, dolphinsinRace) { 
   var i;
-  for (i = 0; i < dolphinsInRace.length - 1; i++) {
-    if (dolphinsInRace[i] === dolphin && i !== currentIndex) {
+  for (i = 0; i < (dolphinsinRace.length - 1); i++) {
+    if (dolphinsinRace[i] === dolphin && i !== currentIndex) {
       return true;
     }
   }
@@ -190,6 +197,16 @@ var shiftFrame5 = 0;
 var shiftFrame6 = 0;
 var shiftFrame7 = 0;
 var shiftFrame8 = 0;
+
+// each dixtance"x" holds the number of "steps" each dolphin takes
+var distance1;
+var distance2;
+var distance3;
+var distance4;
+var distance5;
+var distance6;
+var distance7;
+var distance8;
  
 function loadImage(e) {
   animate();
@@ -197,22 +214,22 @@ function loadImage(e) {
 
 function doRace () {
   // each dixtance"x" holds the number of "steps" each dolphin takes
-  var distance1 = Math.floor((Math.random() * 20) + 5);
-  var distance2 = Math.floor((Math.random() * 20) + 5);
-  var distance3 = Math.floor((Math.random() * 20) + 5);
-  var distance4 = Math.floor((Math.random() * 20) + 5);
-  var distance5 = Math.floor((Math.random() * 20) + 5);
-  var distance6 = Math.floor((Math.random() * 20) + 5);
-  var distance7 = Math.floor((Math.random() * 20) + 5);
-  var distance8 = Math.floor((Math.random() * 20) + 5);
+  distance1 = Math.floor((Math.random() * 20) + 5);
+  distance2 = Math.floor((Math.random() * 20) + 5);
+  distance3 = Math.floor((Math.random() * 20) + 5);
+  distance4 = Math.floor((Math.random() * 20) + 5);
+  distance5 = Math.floor((Math.random() * 20) + 5);
+  distance6 = Math.floor((Math.random() * 20) + 5);
+  distance7 = Math.floor((Math.random() * 20) + 5);
+  distance8 = Math.floor((Math.random() * 20) + 5);
 
   myImage.addEventListener("load", loadImage, false);
-  setInterval(animate(distance1, distance2, distance3, distance4, distance5, distance6, distance7, distance8), 350);
+  setInterval(animate, 300);
 }
  
 // --- animation ---
-function animate(distance1, distance2, distance3, distance4, distance5, distance6, distance7, distance8) {    
-  while (!dolphinRaceOver) {
+function animate() {    
+  if (!dolphinRaceOver) {
     // --- dolphin 1 ---
     context.clearRect(0, dy1, (dWidth + dx1), dHeight);
    
@@ -346,6 +363,7 @@ function printDolphinWinners() {
         "<td>" + dolphins[dolphinsInRace[winningDolphins[j] - 1]] + "</td>" + "</tr>" );
     }
   }
+  document.getElementById("scoreboardBtn").style.visibility = "visible";
 }
 
 function getDolphinNames() {
@@ -380,6 +398,27 @@ function getWinningDolphins(distances) {
     }
   } 
   return winningDolphins;
+}
+
+function updateWallet() {
+  for (var i = 0; i < winningDolphins.length; i++) {
+    for (var j = 0; j < playerNames.length; j++) {
+      if (winningDolphins[i] === chosenDolphins[j]) {
+        playerWallets[j] += playerBets[j]; 
+      } else {
+        playerWallets[j] -= playerBets[j];
+      }
+    }
+  }
+}
+
+function printScoreboard() {
+  updateWallet();
+  for (var i = 0; i < playerNames.length; i++) {
+    $("#scoreboardTable tbody").append( "<tr>" + 
+        "<td>" + playerNames[i] + "</td>" + "<td>" + playerWallets[i] + "</td>" + "<td>" + chosenDolphins[i] + "</td>" + "</tr>" );
+  }
+  document.getElementById("replayBtn").style.visibility = "visible";
 }
 
 $(document).ready(function(){
@@ -463,7 +502,7 @@ $(document).ready(function(){
     if ( valid ) {
       playerNames.push(name.val()); // add names
       playerBets.push(parseInt(betting.val()));
-      playerWallets.push(parseInt(wallet.val() - betting.val()));
+      playerWallets.push(1000);
       chosenDolphins.push(parseInt(chosenDolphin.val()));
 
       $( "#users tbody" ).append( "<tr>" +
@@ -529,6 +568,77 @@ $(document).ready(function(){
   $( "#winningDolphinListBtn" ).button().on( "click", function() {
     printDolphinWinners();
     document.getElementById("winningDolphins").style.visibility = "visible";
+  });
+
+  //  Scoreboard Button
+  $( "#scoreboardBtn" ).button().on( "click", function() {
+    printScoreboard();
+    document.getElementById("scoreboard").style.visibility = "visible";
+  });
+
+  //  Replay Button
+  $( "#replayBtn" ).button().on( "click", function() {
+    playerNames = []; 
+    playerWallets = []; 
+    playerBets = []; 
+    chosenDolphins = [];
+    dolphinRaceOver = false; 
+    distances = [];
+    winningDolphins = []; 
+    winningDolphinNames = []; 
+    numWinningDolphins = 0;
+    context.clearRect(0, 0, myCanvas.width, myCanvas.height);
+
+    // dolphin 1 - 8 destination x, y coordinates 
+    dx1 = 0;
+    dy1 = 8; 
+    dx2 = 0; 
+    dy2 = dHeight + dy1; 
+    dx3 = 0; 
+    dy3 = dHeight + dy2; 
+    dx4 = 0; 
+    dy4 = dHeight + dy3; 
+    dx5 = 0; 
+    dy5 = dHeight + dy4; 
+    dx6 = 0; 
+    dy6 = dHeight + dy5; 
+    dx7 = 0; 
+    dy7 = dHeight + dy6; 
+    dx8 = 0; 
+    dy8 = dHeight + dy7;
+
+    // dolphin 1 - 8 currentFrame counter 
+    currentFrame1 = 0; 
+    currentFrame2 = 0; 
+    currentFrame3 = 0; 
+    currentFrame4 = 0; 
+    currentFrame5 = 0; 
+    currentFrame6 = 0; 
+    currentFrame7 = 0; 
+    currentFrame8 = 0; 
+
+    // dolphin 1 - 8 shiftFrame variable shifts currentFrame onto the next dolphin image in sprite
+    shiftFrame1 = 0; 
+    shiftFrame2 = 0;
+    shiftFrame3 = 0;
+    shiftFrame4 = 0;
+    shiftFrame5 = 0;
+    shiftFrame6 = 0;
+    shiftFrame7 = 0;
+    shiftFrame8 = 0;
+
+    document.getElementById("dolphinsInRace").style.visibility = "hidden"; 
+    document.getElementById("signUp").style.visibility = "hidden";
+    document.getElementById("raceDolphins").style.visibility = "hidden";
+    document.getElementById("results").style.visibility = "hidden";
+    document.getElementById("winningDolphinListBtn").style.visibility = "hidden";
+    document.getElementById("winningDolphins").style.visibility = "hidden";
+    document.getElementById("winningDolphins").style.visibility = "hidden";
+    document.getElementById("scoreboard").style.visibility = "hidden";
+    document.getElementById("scoreboardBtn").style.visibility = "hidden";
+    document.getElementById("replayBtn").style.visibility = "hidden";
+
+    dolphinsInRace = generateRaceDolphins(); 
   });
  
 } )
