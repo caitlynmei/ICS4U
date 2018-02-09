@@ -411,6 +411,42 @@ function printScoreboard() {
   document.getElementById("replayBtn").style.visibility = "visible";
 }
 
+// clears previous information and lists on tables 
+function clearTable() {
+  var dolphinTable = document.getElementById("dolphinTable");
+  var dolphinRows = dolphinTable.rows;
+  var i = dolphinRows.length;
+  while (--i) {
+    dolphinRows[i].parentNode.removeChild(dolphinRows[i]);
+  }
+
+  var playerTable = document.getElementById("users");
+  var playerRows = playerTable.rows;
+  var j = playerRows.length;
+  while (--j) {
+    playerRows[j].parentNode.removeChild(playerRows[j]);
+  }
+  /*for (j = 0; j < playerRows[0].cells.length; j++) {
+    for (var n = 0; n < playerRows.length; n++) {  
+      playerRows[n].deleteCell(j);
+    }
+  }*/
+
+  var dolpWinnerTable = document.getElementById("dolphinWinners");
+  var dolpWinnerRows = dolpWinnerTable.rows;
+  var k = dolpWinnerRows.length;
+  while (--k) {
+    dolpWinnerRows[k].parentNode.removeChild(dolpWinnerRows[k]);
+  }
+
+  var scoreTable = document.getElementById("scoreboardTable");
+  var scoreRows = scoreTable.rows;
+  var m = scoreRows.length;
+  while (--m) {
+    scoreRows[m].parentNode.removeChild(scoreRows[m]);
+  }
+}
+
 $(document).ready(function(){
    
   var dialog, form,
@@ -571,6 +607,8 @@ $(document).ready(function(){
 
   //  Replay Button
   $( "#replayBtn" ).button().on( "click", function() {
+    clearTable();
+
     playerNames = []; 
     playerWallets = []; 
     playerBets = []; 
@@ -620,6 +658,7 @@ $(document).ready(function(){
     shiftFrame7 = 0;
     shiftFrame8 = 0;
 
+    document.getElementById("tips").style.visibility = "hidden";
     document.getElementById("dolphinsInRace").style.visibility = "hidden";
     document.getElementById("continueOneBtn").style.visibility = "hidden"; 
     document.getElementById("signUp").style.visibility = "hidden";
