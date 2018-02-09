@@ -1,7 +1,7 @@
 
 var canvas = document.getElementById("myCanvas");
 var context = canvas.getContext("2d");
-document.getElementById("myCanvas").style.visibility = "visible"; // change to hidden after done testing
+//document.getElementById("myCanvas").style.visibility = "visible"; // change to hidden after done testing
 document.getElementById("dolphinsInRace").style.visibility = "hidden"; 
 document.getElementById("continueOneBtn").style.visibility = "hidden";
 document.getElementById("signUp").style.visibility = "hidden";
@@ -11,46 +11,7 @@ document.getElementById("results").style.visibility = "hidden";
 /*
 var background = new Image();
 background.src = "images/Swimming_Pool.png";
-context.drawImage(background, 0, 0);*/
-
-/* back-up version
-// --- dolphin sprite animation ---
-// variables 
-var shift = 0; // onto the next sprite image
-var frameWidth = 196.57;
-var frameHeight = 198;
-var totalFrames = 4;
-var currentFrame = 0; // counter  
-
-var myImage = new Image();
-myImage.src = "images/Dolphin_Sprite_Use.PNG";
-myImage.addEventListener("load", loadImage, false);
- 
-function loadImage(e) {
-  animate();
-}
- 
-// animation
-function animate() {
-  context.clearRect(120, 25, 196.57, 198);
- 
-  //draw each frame + place them in the middle
-  context.drawImage(myImage, shift, 0, frameWidth, frameHeight, 120, 25, frameWidth, frameHeight);
- 
-  shift += frameWidth + 1;
- 
-   // Start at the beginning once you've reached the
-   // end of your sprite!
-  
-  if (currentFrame === (totalFrames - 1)) {
-    shift = 0;
-    currentFrame = 0;
-  }
- 
-  currentFrame++;
-}
-
-setInterval(animate, 500);
+context.drawImage(background, 0, 0);
 */
 
 // --- initializing player variables ---
@@ -121,12 +82,6 @@ function printDolphinList() {
         "<td>" + (i+1) + "</td>" + "<td>" + dolphins[dolphinsInRace[i]] + "</td>" + "</tr>" );
   }
 }
-
-/*
-$(document).ready(function(){
-  alert("Welcome to today's Dolphin Race!!")
-})
-*/
 
 // --- dolphin sprite animation ---
 var myImage = new Image();
@@ -581,10 +536,6 @@ $(document).ready(function(){
     document.getElementById("raceDolphins").style.visibility = "visible";
     dolphinRaceOver = false;
     doRace();
-    /*
-    if (dolphinRaceOver === true) {
-      document.getElementById("winningDolphinListBtn").style.visibility = "visible";
-    }*/
   });
 
   // Winning Dolphin List Button
