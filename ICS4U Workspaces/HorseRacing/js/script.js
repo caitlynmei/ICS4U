@@ -426,11 +426,6 @@ function clearTable() {
   while (--j) {
     playerRows[j].parentNode.removeChild(playerRows[j]);
   }
-  /*for (j = 0; j < playerRows[0].cells.length; j++) {
-    for (var n = 0; n < playerRows.length; n++) {  
-      playerRows[n].deleteCell(j);
-    }
-  }*/
 
   var dolpWinnerTable = document.getElementById("dolphinWinners");
   var dolpWinnerRows = dolpWinnerTable.rows;
@@ -584,6 +579,7 @@ $(document).ready(function(){
   // Start Race Button
   $( "#startRaceBtn" ).button().on( "click", function() {
     document.getElementById("raceDolphins").style.visibility = "visible";
+    dolphinRaceOver = false;
     doRace();
     /*
     if (dolphinRaceOver === true) {
@@ -613,7 +609,6 @@ $(document).ready(function(){
     playerWallets = []; 
     playerBets = []; 
     chosenDolphins = [];
-    dolphinRaceOver = false; 
     distances = [];
     winningDolphins = []; 
     winningDolphinNames = []; 
