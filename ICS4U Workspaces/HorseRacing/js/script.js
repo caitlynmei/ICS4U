@@ -1,11 +1,17 @@
 
 var canvas = document.getElementById("myCanvas");
 var context = canvas.getContext("2d");
-//document.getElementById("myCanvas").style.visibility = "visible"; // change to hidden after done testing
+document.getElementById("myCanvas").style.visibility = "visible"; // change to hidden after done testing
 document.getElementById("dolphinsInRace").style.visibility = "hidden"; 
+document.getElementById("continueOneBtn").style.visibility = "hidden";
 document.getElementById("signUp").style.visibility = "hidden";
 document.getElementById("raceDolphins").style.visibility = "hidden";
 document.getElementById("results").style.visibility = "hidden";
+
+/*
+var background = new Image();
+background.src = "images/Swimming_Pool.png";
+context.drawImage(background, 0, 0);*/
 
 /* back-up version
 // --- dolphin sprite animation ---
@@ -29,8 +35,7 @@ function animate() {
   context.clearRect(120, 25, 196.57, 198);
  
   //draw each frame + place them in the middle
-  context.drawImage(myImage, shift, 0, frameWidth, frameHeight,
-                    120, 25, frameWidth, frameHeight);
+  context.drawImage(myImage, shift, 0, frameWidth, frameHeight, 120, 25, frameWidth, frameHeight);
  
   shift += frameWidth + 1;
  
@@ -54,14 +59,6 @@ var playerWallets = []; // array holds the amount of money in each player's wall
 var playerBets = []; // array holds the amount of money each player bets
 var minWalletAmount = 0; // minimum amount of money from a player's wallet to bet with; $0
 var maxWalletAmount = 1000; // maximum (initial) amount of money from a player's wallet to bet with; $1000
-
-/*
-var gameOver = false;
-
-while (!gameOver) {
-  dolphinRace();
-  gameOver = promptForGameOver();
-}*/
 
 // --- initializing dolphin variables ---
 var dolphins = ["Kincsem", "Black Caviar", "Peppers Pride", "Eclipse", "Karayel", "Ormonde", "Prestige", "Ribot", "Colin", "Macon", "Frankel", "Highflyer", "Nearco", "Barcaldine",
@@ -126,13 +123,6 @@ function printDolphinList() {
 }
 
 /*
-boolean gameOver = false;
-while (!gameOver) {
-  doRace(minWalletAmount, horses, playerNames, playerWallets, keyboard);
-  gameOver = promptForGameOver(keyboard);
-}*/
-
-/*
 $(document).ready(function(){
   alert("Welcome to today's Dolphin Race!!")
 })
@@ -149,11 +139,11 @@ myImage.src = "images/Dolphin_Sprite_Use.PNG";
 
 var sWidth = 196.57; // width of source dolphin image
 var sHeight = 198; // height of source dolphin image
-var dWidth = sWidth / 3; // ******* fix sizing // width ofdestination dolphin image
+var dWidth = sWidth / 3; // width of destination dolphin image
 var dHeight = sHeight / 3; // width of destination dolphin image
 
 var finishLine = myCanvas.width - dWidth; // amount of px it takes to reach finish line of race
-var dolphinRaceOver = false; // checks for when race is finished ***
+var dolphinRaceOver = false; // checks for when race is finished 
 var distances = []; // holds total amount of steps each dolphin takes in race
 var winningDolphins = []; // holds winning dolphins in this race (if there was a tie, multiple winners)
 var winningDolphinNames = []; // holds winning dolphin string names
@@ -198,7 +188,7 @@ var shiftFrame6 = 0;
 var shiftFrame7 = 0;
 var shiftFrame8 = 0;
 
-// each dixtance"x" holds the number of "steps" each dolphin takes
+// each distance"x" holds the number of "steps" each dolphin takes
 var distance1;
 var distance2;
 var distance3;
@@ -213,7 +203,7 @@ function loadImage(e) {
 }
 
 function doRace () {
-  // each dixtance"x" holds the number of "steps" each dolphin takes
+  // each distance"x" holds the number of "steps" each dolphin takes
   distance1 = Math.floor((Math.random() * 20) + 5);
   distance2 = Math.floor((Math.random() * 20) + 5);
   distance3 = Math.floor((Math.random() * 20) + 5);
@@ -349,33 +339,10 @@ function animate() {
 
     if (checkFinishLine(distances) === true) {
       winningDolphins = getWinningDolphins(distances); // get the winning dolphin(s) in the race
+      document.getElementById("winningDolphinListBtn").style.visibility = "visible";
       dolphinRaceOver = true;
-      //break;
     }
   }
-}
-
-function printDolphinWinners() {
-  winningDolphinNames = getDolphinNames();
-  for (var j = 0; j < numWinningDolphins; j++) {
-    if (winningDolphins[j] != 0) {
-      $("#dolphinWinners tbody").append( "<tr>" + 
-        "<td>" + dolphins[dolphinsInRace[winningDolphins[j] - 1]] + "</td>" + "</tr>" );
-    }
-  }
-  document.getElementById("scoreboardBtn").style.visibility = "visible";
-}
-
-function getDolphinNames() {
-  var i;
-  for (i = 0; i < winningDolphins.length; i++) {
-    if (winningDolphins[i] != 0) {
-      winningDolphinNames[i] = dolphins[dolphinsInRace[winningDolphins[i] - 1]];
-      numWinningDolphins++;
-    }
-  }
-
-  return winningDolphinNames;
 }
 
 function checkFinishLine(distances) {
@@ -398,6 +365,29 @@ function getWinningDolphins(distances) {
     }
   } 
   return winningDolphins;
+}
+
+function getDolphinNames() {
+  var i;
+  for (i = 0; i < winningDolphins.length; i++) {
+    if (winningDolphins[i] != 0) {
+      winningDolphinNames[i] = dolphins[dolphinsInRace[winningDolphins[i] - 1]];
+      numWinningDolphins++;
+    }
+  }
+
+  return winningDolphinNames;
+}
+
+function printDolphinWinners() {
+  winningDolphinNames = getDolphinNames();
+  for (var j = 0; j < numWinningDolphins; j++) {
+    if (winningDolphins[j] != 0) {
+      $("#dolphinWinners tbody").append( "<tr>" + 
+        "<td>" + dolphins[dolphinsInRace[winningDolphins[j] - 1]] + "</td>" + "</tr>" );
+    }
+  }
+  document.getElementById("scoreboardBtn").style.visibility = "visible";
 }
 
 function updateWallet() {
@@ -444,7 +434,7 @@ $(document).ready(function(){
   function checkName( o, n, min, max ) {
     if ( o.val().length > max || o.val().length < min ) {
       o.addClass( "ui-state-error" );
-      updateTips( "Length of " + n + " must be between " +
+      updateTips( "The length of your player\'s " + n + " must be between " +
         min + " and " + max + "." );
       return false;
     } else {
@@ -488,11 +478,9 @@ $(document).ready(function(){
     var valid = true;
     allFields.removeClass( "ui-state-error" );
  
-    valid = valid && checkName( name, "username", 1, 16 );
+    valid = valid && checkName( name, "name", 1, 16 );
     valid = valid && checkBet( betting, "betting", minWalletAmount, maxWalletAmount );
     valid = valid && checkDolphin( chosenDolphin, "chosenDolphin", minDolphinChoice, maxDolphinChoice );
-
-    //valid = valid && checkLength( wallet, "wallet", 1, 6); 
  
     valid = valid && checkRegexp( name, /^[a-z]([0-9a-z_\s])+$/i, "Your player name may consist of a-z, 0-9, underscores, spaces and must begin with a letter." );
     valid = valid && checkRegexp( betting, /^([0-9_\d])+$/i, "You can only bet with numeric money. Please enter a number." ); 
@@ -548,6 +536,8 @@ $(document).ready(function(){
     //alert("here");
     printDolphinList();
     document.getElementById("dolphinsInRace").style.visibility = "visible"; 
+    document.getElementById("continueOneBtn").style.visibility = "visible";
+
   });
 
   // Continue Button One
@@ -559,21 +549,24 @@ $(document).ready(function(){
   $( "#startRaceBtn" ).button().on( "click", function() {
     document.getElementById("raceDolphins").style.visibility = "visible";
     doRace();
+    /*
     if (dolphinRaceOver === true) {
       document.getElementById("winningDolphinListBtn").style.visibility = "visible";
-    }
+    }*/
   });
 
   // Winning Dolphin List Button
   $( "#winningDolphinListBtn" ).button().on( "click", function() {
     printDolphinWinners();
     document.getElementById("winningDolphins").style.visibility = "visible";
+    document.getElementById("scoreText").style.visibility = "visible";
   });
 
   //  Scoreboard Button
   $( "#scoreboardBtn" ).button().on( "click", function() {
     printScoreboard();
     document.getElementById("scoreboard").style.visibility = "visible";
+    document.getElementById("finalText").style.visibility = "visible";
   });
 
   //  Replay Button
@@ -627,7 +620,8 @@ $(document).ready(function(){
     shiftFrame7 = 0;
     shiftFrame8 = 0;
 
-    document.getElementById("dolphinsInRace").style.visibility = "hidden"; 
+    document.getElementById("dolphinsInRace").style.visibility = "hidden";
+    document.getElementById("continueOneBtn").style.visibility = "hidden"; 
     document.getElementById("signUp").style.visibility = "hidden";
     document.getElementById("raceDolphins").style.visibility = "hidden";
     document.getElementById("results").style.visibility = "hidden";
@@ -635,7 +629,9 @@ $(document).ready(function(){
     document.getElementById("winningDolphins").style.visibility = "hidden";
     document.getElementById("winningDolphins").style.visibility = "hidden";
     document.getElementById("scoreboard").style.visibility = "hidden";
+    document.getElementById("scoreText").style.visibility = "hidden";
     document.getElementById("scoreboardBtn").style.visibility = "hidden";
+    document.getElementById("finalText").style.visibility = "hidden";
     document.getElementById("replayBtn").style.visibility = "hidden";
 
     dolphinsInRace = generateRaceDolphins(); 

@@ -2,21 +2,22 @@
 <html>
 	<head>
 		<title>Dolphin Racing</title>
+			<link rel="icon" type="image/x-icon" href="images/Wave_Header.png">
 			<link rel="stylesheet" type="text/css" href="style/jquery-ui.css">
 			<link rel="stylesheet" type="text/css" href="style/style.css">
 	</head>
 
 	<body>
-		<h1 id="test">Dolphin Racing</h1>
-		<p>Howdy everyone! Who's ready to make a few bets on dolphin racing?<br>Great! Let's start!!</p>
-		
+		<h1>Dolphin Racing</h1>
+		<hr>
+		<p>Hi everyone! Who is ready for the <b class = "underline">2018 Winter Olympics Dolphin Racing</b> event?<br><br>Great! Let's start!!</p>
+		<hr><br>
 		<!-- Dolphins -->		
-		<p>First, click on the <b>Generate</b> button to release the list of dolphins participating in today's race.</p>
-		<button id="dolphinList">Generate!</button>
+		<p class = "brightRed">First, click on the <b class = "underline">Generate</b> button to release the list of dolphins participating in today's race.</p>
+		<button id="dolphinList", class = "styleButton">Generate!</button><br><br><br>
 
 		<div id = "dolphinsInRace" class="ui-widget">
-			<p>The dolphins racing are...<br></p> <!-- ******font family fix -->
-			<table id="dolphinTable" class="ui-widget ui-widget-content">
+			<table id="dolphinTable">
 		    <thead>
 		      <tr class="ui-widget-header ">
 		        <th></th>
@@ -24,48 +25,43 @@
 		      </tr>
 		    </thead>
 		    <tbody>
-		      <tr>
-		      </tr>
+		      <tr></tr>
 		    </tbody>
 		  </table>
-		  
-		  <br><br>
-		  <p>Alright, so now that you know which dolphins are racing today, please click on the <b>Continue</b> button.</p>
-		  <button id="continueOneBtn">Continue</button>
+		  <br>
+		  <p class = "normalBrightRed">Alright, so now that you know which dolphins are racing today, please click on the <b class = "underline">Continue</b> button.</p>
 		</div>
+		<button id="continueOneBtn", class = "styleButton">Continue</button><br><br>
 
 		<div id = "signUp">
-			<p>The chart below is the sign up sheet for this round. Players will take turns entering a chosen horse number and the amount they want to bet on in this race. Each players' wallet (a.k.a money available) will start off with $1000. (*Note: If a player does not wish to bet during this round but still would like to feel included, please enter $0 in the "Betting Amount" field.)</p>
+			<p class = "normalText">The chart below is the sign up sheet for this round. Players will take turns entering a chosen horse number and the amount they want to bet on in this race. Each players' wallet (a.k.a money available) will start off with $1000. (*Note: If a player does not wish to bet during this round but still would like to feel included, please enter $0 in the "Betting Amount" field.)</p>
 			
-			<p> Please include your name, amount of money and the corresponding number to the dolphin which you will be betting when you sign up.</p><br>
+			<p class = "normalText"> Please include your name, amount of money and the corresponding number to the dolphin which you will be betting when you sign up.</p>
 
-			<p>Click on the <b>Sign Up User</b> button to sign up!</p>
-
-			<p>Currently, as an example for you, we have a Lily and a Chris on the list. (P.S. They are betting all their money because they are <i>that</i> confident. Maybe you should too.)</p>
+			<p class = "normalText">Currently, as an example for you, we have a Lily and a Chris on the list. (P.S. They are betting all their money because they are <i>that</i> confident. Maybe you should too.)</p>
 			
-			<div id="dialog-form" title="Sign up new user">
+			<div id="dialog-form" title = "Sign Up New User">
 			  <p class="validateTips">Please fill in all form fields in order to sign up.</p>
 			  <form>
 			    <fieldset>
 			      <label for="name">Name</label>
-			      <input type="text" name="name" id="name" placeholder="Enter your name" class="text ui-widget-content ui-corner-all">
+			      <input type="text" name="name" id="name" placeholder="Enter your name..." class="text ui-widget-content ui-corner-all">
 			      <label for="wallet">Wallet ($)</label>
 			      <input type="text" name="wallet" id="wallet" value="1000" readonly class="text ui-widget-content ui-corner-all">		 
 			      <label for="betting">Betting Amount ($)</label>
-			      <input type="text" name="betting" id="betting" placeholder="Enter your betting amount" class="text ui-widget-content ui-corner-all">
+			      <input type="text" name="betting" id="betting" placeholder="Enter your betting amount..." class="text ui-widget-content ui-corner-all">
 			      <label for="chosenDolphin">Chosen Dolphin Number</label>
-			      <input type="text" name="chosenDolphin" id="chosenDolphin" placeholder="Enter your dolphin's number" class="text ui-widget-content ui-corner-all">
+			      <input type="text" name="chosenDolphin" id="chosenDolphin" placeholder="Enter your dolphin's number..." class="text ui-widget-content ui-corner-all">
 
 			      <!-- Allow form submission with keyboard without duplicating the dialog button -->
 			      <input type="submit" tabindex="-1" style="position: absolute; top: -1000px">
 			    </fieldset>
 			  </form>
-			</div>
-			 
-			 
+			</div><br>
+			<h2>Sign Up List:</h2>
+			<p class = "signUpText">Click on the <b class = "underline">Sign New Up User</b> button to sign up!</p>
 			<div id="users-contain" class="ui-widget">
-			  <h1>Sign Up List:</h1>
-			  <table id="users" class="ui-widget ui-widget-content">
+			  <table id="users">
 			    <thead>
 			      <tr class="ui-widget-header ">
 			        <th>Name</th>
@@ -90,24 +86,23 @@
 			    </tbody>
 			  </table>
 			</div>
-
-			<button id="create-user">Sign up new user</button> <!-- sign up button -->
 			<br><br>
-			<p>When everyone has signed up, please click on the <b>Start Race</b> button to begin the 2018 Winter Olympics Dolphin Racing event!</p>
-			<button id="startRaceBtn">Start Race!</button> <!-- start dolphin race button -->
+			<button id="create-user", class = "styleButton">Sign Up New User</button> <!-- sign up button --><br><br>
+			<p class = "brightRed">When everyone has signed up, please click on the <b class = "underline">Start Race</b> button to begin the <b class = "underline">2018 Winter Olympics Dolphin Racing</b> event!</p>
+			<button id="startRaceBtn", class = "styleButton">Start Race!</button> <!-- start dolphin race button -->
 			<br><br><br>
 		</div>
 
 		<div id = "raceDolphins">
-			<canvas id="myCanvas" width="1120" height="550"></canvas>
+			<canvas id="myCanvas" width="850" height="550"></canvas>
 		</div>
 
-		<div id = "results" class="ui-widget">
-			<button id="winningDolphinListBtn">Release Dolphin Winner!</button> <!-- winning dolphin list button -->
-			<br><br>
+		<div id = "results">
+			<br>
+			<button id="winningDolphinListBtn", class = "styleButton">Release Dolphin Winner!</button> <!-- winning dolphin list button -->
+			<br><br><br>
 			<div id = "winningDolphins">
-				<p>The winner(s) of the horse race is(are):</p>
-				<table id="dolphinWinners" class="ui-widget ui-widget-content">
+				<table id="dolphinWinners">
 				    <thead>
 				      <tr class="ui-widget-header">
 				        <th>Dolphin Winner(s)!</th>
@@ -118,11 +113,12 @@
 				      </tr>
 				    </tbody>
 				</table>
-				<p>If you bet on a winning horse, hooray!! Click on the <b>Results</b> button to release the scoreboard.</p>
-				<button id="scoreboardBtn">Release Scoreboard</button> <!-- scoreboard button -->
-			</div>
+			</div><br><br>
+			<p id = "scoreText", class = "brightRed">If you bet on a winning horse, hooray!! Click on the <b class = "underline">Results</b> button to release the scoreboard.</p>
+			<br>
+			<button id="scoreboardBtn", class = "styleButton">Release Scoreboard</button> <!-- scoreboard button --><br><br>
 			<div id = "scoreboard">
-				<table id="scoreboardTable" class="ui-widget ui-widget-content">
+				<table id="scoreboardTable">
 				    <thead>
 			      <tr class="ui-widget-header ">
 			        <th>Name</th>
@@ -135,8 +131,9 @@
 			      </tr>
 			    </tbody>
 				</table>
-			</div>
-			<button id="replayBtn">Replay</button> <!-- replay button -->
+			</div><br><br>
+			<p id = "finalText", class = "brightRed">Thank's for participating in today's <b class = "underline">Dolphin Racing Event</b>!! If you would like to participate in a new Dolphin Racing Event, click on the <b class = "underline">Replay</b> button.</p><br>
+			<button id="replayBtn", class = "styleButton">Replay</button> <!-- replay button -->
 		</div>
 		<br><br><br>
 
@@ -144,7 +141,9 @@
 		<script type "text/javascript" src="js/jquery-ui.js"></script>
 		<script type="text/javascript" src="js/script.js"></script>
 
-		<!-- Replay Button -->
+		<!-- Image Credits: -->
+		<!-- The Resource Spriters (adapted the dolphin sprite): https://www.spriters-resource.com/game_boy_gbc/animbreed4/sheet/2112/ -->
+		<!-- GramUnion (header logo): http://www.gramunion.com/winttered.tumblr.com/157699679444-->
 
 	</body>
 </html>

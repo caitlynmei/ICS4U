@@ -1,23 +1,53 @@
 
-title {
-  font-style: apercu mono;
+h1 {
+  font-style: "Cambria", "Book Antiqua", "Times New Roman", Times, Palatino, serif;
+  font-size: 80px;
+  text-align: center;
+  color: #654a4e; 
+}
+
+h2 {
+  font-style: "Cambria", "Book Antiqua", "Times New Roman", Times, Palatino, serif;
   font-size: 30px;
+  text-align: center;
+  color: #654a4e; 
+}
+
+p {
+  color: #523E41;
+}
+
+body {
+  background-color: #e6ddde;
+  text-align: center;
+  font-family: "Cambria", "Book Antiqua", "Times New Roman", Times, Palatino, serif;
+  display: block;
+  font-size: 20px; 
+  margin-left: 50px;
+  margin-right: 50px;
 }
 
 canvas {
-  background: #D9F2FF;/*#fefefc; */
-  margin: 0 auto; 
+  /*background: url("images/Swimming_Pool.png");*/
+  margin: 0; 
   margin-bottom: 20px;
   display: block;
-  overflow: auto;
-  overflow-y: auto;
-  border: 1px solid #e2e2da;
-  border-radius: 5px;
-  line-height: 1.5em;
+  border: 15px solid #ffffff;
+  background-color: #9ae4db;
+  margin-left: 150px;
+}
+
+hr {
+  display: block;
+  border-top: 1px solid #916a70;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: 60px;
+  margin-right: 60px;
 }
 
 label, input { 
-  display:block; 
+  display: block; 
 }
 
 input.text { 
@@ -32,33 +62,112 @@ fieldset {
   margin-top:25px; 
 }
 
-h1 { 
-  font-size: 1.2em; 
-  margin: .6em 0; 
-}
-
-div#users-contain, div#dolphinsInRace, div#winningDolphins, div#scoreboard { 
+div#users-contain, div#dolphinTable, div#winningDolphins, div#scoreboard { 
   width: 350px; 
-  margin: 20px 0; 
+  text-align: center;
 }
 
-div#users-contain table, div#dolphinsInRace table, div#winningDolphins table, div#scoreboard table{ 
-  margin: 1em 0; 
-  border-collapse: collapse; 
-  width: 100%; 
+table {
+  border-collapse: collapse;
+  text-align: center;
+  border: 15px solid #ffffff;
+  margin-left: 400px;
+  width: 350px;
+  font-family: "Cambria", "Book Antiqua", "Times New Roman", Times, Palatino, serif;
+  font-size: 20px;
+  background-color: #f8f5f5;
+  color: #523E41;
 }
 
-div#users-contain table td, div#users-contain table th, div#dolphinsInRace table td, div#dolphinsInRace table th, div#winningDolphins table td, div#winningDolphins table th, div#dolphinsInRace table td, div#dolphinsInRace table th, div#scoreboard table td, div#scoreboard table th { 
-  border: 1px solid #eee; 
+td, th {
+  border: 5px solid #ffffff; 
   padding: .6em 10px; 
-  text-align: left; 
+  text-align: center; 
+}
+
+th {
+  background-color: #e4ffff;
+  color: #fe5b4d;
+  font-family: "Cambria", "Book Antiqua", "Times New Roman", Times, Palatino, serif;
+  font-size: 24px;
+}
+
+label {
+  text-align: left;
+  color: #fe5b4d;
+  font-family: "Cambria", "Book Antiqua", "Times New Roman", Times, Palatino, serif;
+  font-size: 20px;
+}
+
+input[type = text] {
+  font-family: "Cambria", "Book Antiqua", "Times New Roman", Times, Palatino, serif;
+  font-size: 20px;
+}
+
+.brightRed {
+  color: #fe5b4d;
+  margin-left: 150px;
+  margin-right: 150px;
+  text-align: center;
+  display: block;
+  font-family: "Cambria", "Book Antiqua", "Times New Roman", Times, Palatino, serif;
+  font-size: 20px; 
+}
+
+.underline {
+  text-decoration-line: underline;
+  text-decoration-color: #f5f1f2;
+  /*border-bottom: 4px solid #f5f1f2*/
+}
+
+.normalText {
+  color: #523E41;
+  text-align: left;
+  font-family: "Cambria", "Book Antiqua", "Times New Roman", Times, Palatino, serif;
+  display: block;
+  font-size: 20px; 
+  margin-left: 150px;
+  margin-right: 150px;
+}
+
+.signUpText {
+  color: #fe5b4d;
+  text-align: center;
+  display: block;
+  font-family: "Cambria", "Book Antiqua", "Times New Roman", Times, Palatino, serif;
+  font-size: 20px; 
+  margin-left: 80px;
+}
+
+.normalBrightRed {
+  color:  #fe5b4d;
+  text-align: center;
+  display: block;
+  font-family: "Cambria", "Book Antiqua", "Times New Roman", Times, Palatino, serif;
+  font-size: 20px; 
+  margin-left: 150px;
+  margin-right: 150px;
+}
+
+.styleButton {
+  background-color: #916a70;
+  font-family: "Cambria", "Book Antiqua", "Times New Roman", Times, Palatino, serif;
+  font-size: 20px;
+  color: #ffffff;
+  border-radius: 5px;
+  padding: 15px 32px;
+  text-align: center;
 }
 
 .ui-dialog .ui-state-error { 
   padding: .3em; 
+  font-family: "Cambria", "Book Antiqua", "Times New Roman", Times, Palatino, serif;
+  font-size: 20px;
 }
 
 .validateTips { 
- 	border: 1px solid transparent; 
+  border: 1px solid transparent; 
   padding: 0.3em; 
+  font-family: "Cambria", "Book Antiqua", "Times New Roman", Times, Palatino, serif;
+  font-size: 20px;
 }
