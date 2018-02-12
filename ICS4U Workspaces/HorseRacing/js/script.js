@@ -94,8 +94,8 @@ myImage.src = "images/Dolphin_Sprite_Use.PNG";
 
 var sWidth = 196.57; // width of source dolphin image
 var sHeight = 198; // height of source dolphin image
-var dWidth = sWidth / 3; // width of destination dolphin image
-var dHeight = sHeight / 3; // width of destination dolphin image
+var dWidth = sWidth / 4; // width of destination dolphin image
+var dHeight = sHeight / 4; // width of destination dolphin image
 
 var finishLine = myCanvas.width - dWidth; // amount of px it takes to reach finish line of race
 var dolphinRaceOver = false; // checks for when race is finished 

@@ -28,13 +28,12 @@ body {
 }
 
 canvas {
-  /*background: url("images/Swimming_Pool.png");*/
-  margin: 0; 
+  background: url("../images/Swimming_Pool.png"); 
   margin-bottom: 20px;
   display: block;
   border: 15px solid #ffffff;
-  background-color: #9ae4db;
-  margin-left: 150px;
+  /*background-color: #9ae4db;*/
+  margin-left: 280px;
 }
 
 hr {
