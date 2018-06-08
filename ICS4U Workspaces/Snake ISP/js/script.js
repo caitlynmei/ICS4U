@@ -245,7 +245,7 @@ function draw() {
 			context.fillRect(x*tileWidth, y*tileHeight, tileWidth, tileHeight);
 		}
 	}
-	context.fillStyle = "#000";
+	context.fillStyle = "#FFFFFF";
 	context.fillText("SCORE: " + score, 10, canvas.height-10);
 }
 
@@ -267,3 +267,10 @@ $(document).ready(function(){
 	  gameOver = true;
 	});
 });
+
+window.addEventListener("keydown", function(e) {
+    // space and arrow keys
+    if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+        e.preventDefault();
+    }
+}, false);
