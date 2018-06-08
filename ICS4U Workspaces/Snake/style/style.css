@@ -3,16 +3,16 @@
 	margin: 0; 
 }
 
-.buttonMe div, button {
-  position: center;
-  display: block;
-  margin: 0 auto;
+.buttonStyle div {
   background-color: #916a70;
   font-family: "Cambria", "Book Antiqua", "Times New Roman", Times, Palatino, serif;
   font-size: 20px;
   color: #ffffff;
   border-radius: 5px;
   text-align: center;
+  position: center;
+  display: block;
+  margin: 0 auto;
 }
 
 canvas {
