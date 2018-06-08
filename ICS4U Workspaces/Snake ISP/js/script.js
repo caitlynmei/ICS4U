@@ -233,7 +233,7 @@ function draw() {
 			// fills the grid cells depending on what id (empty cell, snake cell, apple cell)
 			switch (grid.get(x, y)) {
 				case EMPTY:
-					context.fillStyle = "#fff";
+					context.fillStyle = "#0C0C0C";
 					break;
 				case SNAKE:
 					context.fillStyle = "#52C7A7";
